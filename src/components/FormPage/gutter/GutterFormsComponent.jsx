@@ -12,7 +12,7 @@ export const Gutters = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, guttersype: value });
+    updateFields({ ...allFields, gutter: value });
     props.onNext();
   };
 

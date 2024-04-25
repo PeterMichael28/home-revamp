@@ -4,6 +4,7 @@ import LabelInput from "../LabelInput";
 import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import { toast } from "react-toastify";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -12,7 +13,7 @@ export const LocationForm = ({ props }) => {
 
   const handleClick = () => {
     if (!zipCode) return;
-    updateFields({ zipCode });
+    updateFields({ zip_code: zipCode });
     props.onNext();
   };
 
@@ -46,7 +47,7 @@ export const HomeOwnershipForm = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, propertyOwner: value });
+    updateFields({ ...allFields, home_owner: value });
     props.onNext();
   };
   const homeData = ["Own", "Rent"];
@@ -73,7 +74,7 @@ export const PropertyTypeForm = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, propertyType: value });
+    updateFields({ ...allFields, property_type: value });
     props.onNext();
   };
 
@@ -101,7 +102,7 @@ export const ProjectScopeForm = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, projectScope: value });
+    updateFields({ ...allFields, project_scope: value });
     props.onNext();
   };
 
@@ -129,7 +130,7 @@ export const CustomizedForm = ({ props, header, subText, data = [] }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, roofingMaterial: value });
+    updateFields({ ...allFields, roofing_material: value });
     props.onNext();
   };
 
@@ -156,7 +157,7 @@ export const ProjectTimelineForm = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, projectTimeline: value });
+    updateFields({ ...allFields, project_timeline: value });
     props.onNext();
   };
 
@@ -185,7 +186,7 @@ export const ProjectOwnerForm = ({ props }) => {
 
   const handleClick = () => {
     if (!firstName || !lastName) return;
-    updateFields({ ...allFields, firstName: firstName, lastName: lastName });
+    updateFields({ ...allFields, first_name: firstName, last_name: lastName });
     props.onNext();
   };
 
@@ -251,13 +252,39 @@ export const ContactDetailsForm = ({ props }) => {
 
 export const PreferredTimeForm = ({ slug, handleClick }) => {
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const url = import.meta.env.VITE_API_BASE_URL;
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!value) return;
-    updateFields({ ...allFields, preferredTime: value, service: slug });
-    handleClick();
+    setLoading(true);
+    updateFields({ ...allFields, contact_time: value, service: slug });
+
+    try {
+      const response = await fetch(`${url}/home-qoute/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(allFields),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error submitting!, Please try again");
+      }
+      // console.log(response);
+      toast.success("Submitted Successfully!!!");
+      updateFields({});
+      handleClick();
+      setLoading(false);
+    } catch (error) {
+      toast.error("Error submitting!, Please try again");
+      setLoading(false);
+    }
+
+    // handleClick();
   };
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
@@ -274,7 +301,7 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
             <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
           ))}
         </div>
-        <FormButton text="Submit" className="mt-7" onClick={handleSubmit} disabled={!value} />
+        <FormButton text="Submit" className="mt-7" onClick={handleSubmit} disabled={!value} loading={loading} />
       </div>
     </div>
   );

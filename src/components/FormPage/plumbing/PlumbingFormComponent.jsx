@@ -18,7 +18,7 @@ export const Plumbing = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, plumbingType: value });
+    updateFields({ ...allFields, plumbing: value });
     props.onNext();
   };
   return (

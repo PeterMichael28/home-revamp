@@ -12,7 +12,7 @@ export const WindowMaterial = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, windowMaterial: value });
+    updateFields({ ...allFields, window_material: value });
     props.onNext();
   };
 
@@ -40,7 +40,7 @@ export const NumberOfWindows = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, noOfWindows: value });
+    updateFields({ ...allFields, num_of_window: value });
     props.onNext();
   };
 

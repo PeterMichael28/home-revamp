@@ -13,7 +13,7 @@ export const MonthlyBill = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, solarMonthlyBill: value });
+    updateFields({ ...allFields, electric_bill: value });
     props.onNext();
   };
 
@@ -41,7 +41,7 @@ export const SunlightExposure = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, sunlightExposure: value });
+    updateFields({ ...allFields, sunlight_exposure: value });
     props.onNext();
   };
 

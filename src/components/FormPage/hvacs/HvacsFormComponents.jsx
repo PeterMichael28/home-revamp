@@ -25,7 +25,7 @@ export const HVACS = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, hvacsType: value });
+    updateFields({ ...allFields, hvacs: value });
     props.onNext();
   };
 

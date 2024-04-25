@@ -18,7 +18,7 @@ export const Bathroom = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, bathroomType: value });
+    updateFields({ ...allFields, bathroom: value });
     props.onNext();
   };
 

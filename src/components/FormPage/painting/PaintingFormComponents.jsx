@@ -12,7 +12,7 @@ export const PaintingTypeProject = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, paintingType: value });
+    updateFields({ ...allFields, painting_project: value });
     props.onNext();
   };
 
@@ -53,7 +53,7 @@ export const PaintingTypeNeeded = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, paintingTypeNeeded: value });
+    updateFields({ ...allFields, painting_needed: value });
     props.onNext();
   };
   return (

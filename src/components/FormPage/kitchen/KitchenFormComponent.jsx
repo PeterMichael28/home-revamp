@@ -20,7 +20,7 @@ export const Kitchen = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, kitchenType: value });
+    updateFields({ ...allFields, kitchen: value });
     props.onNext();
   };
 
