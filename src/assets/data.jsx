@@ -161,3 +161,111 @@ export const faqData = [
     answer: `Our contractors are carefully vetted to ensure they meet our high standards of professionalism, reliability, and quality workmanship. They are dedicated to providing exceptional service and exceeding your expectations.`,
   },
 ];
+
+export const privacyData = [
+  {
+    title: "Information Collection",
+    subTitle: `Our service collects both "personally identifiable information" and "non-personally identifiable information" from users.`,
+  },
+  {
+    title: "Personally Identifiable Information",
+    subTitle: `When users engage with our service, they may provide personal details such as name, contact information, and financial data. This information is crucial for providing services, facilitating communication, and connecting users with potential Service Providers. Additionally, it may be used for verification and fraud prevention purposes.`,
+  },
+  {
+    title: "Non-Personally Identifiable Information",
+    subTitle: `To enhance user experience, our service gathers anonymous data like IP addresses and browsing behavior through cookies or third-party tracking systems. This information is used for statistical analysis and does not link to personally identifiable information.`,
+  },
+  {
+    title: "Sharing of Information",
+    subTitle: `Under specific circumstances such as legal obligations or business transactions, the company may share collected information. Users provide consent for communication about products or services, and information may be shared with affiliates or third parties as permitted by law.`,
+  },
+  {
+    title: "Information Security",
+    subTitle: `We prioritize the security of user information through various measures to prevent unauthorized access or disclosure. While we take precautions, users are encouraged to take personal data protection measures.`,
+  },
+  {
+    title: "Access to User Information",
+    subTitle: `Users can correct or delete inaccuracies in their personal information by contacting the company. Information is retained as necessary for our services and legal obligations.`,
+  },
+  {
+    title: "Third-Party Links",
+    subTitle: `Our service may provide links to third-party websites, and users are advised to review their privacy policies. These websites may independently collect data.`,
+  },
+  {
+    title: "Children's Privacy",
+    subTitle: `Our service is not intended for children under 13 years old, and we do not knowingly collect personally identifiable information from them.`,
+  },
+  {
+    title: "California Residents",
+    subTitle: `Residents of California have specific rights regarding their personal information under the California Consumer Privacy Act (CCPA). These rights include knowing what personal information is collected, opting out of data sales, and requesting deletion of personal information.`,
+  },
+  {
+    title: "Non-Discrimination",
+    subTitle: `We do not discriminate against users for exercising their CCPA rights, though financial incentives may be offered to those who opt in.`,
+  },
+  {
+    title: "Additional Information",
+    subTitle: `Our service does not respond to "do not track" signals. Personally identifiable information is collected voluntarily, and users can contact the company for privacy-related concerns.`,
+  },
+  {
+    title: "Contact Us",
+    subTitle: `For any questions or concerns regarding privacy, users can reach out via certified mail or our contact page.`,
+  },
+];
+
+export const useOfTermsData = [
+  {
+    title: "Terms of Service",
+    subTitle: `By accessing or using the Homerevampexpert.com website or connection service ("Service"), you agree to abide by the following terms and conditions. Please read these carefully. If you do not agree to these terms and conditions, please refrain from accessing or using this Service. Homerevampexpert.com operates this Service.`,
+  },
+  {
+    title: "Services and Products Offered",
+    subTitle: `You acknowledge that Homerevampexpert.com is not a Home contractor and does not issue the products featured on this Service. Any additional services or products displayed on this Service after receiving a quote are the responsibility of the respective vendors and service providers.`,
+  },
+  {
+    title: "Credit Authorization",
+    subTitle: `You consent to Homerevampexpert.com obtaining consumer information from reporting agencies to connect you with lenders or service providers. Your information may be shared with them for various purposes, including verification and credit decisions.`,
+  },
+  {
+    title: "Security",
+    subTitle: `While we make efforts to protect your personal information, we cannot guarantee against interception or decryption by others. We are not liable for any interception or decryption of personal information.`,
+  },
+  {
+    title: "Cookies",
+    subTitle: `This Service uses "cookies" and web server logs to gather information on usage patterns. Cookies store data on user preferences and simplify interactions with the website. None of this information is personally identifiable.`,
+  },
+  {
+    title: "Service Use",
+    subTitle: `Our Service is free to use, and we may receive compensation from suppliers for services provided to them. Such compensation may or may not relate to your use of our Service.`,
+  },
+  {
+    title: "Limitation of Liability and Warranties",
+    subTitle: `Homerevampexpert.com and its partners disclaim all warranties related to this Service and any associated information, products, or services. Use of this Service is at your own risk, and we are not liable for any damages arising from its use.
+    `,
+  },
+  {
+    title: "Indemnity",
+    subTitle: `By using this Service, you agree to indemnify Homerevampexpert.com and related companies from any damages or expenses resulting from your use or attempted use of the Service.
+    `,
+  },
+  {
+    title: "SMS Marketing",
+    subTitle: `By opting into mobile marketing on this Service, you authorize the sending of SMS messages to your mobile device. You may incur message and data rates, and you waive your right to file a claim against us for such contact.
+    `,
+  },
+  {
+    title: "Disputes and Resolution",
+    subTitle: `Any disputes regarding these Terms of Service or the Service itself will be resolved through arbitration. By using this Service, you waive your right to a jury trial and to participate in class action lawsuits against us.
+    `,
+  },
+  {
+    title: "Opt-Out",
+    subTitle: `You have the option to opt-out of the arbitration and class action waiver provisions by providing written notice within thirty days of registering on this Service.
+    `,
+  },
+  {
+    title: "Acknowledgement",
+    subTitle: `By accepting these Terms of Service, you acknowledge and agree to the arbitration process and waiver of certain rights.
+    `,
+  },
+];

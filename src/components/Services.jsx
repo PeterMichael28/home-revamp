@@ -10,7 +10,7 @@ const Services = ({ data }) => {
             <p className="text-2xl font-medium leading-normal mb-2">{ser.label}</p>
             <p className="text-sm text-gray-dark font-normal leading-[22px]">{ser.subText}</p>
             <Link
-              to={`/${ser.label}`}
+              to={`/${ser.label.toLowerCase()}`}
               className="mt-4 text-sm leading-[20px] text-primary group flex items-center gap-x-2"
             >
               <span>Get Started</span>{" "}

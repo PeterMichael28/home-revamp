@@ -11,7 +11,7 @@ const MobileNavbar = () => {
         {icons.hamburger}
       </span>
       <Drawer active={open} setActive={setOpen} containerClassName="" side="right">
-        <nav className="px-6 mt-24 mb-10 max-w-md  ml-auto h-screen w-2/3 rounded-l-lg">
+        <nav className="px-6 mt-24 mb-10 w-full  ml-auto h-screen w-2/3 rounded-l-lg">
           <Navbar />
         </nav>
       </Drawer>

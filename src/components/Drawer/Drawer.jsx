@@ -1,4 +1,3 @@
-
 import icons from "~/assets/icons/icons";
 import { classNames } from "~/utils/classNames";
 
@@ -14,8 +13,9 @@ const Drawer = ({ active, children, setActive, containerClassName, side = "right
       <div
         className={classNames(
           "w-full bg-white absolute top-0 transition-all duration-500 delay-75",
-          active && side === "right" ? "left-0" : "left-[100%]",
-          active && side === "left" ? "right-0" : "right-[100%]"
+          side === "right" && (active ? "left-0" : "left-[100%]"),
+          side === "left" && (active ? "right-0" : "right-[100%]"),
+          // active && side === "left" ? "right-0" : "right-[100%]"
         )}
       >
         {children}

@@ -1,9 +1,18 @@
+import { useParams } from "react-router-dom";
 import { ourServices } from "~/assets/data";
 import FormHeader from "~/components/FormPage/FormHeader";
 import SectionHeader from "~/components/SectionHeader";
 import Services from "~/components/Services";
+import { useFormStore } from "~/store/formStore";
 
 const CompletedPage = () => {
+  const { slug } = useParams();
+  const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
+
+  const { allFields } = useFormStore((state) => state);
+
+  console.log({ allFields });
+
   return (
     <div>
       <div className="max-w-[750px] px-4 mx-auto pt-12 py-28">
@@ -19,7 +28,7 @@ const CompletedPage = () => {
           subtitle="Explore other services and let us know how we can assist you further. Our team is committed to delivering tailored solutions that meet your unique requirements and exceed your expectations."
         />
 
-        <Services data={ourServices} />
+        <Services data={remainingServices} />
       </section>
     </div>
   );

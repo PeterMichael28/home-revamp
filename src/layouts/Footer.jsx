@@ -10,10 +10,10 @@ const Footer = () => {
         <nav>
           <ul className="flex flex-col md:flex-row  gap-6 items-start md:items-center">
             <li className="text-secondary font-semibold md:text-sm text-lg">
-              <Link to="/privacy-and-policy">Privacy Policy</Link>
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
             <li className="text-secondary font-semibold md:text-sm text-lg">
-              <Link to="/terms">Use of Terms </Link>
+              <Link to="/use-of-terms">Use of Terms </Link>
             </li>
           </ul>
         </nav>

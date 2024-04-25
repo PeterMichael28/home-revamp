@@ -1,40 +1,27 @@
+import { useEffect, useState } from "react";
 import { classNames } from "~/utils/classNames";
+import ProgressBar from "./ProgressBar";
 
-export const StepperIndicator = ({ steps, activeIndex }) => (
-  <div className="flex flex-wrap items-end mb-4">
-    {steps.map((item, index) => (
-      <div className={"flex-1 font-medium cursor-default h-full"} key={index}>
-        <h4
-          className={classNames(
-            "text-xs md:text-base font-medium text-center m-2 max-h-12 line-clamp-2",
-            activeIndex >= index ? "text-secondary" : "text-[#9e9e9e]"
-          )}
-        >
-          {item?.label || item}
-        </h4>
-        <div className="flex items-center gap-1.5">
-          <hr
-            className={classNames(
-              "border flex-1 transition-all duration-300",
-              activeIndex >= index ? "border-primary" : "border-gray-light"
-            )}
-          />
-          <span
-            className={classNames(
-              "inline-flex items-center justify-center size-[28px] rounded-full text-sm p-3 border font-medium ",
-              activeIndex >= index ? " text-primary bg-[#EBF0F5]" : "text-[#646464] bg-[#E1E1E1]"
-            )}
-          >
-            {index + 1}
-          </span>
-          <hr
-            className={classNames("border-2 flex-1", activeIndex >= index ? "border-primary" : "border-gray-light")}
-          />
-        </div>
-      </div>
-    ))}
-  </div>
-);
+export const StepperIndicator = ({ steps, activeIndex }) => {
+  const [percentageCompleted, setPercentageCompleted] = useState(0);
+
+  useEffect(() => {
+    const calculatePercentage = () => {
+      const percentage = (activeIndex / steps.length) * 100;
+      setPercentageCompleted(Math.round(percentage));
+    };
+
+    calculatePercentage();
+  }, [activeIndex, steps]);
+
+  return (
+    <div className="w-full space-y-2 md:space-y-4 px-2 md:px-0">
+      <p className="text-sm text-gray-dark">Your Progress</p>
+      <h3 className="text-secondary font-bold text-lg md:text-xl">{percentageCompleted}% Completed</h3>
+      <ProgressBar progress={percentageCompleted} />
+    </div>
+  );
+};
 
 const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
   const handleNext = () => {
@@ -51,17 +38,17 @@ const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
     const MyComponent = component;
     return (
       <div className={classNames("animate-slidein")}>
-        <MyComponent onNext={handleNext} onPrev={handlePrev} />
+        <MyComponent onNext={handleNext} onPrev={handlePrev} activeIndex={activeIndex} />
       </div>
     );
   };
 
   return (
-    <div>
+    <div className="">
       {/* indicators */}
       <StepperIndicator steps={steps} activeIndex={activeIndex} />
       {/* content */}
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-hidden max-w-[450px] w-full mx-auto mt-9 px-2">
         <RenderComponent component={steps[activeIndex]?.component || steps[activeIndex]} />
       </div>
     </div>

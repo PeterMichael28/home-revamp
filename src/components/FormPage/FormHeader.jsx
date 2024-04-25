@@ -1,10 +1,10 @@
 const FormHeader = ({ title, subtitle }) => {
   return (
-    <div className="max-w-[450px] text-left">
-      <h2 className="text-[20px] md:text-[28px] tracking-[-0.24px] font-bold text-secondary md:tracking-[-0.36px] md:text-4xl mb-6">
+    <div className="w-full text-left md:text-center">
+      <h2 className="text-[24px] tracking-[-0.24px] font-bold text-secondary md:tracking-[-0.36px] mb-1 leading-normal">
         {title}
       </h2>
-      <p className="text-base font-normal leading-[28px] text-gray-dark ">{subtitle}</p>
+      <p className="text-sm font-normal md:leading-[20px] text-gray-dark ">{subtitle}</p>
     </div>
   );
 };

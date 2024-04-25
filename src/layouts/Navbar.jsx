@@ -2,7 +2,7 @@ import OurServicesDropdown from "~/components/OurServicesDropdown";
 
 const Navbar = () => {
   return (
-    <nav className="flex flex-col md:flex-row  gap-12 items-end md:items-center">
+    <nav className="flex flex-col md:flex-row  gap-12 items-end md:items-center w-full">
       <ul className="flex flex-col md:flex-row  gap-8 items-end md:items-center">
         <OurServicesDropdown />
         <li className="text-secondary font-semibold md:text-sm text-lg">About Us</li>

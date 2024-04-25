@@ -1,57 +1,45 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import HomeForm from "~/components/FormPage/HomeForm";
-import PersonalForm from "~/components/FormPage/PersonalForm";
-import ProjectForm from "~/components/FormPage/ProjectForm";
-import StepperWizard from "~/components/StepperWizard/StepperWizard";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import BathroomForms from "~/components/FormPage/bathroom/BathroomForms";
+import GutterForms from "~/components/FormPage/gutter/GutterForms";
+import HvacsForm from "~/components/FormPage/hvacs/HvacsForm";
+import KitchenForm from "~/components/FormPage/kitchen/KitchenForm";
+import PaintingForm from "~/components/FormPage/painting/PaintingForm";
+import PlumbingForm from "~/components/FormPage/plumbing/PlumbingForm";
+import RoofingForm from "~/components/FormPage/roofing/RoofingForm";
+import SolarForms from "~/components/FormPage/solar/SolarForms";
+import WindowsForm from "~/components/FormPage/windows/WindowsForm";
 
 const FormPage = () => {
   const { slug } = useParams();
-  const [activeIndex, setActiveIndex] = useState(0);
 
+  const navigate = useNavigate();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [activeIndex]);
+    if (!slug) {
+      navigate("/");
+    }
+  }, [navigate, slug]);
 
-  return (
-    <div className="max-w-[750px] px-4 mx-auto pt-12 py-28">
-      <StepperWizard steps={STEPS} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-    </div>
-  );
+  const allForms = {
+    roofings: RoofingForm,
+    windows: WindowsForm,
+    solars: SolarForms,
+    hvacs: HvacsForm,
+    bathrooms: BathroomForms,
+    gutters: GutterForms,
+    painting: PaintingForm,
+    plumbing: PlumbingForm,
+    kitchen: KitchenForm
+  };
+
+  const ActiveForm = allForms[slug];
+  useEffect(() => {
+    if (!ActiveForm) {
+      navigate("/");
+    }
+  }, [navigate, ActiveForm]);
+
+  return <ActiveForm slug={slug} />;
 };
 
 export default FormPage;
-
-const roofingMaterialData = [
-  "Asphalt",
-  "Clay-tile",
-  "Metal",
-  "Wood Shingles",
-  "Natural Slate",
-  "Tar",
-  "Cedal Shake",
-  "Others",
-];
-
-const STEPS = [
-  {
-    label: "Personal Details",
-    component: (props) => <PersonalForm props={props} />,
-  },
-  {
-    label: "Home Details",
-    component: (props) => <HomeForm props={props} />,
-  },
-  {
-    label: "Project",
-    component: (props) => (
-      <ProjectForm
-        props={props}
-        label={"Roofing Material"}
-        id={"roofingMaterial"}
-        data={roofingMaterialData}
-        placeholder={"Select your preferred roofing materials"}
-      />
-    ),
-  },
-];
