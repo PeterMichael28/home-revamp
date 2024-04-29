@@ -9,6 +9,7 @@ import {
   ProjectOwnerForm,
   ProjectScopeForm,
   PropertyTypeForm,
+  AddressDetailsForm,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import { NumberOfWindows, WindowMaterial } from "./WindowsFormComponents";
@@ -57,6 +58,10 @@ const WindowsForm = ({ slug }) => {
     {
       label: "Form9",
       component: (props) => <ContactDetailsForm props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <AddressDetailsForm props={props} />,
     },
     {
       label: "Form10",

@@ -5,6 +5,7 @@ import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -43,10 +44,16 @@ export const LocationForm = ({ props }) => {
 
 export const HomeOwnershipForm = ({ props }) => {
   const [value, setValue] = useState("");
+  const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
     if (!value) return;
+    if (value == "Rent") {
+      updateFields({});
+      navigate("/thank-you");
+      return;
+    }
     updateFields({ ...allFields, home_owner: value });
     props.onNext();
   };
@@ -212,6 +219,41 @@ export const ProjectOwnerForm = ({ props }) => {
           />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!firstName || !lastName} />
+      </div>
+    </div>
+  );
+};
+
+export const AddressDetailsForm = ({ props }) => {
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!address || !city || !state) return;
+    updateFields({ ...allFields, address, city, state });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader title={"Address Details"} subtitle={"Please Share your address information with us"} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          <LabelInput
+            id={"address"}
+            required
+            placeholder={"Enter your address"}
+            value={address}
+            setValue={setAddress}
+          />
+          <LabelInput id={"city"} required placeholder={"Enter your city name"} value={city} setValue={setCity} />
+          <LabelInput id={"state"} required placeholder={"Enter your state name"} value={state} setValue={setState} />
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!address || !city || !state} />
       </div>
     </div>
   );

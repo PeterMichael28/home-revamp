@@ -9,6 +9,7 @@ import {
   PropertyTypeForm,
   ProjectTimelineForm,
   ProjectScopeForm,
+  AddressDetailsForm,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import { HVACS } from "./HvacsFormComponents";
@@ -54,6 +55,10 @@ const HvacsForm = ({ slug }) => {
     {
       label: "Form9",
       component: (props) => <ContactDetailsForm props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <AddressDetailsForm props={props} />,
     },
     {
       label: "Form10",

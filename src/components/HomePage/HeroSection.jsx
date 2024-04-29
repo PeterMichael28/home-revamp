@@ -9,7 +9,7 @@ const HeroSection = () => {
 
   const handleGoToNext = () => {
     if (!value) return;
-    navigate(`/${value}`);
+    navigate(`/${value.toLowerCase()}`);
   };
   return (
     <section className="w-full h-sceen bg-onPrimaryContainer pb-9">
@@ -29,7 +29,7 @@ const HeroSection = () => {
             <select
               name="our_services"
               id="our_services"
-              className="flex-1 border text-sm outline-none border-[#E3E3E3] border-r-0 rounded-l bg-white p-4 gap-y-2"
+              className="flex-1 border text-sm outline-none border-[#E3E3E3] border-r-[10px] border-r-transparent rounded-l bg-white p-4 gap-y-2"
               value={value}
               onChange={(e) => setValue(e.target.value)}
             >

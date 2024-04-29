@@ -8,6 +8,7 @@ import UseOfTerms from "./pages/UseOfTerms";
 import PrivacyPage from "./pages/PrivacyPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThankyouPage from "./pages/ThankyouPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ function App() {
         {
           path: "/:slug/completed",
           element: <CompletedPage />,
+        },
+        {
+          path: "/thank-you",
+          element: <ThankyouPage />,
         },
         {
           path: "/privacy-policy",
