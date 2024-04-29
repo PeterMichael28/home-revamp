@@ -17,12 +17,12 @@ const OurServicesDropdown = () => {
         <p className="text-lsm font-semibold mb-5">Select any service to continue:</p>
         <div className=" grid grid-cols-2 place-item-center gap-4">
           {ourServices.map((ser, id) => (
-            <div
+            <Link to={ser.label.toLowerCase()}
               className="text-sm font-medium text-secondary hover:text-primary transition-all duration-500 hover:scale-110 cursor-pointer"
               key={id}
             >
               {ser.label}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

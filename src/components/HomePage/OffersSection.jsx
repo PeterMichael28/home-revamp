@@ -4,7 +4,7 @@ import OfferTimeline from "./OfferTimeline";
 import img1 from "~/assets/images/services.png";
 const OffersSection = () => {
   return (
-    <section className="py-10 md:py-16 w-full h-full px-4 sm:px-8 md:px-14  max-w-[1300px] mx-auto">
+    <section className="py-10 md:py-16 w-full h-full px-4 sm:px-8 md:px-14  max-w-[1300px] mx-auto" id="about">
       <SectionHeader
         title="Our Offerings Encompass a Diverse Range of Premium Services."
         subtitle="Discover transparent and affordable quotes tailored to your needs. Explore our diverse services and get personalized quotes for your home improvement project today."
