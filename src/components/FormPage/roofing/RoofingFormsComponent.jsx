@@ -6,6 +6,7 @@ import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import LabelSelect from "../LabelSelect";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -251,7 +252,7 @@ export const AddressDetailsForm = ({ props }) => {
             setValue={setAddress}
           />
           <LabelInput id={"city"} required placeholder={"Enter your city name"} value={city} setValue={setCity} />
-          <LabelInput id={"state"} required placeholder={"Enter your state name"} value={state} setValue={setState} />
+          <LabelSelect id={"state"} required placeholder={"Enter your state name"} value={state} setValue={setState} />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!address || !city || !state} />
       </div>
@@ -310,13 +311,13 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(allFields),
+        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
-      // console.log(response);
+      // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
       handleClick();
@@ -324,6 +325,7 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
     } catch (error) {
       toast.error("Error submitting!, Please try again");
       setLoading(false);
+      console.log(error);
     }
 
     // handleClick();

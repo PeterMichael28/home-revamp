@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import icons from "~/assets/icons/icons";
 
 const Services = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[34px]">
       {data.map((ser, id) => (
@@ -25,6 +26,7 @@ const Services = ({ data }) => {
             src={ser.img}
             alt=""
             className="h-[240px] w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
+            onClick={() => navigate(ser.label.toLowerCase())}
           />
         </div>
       ))}
