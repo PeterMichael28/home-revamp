@@ -306,7 +306,7 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
     updateFields({ ...allFields, contact_time: value, service: slug });
 
     try {
-      const response = await fetch(`${url}/home-qoute/`, {
+      const response = await fetch(`${url}/api/home-quote/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -37,9 +37,10 @@ const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
   const RenderComponent = ({ component }) => {
     const MyComponent = component;
     return (
-      <div className={classNames("animate-slidein")}>
+      <form className={classNames("animate-slidein")}>
         <MyComponent onNext={handleNext} onPrev={handlePrev} activeIndex={activeIndex} />
-      </div>
+        <input id="leadid_token" name="universal_leadid" type="hidden" value="" />
+      </form>
     );
   };
 

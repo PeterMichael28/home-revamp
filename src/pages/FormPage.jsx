@@ -29,7 +29,7 @@ const FormPage = () => {
     gutters: GutterForms,
     painting: PaintingForm,
     plumbing: PlumbingForm,
-    kitchen: KitchenForm
+    kitchen: KitchenForm,
   };
 
   const ActiveForm = allForms[slug];
