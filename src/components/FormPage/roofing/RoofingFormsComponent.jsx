@@ -5,7 +5,7 @@ import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
 
 export const LocationForm = ({ props }) => {
@@ -214,7 +214,7 @@ export const ProjectOwnerForm = ({ props }) => {
           <LabelInput
             id={"lastName"}
             required
-            placeholder={"Enter your last name"}
+            placeholder={"Select your last name"}
             value={lastName}
             setValue={setLastName}
           />
@@ -300,7 +300,8 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!value) return;
     setLoading(true);
     updateFields({ ...allFields, contact_time: value, service: slug });
@@ -345,7 +346,31 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
             <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
           ))}
         </div>
-        <FormButton text="Submit" className="mt-7" onClick={handleSubmit} disabled={!value} loading={loading} />
+        <div className="my-4">
+          <input type="hidden" id="leadid_tcpa_disclosure" />
+          <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
+            <span className="font-semibold text-base">Note: </span>
+            By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}
+            <Link to="/" className="underline text-blue-600 underline-offset-4">
+              HomeRevampExpert.com
+            </Link>{" "}
+            to the phone number provided using automated technology and prerecorded voice messages even if you are on a
+            do-not-call list. Message and data rates may apply. You also consent to{" "}
+            <Link to="/" className="underline text-blue-600 underline-offset-4">
+              HomeRevampExpert.com
+            </Link>{" "}
+            saving the information you entered and sharing it with relevant marketing and services companies so you can
+            get the most up-to-date quotes.You further agree to our Privacy Policy and Terms of Conditions.
+          </label>
+        </div>
+        <FormButton
+          text="Submit"
+          type="submit"
+          className="mt-7"
+          onClick={handleSubmit}
+          disabled={!value}
+          loading={loading}
+        />
       </div>
     </div>
   );

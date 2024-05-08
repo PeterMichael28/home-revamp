@@ -49,7 +49,7 @@ const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
       {/* indicators */}
       <StepperIndicator steps={steps} activeIndex={activeIndex} />
       {/* content */}
-      <div className="overflow-x-hidden max-w-[450px] w-full mx-auto mt-9 px-2">
+      <div className="overflow-x-hidden max-w-[500px] w-full mx-auto mt-9 px-2">
         <RenderComponent component={steps[activeIndex]?.component || steps[activeIndex]} />
       </div>
     </div>

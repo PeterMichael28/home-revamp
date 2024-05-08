@@ -39,7 +39,14 @@ const FormPage = () => {
     }
   }, [navigate, ActiveForm]);
 
-  return <ActiveForm slug={slug} />;
+  return (
+    <div className="pt-5 md:pt-10">
+      <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
+        Compare {slug} Quote Today!
+      </h2>
+      <ActiveForm slug={slug} />
+    </div>
+  );
 };
 
 export default FormPage;

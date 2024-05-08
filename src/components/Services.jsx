@@ -26,7 +26,7 @@ const Services = ({ data }) => {
             src={ser.img}
             alt=""
             className="h-[240px] w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
-            onClick={() => navigate(ser.label.toLowerCase())}
+            onClick={() => navigate(`/${ser.label.toLowerCase()}`)}
           />
         </div>
       ))}
