@@ -314,7 +314,23 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
         },
         body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
       });
-      console.log(response);
+
+      const response2 = await fetch(
+        `https://enlead.leadportal.com/new_api/index.php?action=detail&func=pingPostLead&TYPE=33`,
+        {
+          method: "POST",
+          headers: {
+            API_Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
+            API_Action: "pingPostLead",
+            SRC: "https://home-revamp.vercel.app/",
+            Mode: "full",
+          },
+          body: JSON.stringify({ ...allFields, contact_time: value, service: slug, Test_Lead: 1 }),
+        }
+      );
+
+      console.log({ response });
+      console.log({ response2 });
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
