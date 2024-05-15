@@ -315,25 +315,25 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
         body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
       });
 
-      const response2 = await fetch(`https://enlead.leadportal.com/apiJSON.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...allFields,
-          Test_Lead: 1,
-          Mode: "full",
-          Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
-          API_Action: "pingPostLead",
-          TYPE: "33",
-          IP_Address: "75.2.92.149",
-          SRC: "https://home-revamp.vercel.app/",
-        }),
-      });
+      // const response2 = await fetch(`https://enlead.leadportal.com/apiJSON.php`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     ...allFields,
+      //     Test_Lead: 1,
+      //     Mode: "full",
+      //     Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
+      //     API_Action: "pingPostLead",
+      //     TYPE: "33",
+      //     IP_Address: "75.2.92.149",
+      //     SRC: "Website",
+      //   }),
+      // });
 
       console.log({ response });
-      console.log({ response2 });
+      // console.log({ response2 });
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }

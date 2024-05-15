@@ -9,6 +9,12 @@ import PrivacyPage from "./pages/PrivacyPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThankyouPage from "./pages/ThankyouPage";
+import ReactGA from "react-ga4";
+import { useEffect } from "react-router-dom";
+
+const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
+
+ReactGA.initialize(measurementId);
 
 function App() {
   const router = createBrowserRouter([
@@ -44,6 +50,10 @@ function App() {
       errorElement: <h1>Error Page</h1>,
     },
   ]);
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   return (
     <>
