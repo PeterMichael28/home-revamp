@@ -11,7 +11,9 @@ const Services = ({ data }) => {
             <p className="text-2xl font-medium leading-normal mb-2">{ser.label}</p>
             <p className="text-sm text-gray-dark font-normal leading-[22px]">{ser.subText}</p>
             <Link
-              to={`/${ser.label.toLowerCase()}`}
+              to={`/new`}
+              // to={`/${ser.label.toLowerCase()}`}
+              // href="https://d3ei5m25ukvnu9.cloudfront.net/form2.php?Form_Key=245517b3-16a8-11ef-8219-06d238407383&isViewForm=1"
               className="mt-4 text-sm leading-[20px] text-primary group flex items-center gap-x-2"
             >
               <span>Get Started</span>{" "}

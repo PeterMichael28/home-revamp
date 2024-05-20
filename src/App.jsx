@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ThankyouPage from "./pages/ThankyouPage";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
+import BoberdooForm from "./pages/CustomForm";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -48,6 +49,10 @@ function App() {
         },
       ],
       errorElement: <h1>Error Page</h1>,
+    },
+    {
+      path: "/new",
+      element: <BoberdooForm />,
     },
   ]);
 
