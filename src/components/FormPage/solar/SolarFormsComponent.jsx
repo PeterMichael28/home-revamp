@@ -49,7 +49,7 @@ export const SunlightExposure = ({ props }) => {
     <div className="w-full">
       <FormHeader
         title={"Sunlight Exposure on Roof"}
-        subtitle={"Which of these windows material best describes your needs?"}
+        subtitle={"Which of these options best describes your needs?"}
       />
 
       <div className="mt-7">
