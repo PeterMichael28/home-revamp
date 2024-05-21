@@ -9,7 +9,8 @@ const HeroSection = () => {
 
   const handleGoToNext = () => {
     if (!value) return;
-    navigate(`/${value.toLowerCase()}`);
+    navigate(`/new`);
+    // navigate(`/${value.toLowerCase()}`);
   };
   return (
     <section className="w-full h-sceen bg-onPrimaryContainer pb-9">

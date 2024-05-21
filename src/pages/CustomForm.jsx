@@ -26,7 +26,7 @@ const BoberdooForm = () => {
       <header className="bg-onPrimaryContainer border-b shadow-md shadow-[rgba(100,100,100,0.16)] w-full">
         <Header />
       </header>
-      <div id="boberdoo-form-container"></div>
+      <div id="boberdoo-form-container py-8"></div>
       <Footer />
     </div>
   );
