@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
 import "./App.css";
 import PageLayout from "./layouts/PageLayout";
 import HomePage from "./pages/HomePage";
@@ -18,6 +18,14 @@ const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 ReactGA.initialize(measurementId);
 
 function App() {
+  function injectScript(src) {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = src;
+    document.body.appendChild(script);
+  }
+
+  // const { pathname } = useLocation();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -58,6 +66,20 @@ function App() {
 
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+
+    // Script injection logic here
+    const leadIdScriptSrc = "//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
+
+    injectScript(leadIdScriptSrc);
+
+    // TrustedForm script injection (dynamic URL)
+    const trustedFormUrl =
+      ("https:" === document.location.protocol ? "https" : "http") +
+      "://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&ping_field=xxTrustedFormPingUrl&l=" +
+      new Date().getTime() +
+      Math.random();
+
+    injectScript(trustedFormUrl);
   }, []);
 
   return (

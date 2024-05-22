@@ -7,6 +7,7 @@ import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
+import axios from "axios";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -306,57 +307,85 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
     setLoading(true);
     updateFields({ ...allFields, contact_time: value, service: slug });
 
-    try {
-      const response = await fetch(`${url}/api/home-quote/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
-      });
+    const apiUrl = "https://enlead.leadportal.com/new_api/index.php";
+    const apiKey = "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583";
+    const postData = {
+      API_Action: "pingPostLead",
+      API_Key: apiKey,
+      SRC: "Website",
+      Mode: "full",
+      ...allFields,
+      contact_time: value,
+      service: slug,
+    };
 
-      const response2 = await fetch(`https://enlead.leadportal.com/new_api/api.php`, {
-        method: "POST",
+    try {
+      // const response = await fetch(`${url}/api/home-quote/`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
+      // });
+
+      // const response2 = await fetch(`https://enlead.leadportal.com/new_api/api.php`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   // mode: "no-cors",
+      //   body: JSON.stringify({
+      //     ...allFields,
+      //     Mode: "full",
+      //     Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
+      //     API_Action: "pingPostLead",
+      //     TYPE: 35,
+      //     SRC: "Website",
+      //     Landing_Page: "https://homerevampexpert.com/roofings",
+      //     Zip: 99999,
+      //     IP_Address: "75.2.92.149",
+      //     Last_Name: "Mike",
+      //     First_Name: "Mikeee",
+      //     State: "Ak",
+      //     Email: "test@nags.us",
+      //     Homeowner: "Own",
+      //   }),
+      // });
+
+      const response = await axios.post(apiUrl, postData, {
+        params: {
+          action: "detail",
+          func: "pingPostLead",
+          TYPE: 35,
+        },
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // This may need to be configured on the server side
         },
-        // mode: "no-cors",
-        body: JSON.stringify({
-          ...allFields,
-          Mode: "full",
-          Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
-          API_Action: "pingPostLead",
-          TYPE: 35,
-          SRC: "Website",
-          Landing_Page: "https://homerevampexpert.com/roofings",
-          Zip: 99999,
-          IP_Address: "75.2.92.149",
-          Last_Name: "Mike",
-          First_Name: "Mikeee",
-          State: "Ak",
-          Email: "test@nags.us",
-          Homeowner: "Own",
-        }),
       });
+      console.log("Response:", response.data);
 
       // console.log({ response });
-      console.log({ response2 });
-      if (!response.ok) {
-        throw new Error("Error submitting!, Please try again");
-      }
+      // console.log({ response });
+      // if (!response.ok) {
+      //   throw new Error("Error submitting!, Please try again");
+      // }
       // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
       handleClick();
       setLoading(false);
     } catch (error) {
-      toast.error("Error submitting!, Please try again");
+      console.error("Error submitting lead:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+      alert("There was an error submitting the lead.");
       setLoading(false);
-      console.log(error);
     }
-
-    // handleClick();
   };
+
+  // handleClick();
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
