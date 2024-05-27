@@ -320,13 +320,13 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
     };
 
     try {
-      // const response = await fetch(`${url}/api/home-quote/`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
-      // });
+      const response = await fetch(`${url}/api/home-quote/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
+      });
 
       // const response2 = await fetch(`https://enlead.leadportal.com/new_api/api.php`, {
       //   method: "POST",
@@ -352,24 +352,24 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
       //   }),
       // });
 
-      const response = await axios.post(apiUrl, postData, {
-        params: {
-          action: "detail",
-          func: "pingPostLead",
-          TYPE: 35,
-        },
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*", // This may need to be configured on the server side
-        },
-      });
-      console.log("Response:", response.data);
+      // const response = await axios.post(apiUrl, postData, {
+      //   params: {
+      //     action: "detail",
+      //     func: "pingPostLead",
+      //     TYPE: 35,
+      //   },
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Origin": "*", // This may need to be configured on the server side
+      //   },
+      // });
+      // console.log("Response:", response.data);
 
       // console.log({ response });
       // console.log({ response });
-      // if (!response.ok) {
-      //   throw new Error("Error submitting!, Please try again");
-      // }
+      if (!response.ok) {
+        throw new Error("Error submitting!, Please try again");
+      }
       // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
