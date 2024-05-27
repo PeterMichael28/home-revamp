@@ -3,10 +3,9 @@ import Footer from "~/layouts/Footer";
 import Header from "~/layouts/Header";
 
 const BoberdooForm = () => {
+  // Create a script element
   useEffect(() => {
-    // Create a script element
     const documents = document.getElementById("boberdoo-form-container");
-
     const script = document.createElement("script");
     script.src = "https://d3ei5m25ukvnu9.cloudfront.net/forms/embed/245517b3-16a8-11ef-8219-06d238407383";
     script.async = true;
@@ -26,7 +25,7 @@ const BoberdooForm = () => {
       <header className="bg-onPrimaryContainer border-b shadow-md shadow-[rgba(100,100,100,0.16)] w-full">
         <Header />
       </header>
-      <div id="boberdoo-form-container py-8"></div>
+      <div id="boberdoo-form-container"></div>
       <Footer />
     </div>
   );
