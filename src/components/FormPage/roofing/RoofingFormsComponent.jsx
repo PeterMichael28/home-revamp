@@ -414,8 +414,18 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
             <Link to="/" className="underline text-blue-600 underline-offset-4">
               HomeRevampExpert.com
             </Link>{" "}
-            saving the information you entered and sharing it with relevant marketing and services companies so you can
-            get the most up-to-date quotes.You further agree to our Privacy Policy and Terms of Conditions.
+            saving the information you entered and sharing it with relevant marketing and services{" "}
+            <Link to="/our-partners" className="underline text-blue-600 underline-offset-4">
+              companies
+            </Link>{" "}
+            so you can get the most up-to-date quotes.You further agree to our{" "}
+            <Link to="/privacy-policy" className="underline text-blue-600 underline-offset-4">
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link to="/use-of-terms" className="underline text-blue-600 underline-offset-4">
+              Terms of Conditions.
+            </Link>
           </label>
         </div>
         <FormButton

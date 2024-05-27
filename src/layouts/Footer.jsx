@@ -15,6 +15,12 @@ const Footer = () => {
             <li className="text-secondary font-semibold md:text-sm text-lg">
               <Link to="/use-of-terms">Use of Terms </Link>
             </li>
+            <li className="text-secondary font-semibold md:text-sm text-lg">
+              <Link to="/ccpa">CCPA </Link>
+            </li>
+            <li className="text-secondary font-semibold md:text-sm text-lg">
+              <Link to="/contact">Contact </Link>
+            </li>
           </ul>
         </nav>
         <div className="text-secondary font-semibold md:text-sm text-lg">

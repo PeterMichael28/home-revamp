@@ -6,6 +6,9 @@ import FormPage from "./pages/FormPage";
 import CompletedPage from "./pages/CompletedPage";
 import UseOfTerms from "./pages/UseOfTerms";
 import PrivacyPage from "./pages/PrivacyPage";
+import PartnersPage from "./pages/PartnersPage";
+import CCPAPage from "./pages/CCPA";
+import ContactPage from "./pages/ContactPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThankyouPage from "./pages/ThankyouPage";
@@ -54,6 +57,22 @@ function App() {
         {
           path: "/use-of-terms",
           element: <UseOfTerms />,
+        },
+        {
+          path: "/ccpa",
+          element: <CCPAPage />,
+        },
+        {
+          path: "/contact",
+          element: <ContactPage />,
+        },
+        {
+          path: "/contact",
+          element: <UseOfTerms />,
+        },
+        {
+          path: "/our-partners",
+          element: <PartnersPage />,
         },
       ],
       errorElement: <h1>Error Page</h1>,

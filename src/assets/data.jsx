@@ -207,9 +207,11 @@ export const privacyData = [
     title: "Additional Information",
     subTitle: `Our service does not respond to "do not track" signals. Personally identifiable information is collected voluntarily, and users can contact the company for privacy-related concerns.`,
   },
+
   {
-    title: "Contact Us",
-    subTitle: `For any questions or concerns regarding privacy, users can reach out via certified mail or our contact page.`,
+    title: "Opt-Out",
+    subTitle: `You have the option to opt-out of the arbitration and class action waiver provisions by providing written notice within thirty days of registering on this Service.
+    `,
   },
 ];
 
@@ -323,3 +325,151 @@ export const stateNames = [
   "Wyoming",
 ];
 
+export const CCPAData = [
+  {
+    title: "California Privacy Notice",
+    subTitle: `Effective Date: June 1, 2021`,
+  },
+  {
+    title: "Your Rights Under the CCPA",
+    subTitle: `As a resident of California, you are entitled to additional rights regarding your personal information under the California Consumer Privacy Act of 2018 (CCPA) and other relevant privacy and data protection laws. This notice outlines the categories of personal information we collect about you, the purposes for which the information is collected, the entities with whom we share your information, and the reasons for sharing it.`,
+  },
+  {
+    title: "Categories of Personal Information We Collect",
+    subTitle: `We collect information that can identify you, your household, or your device, or that can be reasonably linked to you, your household, or your device ("Personal Information"). Personal Information does not include publicly available information from government records, de-identified or aggregated data, or information protected under laws such as HIPAA and the Gramm-Leach Bliley Act (GLBA).`,
+  },
+  {
+    title: "The categories of Personal Information we collect include:",
+    subCat: [
+      "- Identifiers: Name, mailing address, telephone number, email address, birthdate, military affiliation, Social Security Number, ZIP code, driver's license, IP address.",
+      "- Personal Information Listed in the California Customer Records Statute: Employment details, financial information, and protected classification characteristics.",
+      "- Employment Information: Employment status, employer, job title, monthly income, pay period, paycheck type, work phone number, illness/disability.",
+      "- Financial Information: Auto status, car/home ownership, bank details, loan amounts and purposes, debt amounts, primary income source.",
+      "- Characteristics of Protected Classifications: Age, military affiliation.",
+      "- Commercial Information: Debt history, asset information.",
+      "- Internet or Other Electronic Network Activity Information: Cookies, domain name, browser type, operating system, usage data, visit frequency, referring affiliate information, referring ad campaign, time on site, source URL, redirect URL.",
+      "- Geolocation Data: Information about your location when accessing our website.",
+      "- Non-public Education Information: Degree attained, education level, graduation year.",
+      "- Inferences Drawn from Other Personal Information: Potential preferences for financial services.",
+    ],
+  },
+  {
+    title: "Sources of Personal Information",
+    subTitle: `We collect information from:`,
+    subCat: [
+      "- Directly from you: Through online forms or when accessing our website.",
+      "- Third Parties: From aggregators, marketers, lead generators, referring websites, or advertising campaigns.",
+    ],
+  },
+  {
+    title: "How We Share Your Personal Information",
+    subTitle: `We share information in the above categories as follows:`,
+    subCat: [
+      "- All Categories: With potential buyers in case of a company sale or merger, or in response to lawful requests by law enforcement.",
+      "- Identifiers: With service providers for shipping, name and address verification, email distribution, and promotions management; and with lenders, financial service providers, debt relief providers, aggregators, and marketers (you can opt-out of this sharing).",
+      "- Other Personal Information Listed: With service providers as described above (you can opt-out).",
+      "- Internet or Other Electronic Network Activity Information: With data analytics providers and service providers for tracking referrals and ad campaigns.",
+      "- Professional or Employment-Related Information: With service providers as described above (you can opt-out).",
+      "- Non-public Education Information: With service providers as described above (you can opt-out).",
+      "- Inferences Drawn from Other Personal Information: With service providers as described above (you can opt-out).",
+    ],
+  },
+  {
+    title: "How We Use Your Information",
+    subTitle: `For details on how we use your information, refer to "What We Do with the Information We Collect" above. We will not collect additional categories of personal information or use your personal information for significantly different, unrelated, or incompatible purposes without notifying you.`,
+  },
+  {
+    title: "How We Retain and Store Your Personal Information",
+    subTitle: `We retain your personal information for as long as necessary to fulfill the purposes for which it was collected and to comply with applicable laws. We employ reasonable security measures to protect your information while it is stored.`,
+  },
+];
+
+export const CpaRightsData = [
+  {
+    title: "Requests to Know",
+    subTitle: `You have the right to request information about our collection and use of your personal information over the past 12 months. This includes:`,
+    subCat: [
+      "- Categories of personal information collected about you.",
+      "- Sources of the personal information.",
+      "- Business or commercial purposes for collecting or selling the personal information.",
+      "- Categories of third parties with whom we share the personal information.",
+      "- Specific pieces of personal information collected about you.",
+      "- If your personal information was sold or disclosed for a business purpose, information on the categories of personal information sold and to whom.",
+    ],
+  },
+  {
+    title: "Requests to Delete",
+    subTitle: `You have the right to request the deletion of your personal information that we collected and retained, subject to certain exceptions. We may deny your deletion request if retaining the information is necessary to:`,
+    subCat: [
+      "- Complete the transaction for which it was collected.",
+      "- Detect security incidents, protect against malicious, deceptive, fraudulent, or illegal activity.",
+      "- Debug products to identify and repair errors.",
+      "- Comply with legal obligations.",
+      "- Make other lawful uses of the information compatible with the context in which you provided it.",
+    ],
+  },
+  {
+    title: "Non-Discrimination",
+    subTitle: `We will not discriminate against you for exercising your CCPA rights. This means we will not:`,
+    subCat: [
+      "- Deny you goods or services.",
+      "- Charge you different prices or rates.",
+      "- Provide a different level or quality of goods or services.",
+      "- Suggest that you may receive different prices or a different level or quality of goods or services.",
+    ],
+  },
+
+  {
+    title: "Authorized Agent",
+    subTitle: `California residents can empower an "authorized agent" to submit requests on their behalf. The agent must have written authorization confirming their authority.`,
+  },
+
+  {
+    title: "How to Submit Your Request for Information",
+    subTitle: `To request access to specific information we have about you, email us with the subject line "CCPA Right to Know" at help@homerevampexpert.com. Provide sufficient information to identify you, including:`,
+    subCat: [
+      "- Full name",
+      "- Physical address",
+      "- Phone number",
+      "- Email address",
+      "- Proof of identity (e.g., driver's license or passport)",
+      "- Description of the right you wish to exercise",
+
+      "We will verify your identity and respond within the timeframe required by law.",
+    ],
+  },
+
+  {
+    title: "How to Exercise Your Right to Delete Information",
+    subTitle: `To request deletion of your information, email us with the subject line "CCPA Right to Request or Delete Information" at info@homerevampexpert.com. Include:`,
+    subCat: [
+      "- Full name",
+      "- Physical address",
+      "- Phone number",
+      "- Email address",
+      "- Proof of identity (e.g., driver's license or passport)",
+      "- Description of the right you wish to exercise",
+
+      "We will verify your identity and respond within the timeframe required by law.",
+    ],
+  },
+
+  {
+    title: "How to Exercise Your Right to Opt-Out of Sale of Your Information",
+    subTitle: `If you are 16 years or older, you can opt-out of the sale of your personal information. Email us with the subject line "CCPA Do Not Sell My Information" at info@homerevampexpert.com. Include:`,
+    subCat: [
+      "- Full name",
+      "- Physical address",
+      "- Phone number",
+      "- Email address",
+      "- Proof of identity (e.g., driver's license or passport)",
+      "- Description of the right you wish to exercise",
+
+      "We will verify your identity and respond within the timeframe required by law. Note that opting out may affect our ability to provide certain services.",
+    ],
+  },
+  {
+    title: "DO NOT SELL MY PERSONAL INFORMATION",
+    subTitle: `If you opt-out, we may not be able to help you find a quote or other products or services through our Network Partners. To opt-in, submit the completed form or resubmit your request indicating you want to sell your information to receive the products and services requested`,
+  },
+];
