@@ -380,7 +380,7 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
-      alert("There was an error submitting the lead.");
+      toast.error("There was an error submitting the lead.");
       setLoading(false);
     }
   };
