@@ -21,13 +21,6 @@ const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 ReactGA.initialize(measurementId);
 
 function App() {
-  function injectScript(src) {
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = src;
-    document.body.appendChild(script);
-  }
-
   // const { pathname } = useLocation();
   const router = createBrowserRouter([
     {
@@ -87,18 +80,33 @@ function App() {
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 
     // Script injection logic here
-    const leadIdScriptSrc = "//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
+    // const leadIdScriptSrc = "//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
 
-    injectScript(leadIdScriptSrc);
+    // injectScript(leadIdScriptSrc);
 
-    // TrustedForm script injection (dynamic URL)
-    const trustedFormUrl =
-      ("https:" === document.location.protocol ? "https" : "http") +
-      "://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&ping_field=xxTrustedFormPingUrl&l=" +
-      new Date().getTime() +
-      Math.random();
+    // // TrustedForm script injection (dynamic URL)
+    // const trustedFormUrl =
+    //   ("https:" === document.location.protocol ? "https" : "http") +
+    //   "://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&ping_field=xxTrustedFormPingUrl&l=" +
+    //   new Date().getTime() +
+    //   Math.random();
 
-    injectScript(trustedFormUrl);
+    // injectScript(trustedFormUrl);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // window.setUniversalLeadId = onGetUniversalLeadId;
+      const script = document.createElement("script");
+      script.id = "LeadiDscript_campaign";
+      script.type = "text/javascript";
+      script.async = true;
+      script.defer = true;
+      script.crossorigin = "anonymous";
+
+      script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
+      document.body.appendChild(script);
+    }
   }, []);
 
   return (

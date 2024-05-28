@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import FormHeader from "../FormHeader";
 import LabelInput from "../LabelInput";
 import FormButton from "../FormButton";
@@ -13,6 +13,7 @@ export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const [zipCode, setZipCode] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const handleClick = () => {
     if (!zipCode) return;
@@ -20,7 +21,28 @@ export const LocationForm = ({ props }) => {
     props.onNext();
   };
 
+  const isZipValid = useMemo(() => {
+    return /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
+  }, []);
+
   // console.log({ allFields });
+
+  useEffect(() => {
+    if (isZipValid.test(zipCode)) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [isZipValid, zipCode]);
+
+  useEffect(() => {
+    if (!isValid) {
+      const timeoutId = setTimeout(() => setIsValid(true), 4000); // 4 seconds
+
+      // Cleanup function to clear the timeout when the component unmounts
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isValid]);
 
   return (
     <div className="w-full">
@@ -38,7 +60,13 @@ export const LocationForm = ({ props }) => {
           value={zipCode}
           setValue={setZipCode}
         />
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!zipCode} />
+        {!isValid && <p className="text-[11px] text-red-500 mt-1">Enter a valid US Zip or postal code</p>}
+        <FormButton
+          text="Continue"
+          className="mt-7"
+          onClick={handleClick}
+          disabled={!zipCode || !isZipValid.test(zipCode)}
+        />
       </div>
     </div>
   );
@@ -294,8 +322,9 @@ export const ContactDetailsForm = ({ props }) => {
   );
 };
 
-export const PreferredTimeForm = ({ slug, handleClick }) => {
+export const PreferredTimeForm = ({ slug }) => {
   const [value, setValue] = useState("");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
 
@@ -307,18 +336,6 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
     setLoading(true);
     updateFields({ ...allFields, contact_time: value, service: slug });
 
-    const apiUrl = "https://enlead.leadportal.com/new_api/index.php";
-    const apiKey = "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583";
-    const postData = {
-      API_Action: "pingPostLead",
-      API_Key: apiKey,
-      SRC: "Website",
-      Mode: "full",
-      ...allFields,
-      contact_time: value,
-      service: slug,
-    };
-
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
         method: "POST",
@@ -328,52 +345,13 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
         body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
       });
 
-      // const response2 = await fetch(`https://enlead.leadportal.com/new_api/api.php`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   // mode: "no-cors",
-      //   body: JSON.stringify({
-      //     ...allFields,
-      //     Mode: "full",
-      //     Key: "34f9a5fb83b55a157ec5012e26aad318bbdf5000d9be121826097ce5b7b53583",
-      //     API_Action: "pingPostLead",
-      //     TYPE: 35,
-      //     SRC: "Website",
-      //     Landing_Page: "https://homerevampexpert.com/roofings",
-      //     Zip: 99999,
-      //     IP_Address: "75.2.92.149",
-      //     Last_Name: "Mike",
-      //     First_Name: "Mikeee",
-      //     State: "Ak",
-      //     Email: "test@nags.us",
-      //     Homeowner: "Own",
-      //   }),
-      // });
-
-      // const response = await axios.post(apiUrl, postData, {
-      //   params: {
-      //     action: "detail",
-      //     func: "pingPostLead",
-      //     TYPE: 35,
-      //   },
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Origin": "*", // This may need to be configured on the server side
-      //   },
-      // });
-      // console.log("Response:", response.data);
-
-      // console.log({ response });
-      // console.log({ response });
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
       // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
-      handleClick();
+      navigate(`/${slug}/completed`);
       setLoading(false);
     } catch (error) {
       console.error("Error submitting lead:", error);
@@ -389,7 +367,7 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
-    <div className="w-full">
+    <form className="w-full" onSubmit={handleSubmit}>
       <FormHeader
         title={"Preferred Contact Time"}
         subtitle={"Please let us know when it would be a good time to contact you"}
@@ -398,9 +376,18 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                // setContact(dat);
+                setValue(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
+        <input id="leadid_token" name="universal_leadid" type="hidden" value="" />
         <div className="my-4">
           <input type="hidden" id="leadid_tcpa_disclosure" />
           <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
@@ -432,11 +419,11 @@ export const PreferredTimeForm = ({ slug, handleClick }) => {
           text="Submit"
           type="submit"
           className="mt-7"
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
           disabled={!value}
           loading={loading}
         />
       </div>
-    </div>
+    </form>
   );
 };

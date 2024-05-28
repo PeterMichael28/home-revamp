@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   ContactDetailsForm,
   CustomizedForm,
@@ -16,7 +17,6 @@ import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
 const RoofingForm = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,9 +77,7 @@ const RoofingForm = ({ slug }) => {
 
     {
       label: "Form4",
-      component: (props) => (
-        <PreferredTimeForm props={props} handleClick={() => navigate(`/${slug}/completed`)} slug={slug} />
-      ),
+      component: (props) => <PreferredTimeForm props={props} slug={slug} />,
     },
   ];
 

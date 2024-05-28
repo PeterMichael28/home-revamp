@@ -64,9 +64,7 @@ const PaintingForm = ({ slug }) => {
     },
     {
       label: "Form10",
-      component: (props) => (
-        <PreferredTimeForm props={props} handleClick={() => navigate(`/${slug}/completed`)} slug={slug} />
-      ),
+      component: (props) => <PreferredTimeForm props={props} slug={slug} />,
     },
   ];
 
