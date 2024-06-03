@@ -323,51 +323,101 @@ export const ContactDetailsForm = ({ props }) => {
 };
 
 export const PreferredTimeForm = ({ slug }) => {
+  const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = "https://leadapi.px.com/api/lead/post";
+  const apiKey = "EEF9DB6B-3487-403F-AFB2-196F34660CB0";
+  const postData = {
+    ApiToken: apiKey,
+    Vertical: `Solar`,
+    SubId: "FB1",
+    UserAgent:
+      "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
+    OriginalUrl: "https://homerevampexpert.com/solar",
+    Source: "Social",
+    JornayaLeadId: "",
+    TrustedForm: "",
+    SessionLength: "38",
+    TcpaText: "I concent",
+    VerifyAddress: "false",
+    ContactData: {
+      ...allFields,
+      ZipCode: 90100,
+      FirstName: allFields?.first_name,
+      LastName: allFields?.last_name,
+    },
+  };
 
-  const { allFields, updateFields } = useFormStore((state) => state);
-
-  const handleSubmit = async (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
-    if (!value) return;
     setLoading(true);
-    updateFields({ ...allFields, contact_time: value, service: slug });
 
     try {
-      const response = await fetch(`${url}/api/home-quote/`, {
+      const response2 = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
+        // mode: "no-cors",
+        body: JSON.stringify(postData),
       });
+      // if (!response2.ok) {
+      //   throw new Error("Error submitting!, Please try again");
+      // }
 
-      if (!response.ok) {
-        throw new Error("Error submitting!, Please try again");
-      }
-      // console.log(error);
-      toast.success("Submitted Successfully!!!");
-      updateFields({});
-      navigate(`/${slug}/completed`);
+      console.log({ response2 });
       setLoading(false);
     } catch (error) {
-      console.error("Error submitting lead:", error);
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-      }
-      toast.error("There was an error submitting the lead.");
+      console.log({ error });
       setLoading(false);
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!value) return;
+  //   setLoading(true);
+  //   updateFields({ ...allFields, contact_time: value, service: slug });
+
+  //   try {
+  //     const response = await fetch(`${url}/api/home-quote/`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Error submitting!, Please try again");
+  //     }
+  //     // console.log(error);
+  //     toast.success("Submitted Successfully!!!");
+  //     updateFields({});
+  //     navigate(`/${slug}/completed`);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error("Error submitting lead:", error);
+  //     if (error.response) {
+  //       console.error("Response data:", error.response.data);
+  //     }
+  //     toast.error("There was an error submitting the lead.");
+  //     setLoading(false);
+  //   }
+  // };
 
   // handleClick();
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
-    <form className="w-full" onSubmit={handleSubmit}>
+    <form
+      className="w-full"
+      onSubmit={submitData}
+      // onSubmit={ handleSubmit }
+    >
       <FormHeader
         title={"Preferred Contact Time"}
         subtitle={"Please let us know when it would be a good time to contact you"}

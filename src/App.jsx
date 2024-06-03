@@ -96,7 +96,6 @@ function App() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // window.setUniversalLeadId = onGetUniversalLeadId;
       const script = document.createElement("script");
       script.id = "LeadiDscript_campaign";
       script.type = "text/javascript";
