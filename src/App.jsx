@@ -15,6 +15,8 @@ import ThankyouPage from "./pages/ThankyouPage";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import BoberdooForm from "./pages/CustomForm";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminPage from "./pages/admin/AdminPage";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -73,6 +75,16 @@ function App() {
     {
       path: "/new",
       element: <BoberdooForm />,
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout />,
+      children: [
+        {
+          path: "/admin/dashboard",
+          element: <AdminPage />,
+        },
+      ],
     },
   ]);
 

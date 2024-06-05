@@ -328,14 +328,13 @@ export const PreferredTimeForm = ({ slug }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
-  const apiUrl = "https://leadapi.px.com/api/lead/post";
+  const apiUrl = "https://leadapi.px.com/api/call/ping";
   const apiKey = "EEF9DB6B-3487-403F-AFB2-196F34660CB0";
   const postData = {
-    ApiToken: apiKey,
+    ApiToken: "EEF9DB6B-3487-403F-AFB2-196F34660CB0",
     Vertical: `Solar`,
     SubId: "FB1",
-    UserAgent:
-      "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
+    UserAgent: "",
     OriginalUrl: "https://homerevampexpert.com/solar",
     Source: "Social",
     JornayaLeadId: "",
@@ -362,11 +361,11 @@ export const PreferredTimeForm = ({ slug }) => {
           "Content-Type": "application/json",
         },
         // mode: "no-cors",
-        body: JSON.stringify(postData),
+        body: JSON.stringify({ ...postData }),
       });
-      // if (!response2.ok) {
-      //   throw new Error("Error submitting!, Please try again");
-      // }
+      if (!response2.ok) {
+        throw new Error("Error submitting!, Please try again");
+      }
 
       console.log({ response2 });
       setLoading(false);
