@@ -106,19 +106,19 @@ function App() {
     // injectScript(trustedFormUrl);
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const script = document.createElement("script");
-      script.id = "LeadiDscript_campaign";
-      script.type = "text/javascript";
-      script.async = true;
-      script.defer = true;
-      script.crossorigin = "anonymous";
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const script = document.createElement("script");
+  //     script.id = "LeadiDscript_campaign";
+  //     script.type = "text/javascript";
+  //     script.async = true;
+  //     script.defer = true;
+  //     script.crossorigin = "anonymous";
 
-      script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
-      document.body.appendChild(script);
-    }
-  }, []);
+  //     script.src = `//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
+  //     document.body.appendChild(script);
+  //   }
+  // }, []);
 
   return (
     <>

@@ -6,7 +6,7 @@ const Services = ({ data }) => {
   return (
     <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[34px]">
       {data.map((ser, id) => (
-        <div className="pt-5 rounded-xl border border-gray overflow-hidden max-w-[360px] mx-auto" key={id}>
+        <div className="pt-5 rounded-xl border border-gray overflow-hidden max-w-[360px] justify-between mx-auto flex flex-col" key={id}>
           <div className="mb-6 px-4">
             <p className="text-2xl font-medium leading-normal mb-2">{ser.label}</p>
             <p className="text-sm text-gray-dark font-normal leading-[22px]">{ser.subText}</p>
@@ -27,7 +27,7 @@ const Services = ({ data }) => {
           <img
             src={ser.img}
             alt=""
-            className="h-[240px] w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
+            className="h-[60%] self-end w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
             onClick={() => navigate(`/${ser.label.toLowerCase()}`)}
           />
         </div>

@@ -325,10 +325,11 @@ export const ContactDetailsForm = ({ props }) => {
 export const PreferredTimeForm = ({ slug }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
+  const [tokenId, setTokenId] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
-  const apiUrl = "https://leadapi.px.com/api/call/ping";
+  const apiUrl = "https://leadapi.px.com/api/lead/ping";
   const apiKey = "EEF9DB6B-3487-403F-AFB2-196F34660CB0";
   const postData = {
     ApiToken: "EEF9DB6B-3487-403F-AFB2-196F34660CB0",
@@ -354,25 +355,27 @@ export const PreferredTimeForm = ({ slug }) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const response2 = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // mode: "no-cors",
-        body: JSON.stringify({ ...postData }),
-      });
-      if (!response2.ok) {
-        throw new Error("Error submitting!, Please try again");
-      }
+    // try {
+    //   const response2 = await fetch(apiUrl, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     // mode: "no-cors",
+    //     body: JSON.stringify({ ...postData }),
+    //   });
+    //   if (!response2.ok) {
+    //     throw new Error("Error submitting!, Please try again");
+    //   }
 
-      console.log({ response2 });
-      setLoading(false);
-    } catch (error) {
-      console.log({ error });
-      setLoading(false);
-    }
+    //   console.log({ response2 });
+    //   setLoading(false);
+    // } catch (error) {
+    //   console.log({ error });
+    //   setLoading(false);
+    // }
+
+    console.log({ tokenId });
   };
 
   // const handleSubmit = async (e) => {
@@ -436,7 +439,13 @@ export const PreferredTimeForm = ({ slug }) => {
             />
           ))}
         </div>
-        <input id="leadid_token" name="universal_leadid" type="hidden" value="" />
+        <input
+          id="leadid_token"
+          name="universal_leadid"
+          type="hidden"
+          value=""
+          onChange={(e) => console.log("ok", e.target.value)}
+        />
         <div className="my-4">
           <input type="hidden" id="leadid_tcpa_disclosure" />
           <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
