@@ -11,7 +11,16 @@ import {
   AddressDetailsForm,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
-import { MonthlyBill, SunlightExposure } from "./SolarFormsComponent";
+import {
+  CurrentUtilityProvider,
+  MonthlyBill,
+  ProjectStatus,
+  PropertyStories,
+  PropertyUsage,
+  SolarInstallationLocation,
+  SolarSystemType,
+  SunlightExposure,
+} from "./SolarFormsComponent";
 
 const SolarForms = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,17 +44,43 @@ const SolarForms = ({ slug }) => {
       component: (props) => <PropertyTypeForm props={props} />,
     },
     {
+      label: "Form23",
+      component: (props) => <PropertyStories props={props} />,
+    },
+    {
+      label: "Form123",
+      component: (props) => <PropertyUsage props={props} />,
+    },
+
+    {
       label: "Form4",
       component: (props) => <MonthlyBill props={props} />,
     },
     {
+      label: "Form95",
+      component: (props) => <CurrentUtilityProvider props={props} />,
+    },
+
+    {
       label: "Form5",
       component: (props) => <SunlightExposure props={props} />,
+    },
+    {
+      label: "Form25",
+      component: (props) => <SolarSystemType props={props} />,
+    },
+    {
+      label: "Form245",
+      component: (props) => <SolarInstallationLocation props={props} />,
     },
 
     {
       label: "Form7",
       component: (props) => <ProjectTimelineForm props={props} />,
+    },
+    {
+      label: "Form37",
+      component: (props) => <ProjectStatus props={props} />,
     },
     {
       label: "Form8",

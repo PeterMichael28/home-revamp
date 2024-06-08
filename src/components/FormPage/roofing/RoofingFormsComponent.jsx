@@ -329,95 +329,38 @@ export const PreferredTimeForm = ({ slug }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
-  const apiUrl = "https://leadapi.px.com/api/lead/ping";
-  const apiKey = "EEF9DB6B-3487-403F-AFB2-196F34660CB0";
-  const postData = {
-    ApiToken: "EEF9DB6B-3487-403F-AFB2-196F34660CB0",
-    Vertical: `Solar`,
-    SubId: "FB1",
-    UserAgent: "",
-    OriginalUrl: "https://homerevampexpert.com/solar",
-    Source: "Social",
-    JornayaLeadId: "",
-    TrustedForm: "",
-    SessionLength: "38",
-    TcpaText: "I concent",
-    VerifyAddress: "false",
-    ContactData: {
-      ...allFields,
-      ZipCode: 90100,
-      FirstName: allFields?.first_name,
-      LastName: allFields?.last_name,
-    },
-  };
-
-  const submitData = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!value) return;
     setLoading(true);
+    updateFields({ ...allFields, contact_time: value, service: slug });
 
-    // try {
-    //   const response2 = await fetch(apiUrl, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     // mode: "no-cors",
-    //     body: JSON.stringify({ ...postData }),
-    //   });
-    //   if (!response2.ok) {
-    //     throw new Error("Error submitting!, Please try again");
-    //   }
+    try {
+      const response2 = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // mode: "no-cors",
+        body: JSON.stringify({ ...postData }),
+      });
+      if (!response2.ok) {
+        throw new Error("Error submitting!, Please try again");
+      }
 
-    //   console.log({ response2 });
-    //   setLoading(false);
-    // } catch (error) {
-    //   console.log({ error });
-    //   setLoading(false);
-    // }
-
-    console.log({ tokenId });
+      console.log({ response2 });
+      setLoading(false);
+    } catch (error) {
+      console.log({ error });
+      setLoading(false);
+    }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!value) return;
-  //   setLoading(true);
-  //   updateFields({ ...allFields, contact_time: value, service: slug });
-
-  //   try {
-  //     const response = await fetch(`${url}/api/home-quote/`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Error submitting!, Please try again");
-  //     }
-  //     // console.log(error);
-  //     toast.success("Submitted Successfully!!!");
-  //     updateFields({});
-  //     navigate(`/${slug}/completed`);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error submitting lead:", error);
-  //     if (error.response) {
-  //       console.error("Response data:", error.response.data);
-  //     }
-  //     toast.error("There was an error submitting the lead.");
-  //     setLoading(false);
-  //   }
-  // };
-
-  // handleClick();
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
     <form
       className="w-full"
-      onSubmit={submitData}
+      onSubmit={handleSubmit}
       // onSubmit={ handleSubmit }
     >
       <FormHeader
