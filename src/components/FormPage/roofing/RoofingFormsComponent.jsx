@@ -80,17 +80,125 @@ export const HomeOwnershipForm = ({ props }) => {
   const handleClick = () => {
     if (!value) return;
     if (value == "Rent") {
-      updateFields({});
-      navigate("/thank-you");
+      updateFields({ ...allFields, home_owner: value });
+      props.onNext();
       return;
     }
     updateFields({ ...allFields, home_owner: value });
-    props.onNext();
+    props.goto(5);
   };
   const homeData = ["Own", "Rent"];
   return (
     <div className="w-full">
       <FormHeader title={"Home Ownership"} subtitle={"Please indicate your ownership status for this property."} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
+export const HomeAuthorization = ({ props }) => {
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    if (value == "No, I am not authorized.") {
+      updateFields({});
+      navigate("/thank-you");
+      return;
+    }
+    updateFields({ ...allFields, homeAuthorization: value });
+    props.onNext();
+  };
+  const homeData = [
+    "Yes, I have the authorization.",
+    "No, but I can get permission from the landlord.",
+    "No, I am not authorized.",
+  ];
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Home Authorization"}
+        subtitle={"Are you authorized to make decisions about the property's energy systems?"}
+      />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
+export const LeaseAgreement = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, leaseAgreement: value });
+    props.onNext();
+  };
+
+  const homeData = [
+    "Yes, my lease is more than 3 years.",
+    " Yes, my lease is between 1 and 3 years.",
+    "No, my lease is less than 1 year.",
+    "No, I am month-to-month.",
+  ];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Lease Agreement"} subtitle={"Do you have a long-term lease agreement?"} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
+export const AccessFromLandlord = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, accessFromLandlord: value });
+    props.onNext();
+  };
+
+  const homeData = [
+    "Yes, major modifications are allowed.",
+    "Yes, but only minor modifications.",
+    "No, modifications are not allowed.",
+    "Not sure, I need to check.",
+  ];
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Access from Landlord?"}
+        subtitle={"Does your landlord allow modifications to the property?"}
+      />
 
       <div className="mt-7">
         <div className="space-y-5">

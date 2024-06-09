@@ -34,11 +34,15 @@ const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
     setActiveIndex((prev) => prev - 1);
   };
 
+  const goto = (id) => {
+    if (!id) return;
+    setActiveIndex(id);
+  };
   const RenderComponent = ({ component }) => {
     const MyComponent = component;
     return (
       <div className={classNames("animate-slidein")}>
-        <MyComponent onNext={handleNext} onPrev={handlePrev} activeIndex={activeIndex} />
+        <MyComponent onNext={handleNext} onPrev={handlePrev} activeIndex={activeIndex} goto={goto} />
       </div>
     );
   };

@@ -5,7 +5,7 @@ const ThankyouPage = () => {
         Thank you for providing your details!
       </h2>
       <p className="text-sm text-gray-dark md:text-base text-pretty leading-[22px] md:leading-[27px] mt-2">
-        Our service providers exclusively offer services tailored to homeowners.
+        Our service providers exclusively offer services tailored to homeowners or people authorized by the owner.
       </p>
     </div>
   );
