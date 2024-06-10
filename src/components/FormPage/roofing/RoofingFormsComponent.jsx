@@ -325,7 +325,6 @@ export const ContactDetailsForm = ({ props }) => {
 export const PreferredTimeForm = ({ slug }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
-  const [tokenId, setTokenId] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
@@ -336,22 +335,28 @@ export const PreferredTimeForm = ({ slug }) => {
     updateFields({ ...allFields, contact_time: value, service: slug });
 
     try {
-      const response2 = await fetch(apiUrl, {
+      const response = await fetch(`${url}/api/home-quote/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // mode: "no-cors",
-        body: JSON.stringify({ ...postData }),
+        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
       });
-      if (!response2.ok) {
+
+      if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
-
-      console.log({ response2 });
+      // console.log(error);
+      toast.success("Submitted Successfully!!!");
+      updateFields({});
+      navigate(`/${slug}/completed`);
       setLoading(false);
     } catch (error) {
-      console.log({ error });
+      console.error("Error submitting lead:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
+      toast.error("There was an error submitting the lead.");
       setLoading(false);
     }
   };
