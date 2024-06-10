@@ -12,6 +12,9 @@ import {
   PropertyTypeForm,
   ProjectTimelineForm,
   AddressDetailsForm,
+  HomeAuthorization,
+  LeaseAgreement,
+  AccessFromLandlord,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
@@ -37,6 +40,19 @@ const RoofingForm = ({ slug }) => {
     {
       label: "Form2",
       component: (props) => <HomeOwnershipForm props={props} />,
+    },
+
+    {
+      label: "Form2",
+      component: (props) => <HomeAuthorization props={props} />,
+    },
+    {
+      label: "Form2",
+      component: (props) => <LeaseAgreement props={props} />,
+    },
+    {
+      label: "Form2",
+      component: (props) => <AccessFromLandlord props={props} />,
     },
     {
       label: "Form3",
