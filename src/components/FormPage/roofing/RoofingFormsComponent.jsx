@@ -438,9 +438,10 @@ export const PreferredTimeForm = ({ slug }) => {
   const url = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const leadIdToken = e.target.querySelector("#leadid_token").value;
     if (!value) return;
     setLoading(true);
-    updateFields({ ...allFields, contact_time: value, service: slug });
+    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
@@ -448,7 +449,7 @@ export const PreferredTimeForm = ({ slug }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, service: slug }),
+        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug }),
       });
 
       if (!response.ok) {
