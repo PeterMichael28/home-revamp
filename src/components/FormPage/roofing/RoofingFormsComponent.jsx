@@ -439,16 +439,34 @@ export const PreferredTimeForm = ({ slug }) => {
   const url = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const leadIdToken = await e.target.querySelector("#leadid_token").value;
-    const leadIdInput = await formRef.current.querySelector("#leadid_token").value;
-    console.log(1, leadIdInput);
+    let leadIdToken = e.target.querySelector("#leadid_token").value;
+    // const leadIdInput = formRef.current.querySelector("#leadid_token").value;
+    // console.log(1, leadIdInput);
+
+    // Function to retry getting the leadIdToken
+    const retryGetLeadIdToken = () => {
+      return new Promise((resolve) => {
+        const interval = setInterval(() => {
+          leadIdToken = e.target.querySelector("#leadid_token").value;
+          if (leadIdToken) {
+            clearInterval(interval);
+            resolve(leadIdToken);
+          }
+        }, 100); // Retry every 100 milliseconds
+      });
+    };
+
     console.log(2, leadIdToken);
-    if (!value || !leadIdInput) {
-      console.log("no leadId");
+    if (!value) {
       return;
     }
-    // setLoading(true);
-    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdInput, service: slug });
+
+    if (!leadIdToken) {
+      console.log("no leadId, retrying...");
+      leadIdToken = await retryGetLeadIdToken();
+    }
+    setLoading(true);
+    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
@@ -456,7 +474,7 @@ export const PreferredTimeForm = ({ slug }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdInput, service: slug }),
+        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug }),
       });
 
       if (!response.ok) {
