@@ -26,7 +26,7 @@ const HeroSection = () => {
           </p>
 
           {/* select */}
-          <form className="mt-8 w-full flex items-center max-w-[320px] md:max-w-[400px]">
+          <form className="mt-8 w-full flex items-center sm:max-w-[400px]">
             <select
               name="our_services"
               id="our_services"
