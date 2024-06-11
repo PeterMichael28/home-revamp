@@ -439,7 +439,11 @@ export const PreferredTimeForm = ({ slug }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const leadIdToken = e.target.querySelector("#leadid_token").value;
-    if (!value) return;
+
+    if (!value || !leadIdToken) {
+      console.log("no leadId");
+      return;
+    }
     setLoading(true);
     updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
