@@ -106,6 +106,17 @@ function App() {
     // injectScript(trustedFormUrl);
   }, []);
 
+  //   <script id="LeadiDscript" type="text/javascript">
+  //   (function () {
+  //     var s = document.createElement("script");
+  //     s.id = "LeadiDscript_campaign";
+  //     s.type = "text/javascript";
+  //     s.async = true;
+  //     s.src = "https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
+  //     var LeadiDscript = document.getElementById("LeadiDscript");
+  //     LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
+  //   })();
+  // </script>
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     const script = document.createElement("script");
@@ -113,9 +124,8 @@ function App() {
   //     script.type = "text/javascript";
   //     script.async = true;
   //     script.defer = true;
-  //     script.crossorigin = "anonymous";
 
-  //     script.src = `//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
+  //     script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
   //     document.body.appendChild(script);
   //   }
   // }, []);
