@@ -439,8 +439,8 @@ export const PreferredTimeForm = ({ slug }) => {
   const url = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const leadIdToken = e.target.querySelector("#leadid_token").value;
-    const leadIdInput = formRef.current.querySelector("#leadid_token").value;
+    const leadIdToken = await e.target.querySelector("#leadid_token").value;
+    const leadIdInput = await formRef.current.querySelector("#leadid_token").value;
     console.log(1, leadIdInput);
     console.log(2, leadIdToken);
     if (!value || !leadIdInput) {
