@@ -389,7 +389,7 @@ export const AddressDetailsForm = ({ props }) => {
             setValue={setAddress}
           />
           <LabelInput id={"city"} required placeholder={"Enter your city name"} value={city} setValue={setCity} />
-          <LabelSelect id={"state"} required placeholder={"Enter your state name"} value={state} setValue={setState} />
+          <LabelSelect id={"state"} required placeholder={"Select your state"} value={state} setValue={setState} />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!address || !city || !state} />
       </div>
@@ -439,6 +439,10 @@ export const PreferredTimeForm = ({ slug }) => {
   const url = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!value) {
+      return;
+    }
+    setLoading(true);
     let leadIdToken = e.target.querySelector("#leadid_token").value;
     // const leadIdInput = formRef.current.querySelector("#leadid_token").value;
     // console.log(1, leadIdInput);
@@ -457,15 +461,12 @@ export const PreferredTimeForm = ({ slug }) => {
     };
 
     console.log(2, leadIdToken);
-    if (!value) {
-      return;
-    }
 
     if (!leadIdToken) {
       console.log("no leadId, retrying...");
       leadIdToken = await retryGetLeadIdToken();
     }
-    setLoading(true);
+
     updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
     try {
@@ -485,6 +486,7 @@ export const PreferredTimeForm = ({ slug }) => {
       updateFields({});
       navigate(`/${slug}/completed`);
       setLoading(false);
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting lead:", error);
       if (error.response) {
@@ -568,5 +570,3 @@ export const PreferredTimeForm = ({ slug }) => {
     </form>
   );
 };
-
-<input id="leadid_token" name="universal_leadid" type="hidden" value="10FC7966-8568-981F-7BF2-E24672E584C6"></input>;

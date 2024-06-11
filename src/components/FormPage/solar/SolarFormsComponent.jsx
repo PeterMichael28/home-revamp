@@ -239,7 +239,7 @@ export const CurrentUtilityProvider = ({ props }) => {
           id={"CurrentUtilityProvider"}
           required
           placeholder={"Enter your current utility provider name"}
-          type="tel"
+          type="text"
           value={currentUtilityProvider}
           setValue={setCurrentUtilityProvider}
         />
