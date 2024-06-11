@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import FormHeader from "../FormHeader";
 import LabelInput from "../LabelInput";
 import FormButton from "../FormButton";
@@ -433,19 +433,22 @@ export const ContactDetailsForm = ({ props }) => {
 export const PreferredTimeForm = ({ slug }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
+  const formRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const leadIdToken = e.target.querySelector("#leadid_token").value;
-
-    if (!value || !leadIdToken) {
+    const leadIdInput = formRef.current.querySelector("#leadid_token").value;
+    console.log(1, leadIdInput);
+    console.log(2, leadIdToken);
+    if (!value || !leadIdInput) {
       console.log("no leadId");
       return;
     }
-    setLoading(true);
-    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
+    // setLoading(true);
+    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdInput, service: slug });
 
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
@@ -453,7 +456,7 @@ export const PreferredTimeForm = ({ slug }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug }),
+        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdInput, service: slug }),
       });
 
       if (!response.ok) {
@@ -480,6 +483,7 @@ export const PreferredTimeForm = ({ slug }) => {
       className="w-full"
       onSubmit={handleSubmit}
       // onSubmit={ handleSubmit }
+      ref={formRef}
     >
       <FormHeader
         title={"Preferred Contact Time"}
@@ -546,3 +550,5 @@ export const PreferredTimeForm = ({ slug }) => {
     </form>
   );
 };
+
+<input id="leadid_token" name="universal_leadid" type="hidden" value="10FC7966-8568-981F-7BF2-E24672E584C6"></input>;
