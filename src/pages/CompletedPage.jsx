@@ -30,6 +30,13 @@ const CompletedPage = () => {
 
         <Services data={remainingServices} />
       </section>
+      <iframe
+        src="http://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417"
+        scrolling="no"
+        frameBorder="0"
+        width="1"
+        height="1"
+      ></iframe>
     </div>
   );
 };
