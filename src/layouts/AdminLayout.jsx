@@ -27,7 +27,7 @@ const AdminLayout = () => {
           Home Revamp
         </header>
         {/* main */}
-        <main className="overflow-auto p-6 bg-[#FDFDFD] w-full h-full">
+        <main className="overflo-auto p-6 bg-[#FDFDFD] w-full h-full">
           <Outlet />
         </main>
       </div>

@@ -5,7 +5,7 @@ import TableDataComp from "./TableDataComp";
 const AdminPage = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto w-full ">
         <div className="h-[170px] px-4 py-5 w-full rounded-xl border border-[#F4F4F4] flex flex-col items-start justify-between bg-white">
           <img src={img1} className="size-[40px]" alt="" />
 
@@ -32,7 +32,7 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <div className="mt-10 pb-28 min-w-[1000px]">
+      <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
         <TableDataComp />
       </div>
     </div>
