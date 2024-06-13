@@ -79,7 +79,7 @@ export const HomeOwnershipForm = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    if (value == "Rent") {
+    if (value == "Rented") {
       updateFields({ ...allFields, home_owner: value });
       props.onNext();
       return;
@@ -87,7 +87,8 @@ export const HomeOwnershipForm = ({ props }) => {
     updateFields({ ...allFields, home_owner: value });
     props.goto(5);
   };
-  const homeData = ["Own", "Rent"];
+  const homeData = ["Own", "Rented"];
+
   return (
     <div className="w-full">
       <FormHeader title={"Home Ownership"} subtitle={"Please indicate your ownership status for this property."} />
@@ -111,7 +112,7 @@ export const HomeAuthorization = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    if (value == "No, I am not authorized.") {
+    if (value == "No") {
       updateFields({});
       navigate("/thank-you");
       return;
@@ -119,11 +120,7 @@ export const HomeAuthorization = ({ props }) => {
     updateFields({ ...allFields, homeAuthorization: value });
     props.onNext();
   };
-  const homeData = [
-    "Yes, I have the authorization.",
-    "No, but I can get permission from the landlord.",
-    "No, I am not authorized.",
-  ];
+  const homeData = ["Yes", "No"];
   return (
     <div className="w-full">
       <FormHeader

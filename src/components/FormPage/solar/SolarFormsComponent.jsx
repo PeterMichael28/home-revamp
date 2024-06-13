@@ -7,7 +7,20 @@ import { useFormStore } from "~/store/formStore";
 
 export const MonthlyBill = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["$0 - $150", "$150 - $200", "$200 - $300", "$300 - $500", "$500 - $700", "$700+"];
+  const data = [
+    "$0 - 25",
+    "$26 - 50",
+    "$51 - 75",
+    "$76 - 100",
+    "$101 - 125",
+    "$126 - 150",
+    "$151 - 175",
+    "$176 - 200",
+    "$201 - 300",
+    "$301 - 400",
+    "$401 - 500",
+    "$500+",
+  ];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
@@ -35,7 +48,7 @@ export const MonthlyBill = ({ props }) => {
 
 export const SunlightExposure = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["Full Sun", "Partially Shaded", "Mostly Shaded", "Not sure"];
+  const data = ["Full sun", "Partial sun", "Mostly shaded", "Not sure"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
@@ -63,7 +76,7 @@ export const SunlightExposure = ({ props }) => {
 
 export const ProjectStatus = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["Existing Home", "New Construction", "Renovation"];
+  const data = ["Existing home", "Under development"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
@@ -94,8 +107,7 @@ export const ProjectStatus = ({ props }) => {
 
 export const PropertyStories = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["Single Story", "Two Stories", "Three Stories", "More Than Three Stories"];
-
+  const data = ["One story", "Two stories", "Three stories and more"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
@@ -122,13 +134,7 @@ export const PropertyStories = ({ props }) => {
 
 export const PropertyUsage = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = [
-    "Residential (Single Family)",
-    "Residential (Multi-Family)",
-    "Commercial",
-    "Industrial",
-    "Agricultural",
-  ];
+  const data = ["Residential", "Commercial"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
@@ -156,14 +162,7 @@ export const PropertyUsage = ({ props }) => {
 
 export const SolarSystemType = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = [
-    "Solar Electricity",
-    "Solar Hot Water",
-    "Solar Pool Heating",
-    "Solar Lighting",
-    "Hybrid Systems (Combination of above)",
-  ];
-
+  const data = ["Solar electricity", "Solar hot water", "Solar electricity and hot water"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
@@ -190,7 +189,7 @@ export const SolarSystemType = ({ props }) => {
 
 export const SolarInstallationLocation = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["Roof Mounting", "Ground Mounting", "Pole Mounting", "Others"];
+  const data = ["Roof", "On the ground", "Nearby structure"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 

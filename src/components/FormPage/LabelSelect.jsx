@@ -1,4 +1,4 @@
-import { stateNames } from "~/assets/data";
+import { statesNames } from "~/assets/data";
 
 const LabelSelect = ({ label, disabled, placeholder, id, required, value, setValue }) => {
   return (
@@ -18,9 +18,9 @@ const LabelSelect = ({ label, disabled, placeholder, id, required, value, setVal
           className=" first-line:rounded border-none border-l-[10px] border-l-transparent placeholder:text-xs text-sm placeholder:text-[#9e9e9e]  w-full h-full outline-none"
         >
           <option value="">{placeholder}</option>
-          {stateNames.map((state) => (
-            <option key={state} className="p-2 text-sm">
-              {state}
+          {statesNames.map((state) => (
+            <option key={state.name} value={state.code} className="p-2 text-sm">
+              {state.name}
             </option>
           ))}
         </select>
