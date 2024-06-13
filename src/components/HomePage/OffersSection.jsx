@@ -2,7 +2,9 @@ import React from "react";
 import SectionHeader from "../SectionHeader";
 import OfferTimeline from "./OfferTimeline";
 import img1 from "~/assets/images/services.png";
+import { useNavigate } from "react-router-dom";
 const OffersSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-10 md:py-16 w-full h-full px-4 sm:px-8 md:px-14  max-w-[1300px] mx-auto" id="about">
       <SectionHeader
@@ -16,7 +18,7 @@ const OffersSection = () => {
           <OfferTimeline />
         </div>
 
-        <div className="w-full md:w-[54%] md:h-[25rem]">
+        <div className="w-full md:w-[54%] md:h-[25rem]" onClick={() => navigate("/admin/dashboard")}>
           <img src={img1} alt="img" className="w-full h-full object-contain" />
         </div>
       </div>
