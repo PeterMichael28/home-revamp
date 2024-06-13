@@ -8,6 +8,19 @@ import Services from "~/components/Services";
 const CompletedPage = () => {
   const { slug } = useParams();
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
+  useEffect(() => {
+    const pixelUrl = "http://encyl.offerstrack.net/pixelBack.php?offer_id=6899&adv_id=2417";
+    const img = new Image();
+    img.src = pixelUrl;
+    img.width = 1;
+    img.height = 1;
+    img.style.display = "none";
+    document.body.appendChild(img);
+
+    return () => {
+      document.body.removeChild(img);
+    };
+  }, []);
 
   return (
     <div>
