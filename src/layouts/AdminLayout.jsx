@@ -3,7 +3,7 @@ import fileImg from "~/assets/images/fileImg.png";
 
 const AdminLayout = () => {
   return (
-    <div className="flex overflow-hidden h-screen">
+    <div className="flex overflow-x-auto h-screen">
       {/* sidebar */}
       <div className="w-[280px] h-full border-r border-[#F4F4F4]">
         {/* logo */}
@@ -21,13 +21,13 @@ const AdminLayout = () => {
       </div>
 
       {/* page container */}
-      <div className="flex-1 h-full">
+      <div className="flex-1 h-full w-full overflow-aut">
         {/* header */}
         <header className="w-full h-[88px] border-b border-b-[#F4F4F4] flex items-center text-[24px] font-medium leading-[30px] text-[#01100A] px-6">
           Home Revamp
         </header>
         {/* main */}
-        <main className="overflow-auto p-6 bg-[#FDFDFD] w-full h-full">
+        <main className="overflow-auto p-6 bg-[#FDFDFD] w-full h-full min-w-[1000px]">
           <Outlet />
         </main>
       </div>
