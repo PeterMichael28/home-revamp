@@ -32,7 +32,7 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <div className="mt-10 pb-28">
+      <div className="mt-10 pb-28 min-w-[1000px]">
         <TableDataComp />
       </div>
     </div>
