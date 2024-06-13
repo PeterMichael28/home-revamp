@@ -9,17 +9,6 @@ const CompletedPage = () => {
   const { slug } = useParams();
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
 
-  useEffect(() => {
-    const iframe = document.createElement("iframe");
-    iframe.src = "https://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417";
-    iframe.width = "1";
-    iframe.height = "1";
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-
-    return () => document.body.removeChild(iframe);
-  }, []);
-
   return (
     <div>
       <div className="max-w-[750px] px-4 mx-auto pt-12 py-28">
@@ -37,13 +26,7 @@ const CompletedPage = () => {
 
         <Services data={remainingServices} />
       </section>
-      {/* <iframe
-        src="http://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417"
-        scrolling="no"
-        frameBorder="0"
-        width="1"
-        height="1"
-      ></iframe> */}
+      <img src="http://encyl.offerstrack.net/pixelBack.php?offer_id=6899&adv_id=2417" width="1" height="1" />
     </div>
   );
 };
