@@ -1,17 +1,24 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ourServices } from "~/assets/data";
 import FormHeader from "~/components/FormPage/FormHeader";
 import SectionHeader from "~/components/SectionHeader";
 import Services from "~/components/Services";
-import { useFormStore } from "~/store/formStore";
 
 const CompletedPage = () => {
   const { slug } = useParams();
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
 
-  const { allFields } = useFormStore((state) => state);
+  useEffect(() => {
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417";
+    iframe.width = "1";
+    iframe.height = "1";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
 
-  console.log({ allFields });
+    return () => document.body.removeChild(iframe);
+  }, []);
 
   return (
     <div>
@@ -30,13 +37,13 @@ const CompletedPage = () => {
 
         <Services data={remainingServices} />
       </section>
-      <iframe
+      {/* <iframe
         src="http://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417"
         scrolling="no"
         frameBorder="0"
         width="1"
         height="1"
-      ></iframe>
+      ></iframe> */}
     </div>
   );
 };
