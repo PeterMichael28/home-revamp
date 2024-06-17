@@ -419,7 +419,14 @@ export const ContactDetailsForm = ({ props }) => {
             value={email}
             setValue={setEmail}
           />
-          <LabelInput id={"phone"} required placeholder={"Enter your phone number"} value={phone} setValue={setPhone} />
+          <LabelInput
+            id={"phone"}
+            required
+            placeholder={"Enter your phone number"}
+            type={"number"}
+            value={phone}
+            setValue={setPhone}
+          />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!email || !phone} />
       </div>
