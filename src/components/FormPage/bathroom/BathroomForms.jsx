@@ -15,7 +15,16 @@ import {
   AccessFromLandlord,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
-import { Bathroom } from "./BathroomFormsComponents";
+import {
+  Bathroom,
+  Cabinets,
+  Countertops,
+  Flooring,
+  Floorplan,
+  ShowerOrBath,
+  Sinks,
+  Toilets,
+} from "./BathroomFormsComponents";
 
 const BathroomForms = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -57,6 +66,34 @@ const BathroomForms = ({ slug }) => {
     {
       label: "Form4",
       component: (props) => <Bathroom props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Cabinets props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Countertops props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Flooring props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Floorplan props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <ShowerOrBath props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Sinks props={props} />,
+    },
+    {
+      label: "Form4",
+      component: (props) => <Toilets props={props} />,
     },
 
     {

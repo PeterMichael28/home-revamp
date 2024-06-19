@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
 import axios from "axios";
+import { statesNames } from "~/assets/data";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -323,12 +324,28 @@ export const ProjectTimelineForm = ({ props }) => {
 export const ProjectOwnerForm = ({ props }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
+  const handleFormatDate = (selectedDate) => {
+    if (selectedDate) {
+      // Create a new Date object from the selected date
+      const date = new Date(selectedDate);
+      // Format the date as yyyy-mm-dd
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // Add 1 because getMonth() returns 0-11
+      const day = String(date.getDate()).padStart(2, "0");
+      const formatted = `${year}-${month}-${day}`;
+      // Set the formatted date to the state
+      return formatted;
+    }
+  };
+
   const handleClick = () => {
     if (!firstName || !lastName) return;
-    updateFields({ ...allFields, first_name: firstName, last_name: lastName });
+    updateFields({ ...allFields, first_name: firstName, last_name: lastName, gender, dob: handleFormatDate(dob) });
     props.onNext();
   };
 
@@ -352,8 +369,29 @@ export const ProjectOwnerForm = ({ props }) => {
             value={lastName}
             setValue={setLastName}
           />
+          <LabelInput
+            id={"dob"}
+            required
+            placeholder={"Select your date of birth"}
+            value={dob}
+            setValue={setDob}
+            type="date"
+          />
+          <LabelSelect
+            id={"gender"}
+            required
+            placeholder={"Select your gender"}
+            value={gender}
+            setValue={setGender}
+            data={["Male", "Female", "Others"]}
+          />
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!firstName || !lastName} />
+        <FormButton
+          text="Continue"
+          className="mt-7"
+          onClick={handleClick}
+          disabled={!firstName || !lastName || !dob || !gender}
+        />
       </div>
     </div>
   );
@@ -386,7 +424,14 @@ export const AddressDetailsForm = ({ props }) => {
             setValue={setAddress}
           />
           <LabelInput id={"city"} required placeholder={"Enter your city name"} value={city} setValue={setCity} />
-          <LabelSelect id={"state"} required placeholder={"Select your state"} value={state} setValue={setState} />
+          <LabelSelect
+            id={"state"}
+            required
+            placeholder={"Select your state"}
+            value={state}
+            setValue={setState}
+            data={statesNames}
+          />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!address || !city || !state} />
       </div>
