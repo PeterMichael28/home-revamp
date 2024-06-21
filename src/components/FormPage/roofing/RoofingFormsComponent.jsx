@@ -249,7 +249,7 @@ export const ProjectScopeForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["New", "Repair", "Replace"];
+  const homeData = ["Install", "Repair", "Replace"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Scope"} subtitle={"Please specify the scope this project."} />
@@ -442,12 +442,13 @@ export const AddressDetailsForm = ({ props }) => {
 export const ContactDetailsForm = ({ props }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [dayPhone, setDayPhone] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
     if (!email || !phone) return;
-    updateFields({ ...allFields, email: email, phone: phone });
+    updateFields({ ...allFields, email: email, phone: phone, dayPhoneNumber: dayPhone });
     props.onNext();
   };
 
@@ -471,6 +472,14 @@ export const ContactDetailsForm = ({ props }) => {
             type={"number"}
             value={phone}
             setValue={setPhone}
+          />
+          <LabelInput
+            id={"dayPhone"}
+            required
+            placeholder={"Enter your day phone number"}
+            type={"number"}
+            value={dayPhone}
+            setValue={setDayPhone}
           />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!email || !phone} />
