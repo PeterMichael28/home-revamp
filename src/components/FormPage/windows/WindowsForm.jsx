@@ -15,7 +15,7 @@ import {
   AccessFromLandlord,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
-import { NumberOfWindows, WindowMaterial } from "./WindowsFormComponents";
+import { NumberOfWindows, WindowAge, WindowCondition, WindowMaterial } from "./WindowsFormComponents";
 
 const WindowsForm = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,6 +61,14 @@ const WindowsForm = ({ slug }) => {
     {
       label: "Form6",
       component: (props) => <NumberOfWindows props={props} />,
+    },
+    {
+      label: "Form6",
+      component: (props) => <WindowAge props={props} />,
+    },
+    {
+      label: "Form6",
+      component: (props) => <WindowCondition props={props} />,
     },
     {
       label: "Form7",

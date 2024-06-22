@@ -62,3 +62,65 @@ export const NumberOfWindows = ({ props }) => {
     </div>
   );
 };
+
+export const WindowAge = ({ props }) => {
+  const [value, setValue] = useState("");
+  const data = ["New (less than 1 year old)", "1-5 years", "6+ years"];
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, windowAge: value });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Window Age"}
+        subtitle={"Please indicate the age of windows you are interested in for your project."}
+      />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {data.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
+export const WindowCondition = ({ props }) => {
+  const [value, setValue] = useState("");
+  const data = ["Good", "Average", "Poor"];
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, windowCondition: value });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Window Condition"}
+        subtitle={"Please indicate the condition of windows you are interested in for your project."}
+      />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {data.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
