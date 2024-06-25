@@ -130,7 +130,7 @@ export const Floorplan = ({ props }) => {
 
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, flooplan: value });
+    updateFields({ ...allFields, floorPlan: value });
     props.onNext();
   };
 
