@@ -41,9 +41,13 @@ const FormPage = () => {
 
   return (
     <div className="pt-5 md:pt-10">
-      {slug === "solars" ? (
+      {slug == "solars" ? (
         <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
           Discover How You Can Save Using Solar Energy <br /> Compare Solar Quotes, Get match with Experts Today!{" "}
+        </h2>
+      ) : slug == "bathrooms" ? (
+        <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
+          Save BIG On A Bathroom Remodeling! <br /> Get Free, No Obligation Quotes from Top Experts Near You!{" "}
         </h2>
       ) : (
         <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
