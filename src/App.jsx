@@ -118,16 +118,16 @@ function App() {
   //   })();
   // </script>
   // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const script = document.createElement("script");
-  //     script.id = "LeadiDscript_campaign";
-  //     script.type = "text/javascript";
-  //     script.async = true;
-  //     script.defer = true;
+    // if (typeof window !== "undefined") {
+    //   const script = document.createElement("script");
+    //   script.id = "LeadiDscript_campaign";
+    //   script.type = "text/javascript";
+    //   script.async = true;
+    //   script.defer = true;
 
-  //     script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
-  //     document.body.appendChild(script);
-  //   }
+    //   script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
+    //   document.body.appendChild(script);
+    // }
   // }, []);
 
   return (
