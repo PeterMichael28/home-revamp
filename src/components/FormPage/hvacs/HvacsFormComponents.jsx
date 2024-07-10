@@ -73,3 +73,30 @@ export const AirType = ({ props }) => {
     </div>
   );
 };
+
+export const HvacProjectTimelineForm = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, project_timeline: value });
+    props.onNext();
+  };
+  const homeData = ["Immediately", "1-3 months", "3-6 months", "Within a Year", "Not sure"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};

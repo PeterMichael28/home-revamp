@@ -15,6 +15,8 @@ import {
   HomeAuthorization,
   LeaseAgreement,
   AccessFromLandlord,
+  RoofingProjectScopeForm,
+  RoofingProjectTimelineForm,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
@@ -26,7 +28,7 @@ const RoofingForm = ({ slug }) => {
   }, [activeIndex]);
 
   const customData = {
-    data: ["Asphalt", "Clay-tile", "Metal", "Wood Shingles", "Natural Slate", "Tar", "Cedal Shake", "Others"],
+    data: ["Asphalt Shingle", "Tile", "Metal", "Tar Torchdown", "Natural Slate", "Tar", "Cedal Slate"],
     header: "Roofing Material",
     subText: "Which of these roofing materials best describes your needs",
     label: "roofing_material",
@@ -60,7 +62,7 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form4",
-      component: (props) => <ProjectScopeForm props={props} />,
+      component: (props) => <RoofingProjectScopeForm props={props} />,
     },
     {
       label: "Form5",
@@ -76,7 +78,7 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form4",
-      component: (props) => <ProjectTimelineForm props={props} />,
+      component: (props) => <RoofingProjectTimelineForm props={props} />,
     },
     {
       label: "Form4",

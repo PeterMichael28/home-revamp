@@ -107,7 +107,7 @@ export const ProjectStatus = ({ props }) => {
 
 export const PropertyStories = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["One story", "Two stories", "Three stories and more"];
+  const data = ["One story", "Two stories", "Three stories or more"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {

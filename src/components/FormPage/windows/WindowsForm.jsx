@@ -16,6 +16,7 @@ import {
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import { NumberOfWindows, WindowAge, WindowCondition, WindowMaterial } from "./WindowsFormComponents";
+import { HvacProjectTimelineForm } from "../hvacs/HvacsFormComponents";
 
 const WindowsForm = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -72,7 +73,7 @@ const WindowsForm = ({ slug }) => {
     },
     {
       label: "Form7",
-      component: (props) => <ProjectTimelineForm props={props} />,
+      component: (props) => <HvacProjectTimelineForm props={props} />,
     },
     {
       label: "Form8",

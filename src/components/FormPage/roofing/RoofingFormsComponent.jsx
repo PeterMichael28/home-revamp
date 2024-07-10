@@ -221,7 +221,7 @@ export const PropertyTypeForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Commercial", "Residential", "Multi-units"];
+  const homeData = ["Commercial", "Residential"];
   return (
     <div className="w-full">
       <FormHeader title={"Property Type"} subtitle={"Please specify the type of content for this project."} />
@@ -250,6 +250,34 @@ export const ProjectScopeForm = ({ props }) => {
   };
 
   const homeData = ["Install", "Repair", "Replace"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Project Scope"} subtitle={"Please specify the scope this project."} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
+export const RoofingProjectScopeForm = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, project_scope: value });
+    props.onNext();
+  };
+
+  const homeData = ["New Roof for New Home", "New Roof for an Existing Home", "Repair", "Shingle over Existing Roof"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Scope"} subtitle={"Please specify the scope this project."} />
@@ -321,6 +349,33 @@ export const ProjectTimelineForm = ({ props }) => {
   );
 };
 
+export const RoofingProjectTimelineForm = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, project_timeline: value });
+    props.onNext();
+  };
+
+  const homeData = ["Flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks", "Not sure"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
 export const ProjectOwnerForm = ({ props }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

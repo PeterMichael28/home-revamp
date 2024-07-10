@@ -15,7 +15,7 @@ import {
   LeaseAgreement,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
-import { HVACS } from "./HvacsFormComponents";
+import { AirType, HvacProjectTimelineForm, HVACS } from "./HvacsFormComponents";
 
 const HvacsForm = ({ slug }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -58,10 +58,13 @@ const HvacsForm = ({ slug }) => {
       label: "Form4",
       component: (props) => <HVACS props={props} />,
     },
-
+    {
+      label: "Form5",
+      component: (props) => <AirType props={props} />,
+    },
     {
       label: "Form7",
-      component: (props) => <ProjectTimelineForm props={props} />,
+      component: (props) => <HvacProjectTimelineForm props={props} />,
     },
     {
       label: "Form8",
