@@ -21,6 +21,11 @@ const Footer = () => {
             <li className="text-secondary font-semibold md:text-sm text-lg">
               <Link to="/contact">Contact </Link>
             </li>
+            <li>
+              <Link to="/our-partners" className="text-secondary font-semibold md:text-sm text-lg">
+                Our Partners{" "}
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="text-secondary font-semibold md:text-sm text-lg">

@@ -1,11 +1,12 @@
 import OurServicesDropdown from "~/components/OurServicesDropdown";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 const Navbar = ({ setActive = () => {} }) => {
   return (
     <nav className="flex flex-col md:flex-row  gap-12 items-end md:items-center w-full">
       <ul className="flex flex-col md:flex-row  gap-8 items-end md:items-center">
         <OurServicesDropdown />
-        <Link
+        <ScrollLink
           className="text-secondary font-semibold md:text-sm text-lg cursor-pointer"
           smooth
           duration={500}
@@ -13,8 +14,8 @@ const Navbar = ({ setActive = () => {} }) => {
           onClick={() => setActive(false)}
         >
           About Us
-        </Link>
-        <Link
+        </ScrollLink>
+        <ScrollLink
           smooth
           duration={500}
           to={"faq"}
@@ -22,6 +23,14 @@ const Navbar = ({ setActive = () => {} }) => {
           className="text-secondary font-semibold md:text-sm text-lg cursor-pointer"
         >
           FAQs
+        </ScrollLink>
+
+        <Link
+          to="/our-partners"
+          onClick={() => setActive(false)}
+          className="text-secondary font-semibold md:text-sm text-lg cursor-pointer"
+        >
+          Our Partners{" "}
         </Link>
       </ul>
       <p className="text-secondary font-semibold md:text-sm text-lg text-center md:text-left">

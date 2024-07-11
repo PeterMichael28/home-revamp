@@ -8,7 +8,7 @@ const PartnersPage = () => {
           Our Partners:
         </h2>
         <p className="text-sm text-gray-dark mb-6 mt-2 text-left">Working hand-in-hand for a better future </p>
-        <ul className="mt-7 grid grid-cols-1 md:grid-cols-2 gap-4 text-left place-items-strt place-content-ceter">
+        <ul className="mt-7 grid grid-cols-1 md:grid-cols-2  gap-4 text-left place-items-strt place-content-ceter list-disc">
           {/* <p className="text-[35px] md:text-[45px] font-bold italic">DaBella</p> */}
           {partnerList.map((dat, i) => (
             <li className="text-sm font-medium" key={i}>
