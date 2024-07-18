@@ -32,9 +32,49 @@ export const WindowMaterial = ({ props }) => {
   );
 };
 
+export const WindowStyle = ({ props }) => {
+  const [value, setValue] = useState("");
+  const data = [
+    "Bay or Bow",
+    "Fixed (non-opening)",
+    "Sliding Glass Window",
+    "Garden window",
+    "Casement",
+    "Sliding Glass Door",
+    "Double Hung (both halves open)",
+    "French Door",
+    "Single-Hung (lower half opens)",
+    "Awning (hinged at the top)",
+    "Unsure",
+  ];
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, WindowStyle: value });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader title={"Window Style"} subtitle={"Which of these windows style best describes your needs?"} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {data.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
 export const NumberOfWindows = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["1 Window", "2 Windows", "3-5 Windows", "6-9 Windows", "10+ Windows"];
+  const data = ["1 Window", "2 Windows", "3 to 5 Windows", "6 to 9 Windows", "10+ windows"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
