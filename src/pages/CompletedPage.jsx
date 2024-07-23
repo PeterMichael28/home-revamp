@@ -9,6 +9,22 @@ const CompletedPage = () => {
   const { slug } = useParams();
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
 
+  useEffect(() => {
+    const iframe = document.createElement("iframe");
+    iframe.src = "https://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417";
+    iframe.scrolling = "no";
+    iframe.frameBorder = "0";
+    iframe.width = "1";
+    iframe.height = "1";
+    iframe.style.display = "none"; // Ensure it does not affect layout
+
+    document.head.appendChild(iframe);
+
+    // Cleanup function to remove the iframe when the component unmounts
+    return () => {
+      document.head.removeChild(iframe);
+    };
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
   return (
     <div>
       <div className="max-w-[750px] px-4 mx-auto pt-12 py-28">
