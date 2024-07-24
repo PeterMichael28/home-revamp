@@ -546,25 +546,18 @@ export const ContactDetailsForm = ({ props }) => {
 export const PreferredTimeForm = ({ slug }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
-  const formRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!value) {
-      return;
-    }
-    setLoading(true);
-    let leadIdToken = e.target.querySelector("#leadid_token").value;
-    // const leadIdInput = formRef.current.querySelector("#leadid_token").value;
-    // console.log(1, leadIdInput);
 
-    // Function to retry getting the leadIdToken
+  const [leadIdToken, setLeadIdToken] = useState(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
     const retryGetLeadIdToken = () => {
       return new Promise((resolve) => {
         const interval = setInterval(() => {
-          leadIdToken = e.target.querySelector("#leadid_token").value;
+          const leadIdToken = formRef.current?.querySelector("#leadid_token")?.value;
           if (leadIdToken) {
             clearInterval(interval);
             resolve(leadIdToken);
@@ -573,12 +566,20 @@ export const PreferredTimeForm = ({ slug }) => {
       });
     };
 
-    console.log(2, leadIdToken);
+    const getLeadIdToken = async () => {
+      const token = await retryGetLeadIdToken();
+      setLeadIdToken(token);
+    };
 
-    if (!leadIdToken) {
-      console.log("no leadId, retrying...");
-      leadIdToken = await retryGetLeadIdToken();
+    getLeadIdToken();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!value || !leadIdToken) {
+      return;
     }
+    setLoading(true);
 
     updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
