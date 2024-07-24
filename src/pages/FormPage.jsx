@@ -43,7 +43,7 @@ const FormPage = () => {
     <div className="pt-5 md:pt-10">
       {slug == "solars" ? (
         <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
-          Discover How You Can Save Using Solar Energy <br /> Compare Solar Quotes, Get match with Experts Today!{" "}
+          Compare Solar Quotes, Get match with Experts Today!{" "}
         </h2>
       ) : slug == "bathrooms" ? (
         <h2 className="capitalize font-semibold text-xl md:text-3xl text-center text-[#010101] mb-4">
