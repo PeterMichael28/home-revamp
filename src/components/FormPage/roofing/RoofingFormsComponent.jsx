@@ -5,7 +5,7 @@ import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
 import axios from "axios";
 import { statesNames } from "~/assets/data";
@@ -549,6 +549,23 @@ export const PreferredTimeForm = ({ slug }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
+  const [searchParams] = useSearchParams();
+
+  const clickId = searchParams.get("click_id");
+  const networkName = searchParams.get("network_name");
+
+  const params = new URLSearchParams();
+  let newUrl = `/${slug}/completed`;
+  if (clickId) {
+    params.append("click_id", clickId);
+  }
+  if (networkName) {
+    params.append("network_name", networkName);
+  }
+
+  if (params.toString()) {
+    newUrl += `?${params.toString()}`;
+  }
 
   const [leadIdToken, setLeadIdToken] = useState(null);
   const formRef = useRef(null);
@@ -598,7 +615,7 @@ export const PreferredTimeForm = ({ slug }) => {
       // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
-      navigate(`/${slug}/completed`);
+      navigate(newUrl);
       setLoading(false);
       window.location.reload();
     } catch (error) {
