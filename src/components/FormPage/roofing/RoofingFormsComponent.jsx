@@ -470,7 +470,7 @@ export const ProjectOwnerForm = ({ props }) => {
             placeholder={"Select your gender"}
             value={gender}
             setValue={setGender}
-            data={["Male", "Female", "Others"]}
+            data={["Male", "Female", "Unspecified"]}
           />
         </div>
         <FormButton
