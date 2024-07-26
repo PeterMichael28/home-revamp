@@ -13,4 +13,17 @@
 
 
   
-  
+  /* HTML: <div class="loader"></div> */
+.loader {
+  width: 210px;
+  height: 10px;
+  background: 
+    linear-gradient(90deg,#0001 33%,rgba(0, 0, 0, 0.601) 50%,rgba(0, 0, 0, 0.247) 66%)
+    #f2f2f2;
+  background-size:300% 100%;
+  animation: l1 1s infinite linear;
+  border-radius: 20px;
+}
+@keyframes l1 {
+  0% {background-position: right}
+}

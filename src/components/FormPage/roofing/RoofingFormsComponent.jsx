@@ -9,6 +9,10 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
 import axios from "axios";
 import { statesNames } from "~/assets/data";
+import Modal from "~/components/Modal/Modal";
+
+import Lottie from "lottie-react";
+import animation from "~/assets/Animation8.json";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -546,6 +550,7 @@ export const ContactDetailsForm = ({ props }) => {
 export const PreferredTimeForm = ({ slug }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
   const [value, setValue] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const url = import.meta.env.VITE_API_BASE_URL;
@@ -593,10 +598,14 @@ export const PreferredTimeForm = ({ slug }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value || !leadIdToken) {
+    if (!value) {
       return;
     }
     setLoading(true);
+    // Set a timeout to show the modal after 2 seconds
+    const modalTimer = setTimeout(() => {
+      setOpenModal(true);
+    }, 2000);
 
     updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
@@ -615,6 +624,8 @@ export const PreferredTimeForm = ({ slug }) => {
       // console.log(error);
       toast.success("Submitted Successfully!!!");
       updateFields({});
+      setOpenModal(false); // Close the modal
+      clearTimeout(modalTimer);
       navigate(newUrl);
       setLoading(false);
       window.location.reload();
@@ -623,6 +634,8 @@ export const PreferredTimeForm = ({ slug }) => {
       if (error.response) {
         console.error("Response data:", error.response.data);
       }
+      setOpenModal(false); // Close the modal in case of error
+      clearTimeout(modalTimer);
       toast.error("There was an error submitting the lead.");
       setLoading(false);
     }
@@ -630,74 +643,102 @@ export const PreferredTimeForm = ({ slug }) => {
 
   const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
-    <form
-      className="w-full"
-      onSubmit={handleSubmit}
-      // onSubmit={ handleSubmit }
-      ref={formRef}
-    >
-      <FormHeader
-        title={"Preferred Contact Time"}
-        subtitle={"Please let us know when it would be a good time to contact you"}
-      />
+    <>
+      <form
+        className="w-full"
+        onSubmit={handleSubmit}
+        // onSubmit={ handleSubmit }
+        ref={formRef}
+      >
+        <FormHeader
+          title={"Preferred Contact Time"}
+          subtitle={"Please let us know when it would be a good time to contact you"}
+        />
 
-      <div className="mt-7">
-        <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                // setContact(dat);
-                setValue(dat);
-              }}
-              text={dat}
+        <div className="mt-7">
+          <div className="space-y-5">
+            {homeData.map((dat) => (
+              <FormSelectBox
+                key={dat}
+                active={value === dat}
+                onClick={() => {
+                  // setContact(dat);
+                  setValue(dat);
+                }}
+                text={dat}
+              />
+            ))}
+          </div>
+          <input
+            id="leadid_token"
+            name="universal_leadid"
+            type="hidden"
+            value=""
+            onChange={(e) => console.log("ok", e.target.value)}
+          />
+          <div className="my-4">
+            <input type="hidden" id="leadid_tcpa_disclosure" />
+            <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
+              <span className="font-semibold text-base">Note: </span>
+              By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}
+              <Link to="/" className="underline text-blue-600 underline-offset-4">
+                HomeRevampExpert.com
+              </Link>{" "}
+              to the phone number provided using automated technology and prerecorded voice messages even if you are on
+              a do-not-call list. Message and data rates may apply. You also consent to{" "}
+              <Link to="/" className="underline text-blue-600 underline-offset-4">
+                HomeRevampExpert.com
+              </Link>{" "}
+              saving the information you entered and sharing it with relevant marketing and services{" "}
+              <Link to="/our-partners" className="underline text-blue-600 underline-offset-4">
+                companies
+              </Link>{" "}
+              so you can get the most up-to-date quotes.You further agree to our{" "}
+              <Link to="/privacy-policy" className="underline text-blue-600 underline-offset-4">
+                Privacy Policy
+              </Link>{" "}
+              and{" "}
+              <Link to="/use-of-terms" className="underline text-blue-600 underline-offset-4">
+                Terms of Conditions.
+              </Link>
+            </label>
+          </div>
+          <FormButton
+            text="Submit"
+            type="submit"
+            className="mt-7"
+            // onClick={handleSubmit}
+            disabled={!value}
+            loading={loading}
+          />
+        </div>
+      </form>
+
+      <Modal isOpen={openModal} className="max-w-5xl py-8" onClose={() => setOpenModal(false)} maxWidth="700px">
+        <div className="flex justify-center items-center gap-4 flex-col w-full">
+          {/* <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+            <circle cx="44.0007" cy="43.9997" r="36.6667" fill="#D5EBDC" />
+            <path
+              d="M59.2519 37.068L41.5419 54.778C41.0285 55.2913 40.3319 55.5846 39.5985 55.5846C38.8652 55.5846 38.1685 55.2913 37.6552 54.778L28.7819 45.9046C27.7185 44.8413 27.7185 43.0813 28.7819 42.018C29.8452 40.9546 31.6052 40.9546 32.6685 42.018L39.5985 48.948L55.3652 33.1813C56.4285 32.118 58.1885 32.118 59.2519 33.1813C60.3152 34.2446 60.3152 36.0046 59.2519 37.068Z"
+              fill="#008726"
             />
-          ))}
+          </svg> */}
+          <div>
+            <Lottie animationData={animation} loop={true} className="size-[200px] p-0" />
+          </div>
+          <FormHeader
+            title={"Successfully Submitted!!!"}
+            subtitle={"Thank your for your time, You are been redirected now."}
+            className="text-center"
+            titleClassName="text-[38px]"
+          />
+
+          <div className="">
+            <p className="animate-pulse italic text-gray-dark text-sm text-center">Redirecting... Please wait!!!</p>
+            <div className="loader mt-2 mx-auto"></div>
+          </div>
         </div>
-        <input
-          id="leadid_token"
-          name="universal_leadid"
-          type="hidden"
-          value=""
-          onChange={(e) => console.log("ok", e.target.value)}
-        />
-        <div className="my-4">
-          <input type="hidden" id="leadid_tcpa_disclosure" />
-          <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
-            <span className="font-semibold text-base">Note: </span>
-            By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}
-            <Link to="/" className="underline text-blue-600 underline-offset-4">
-              HomeRevampExpert.com
-            </Link>{" "}
-            to the phone number provided using automated technology and prerecorded voice messages even if you are on a
-            do-not-call list. Message and data rates may apply. You also consent to{" "}
-            <Link to="/" className="underline text-blue-600 underline-offset-4">
-              HomeRevampExpert.com
-            </Link>{" "}
-            saving the information you entered and sharing it with relevant marketing and services{" "}
-            <Link to="/our-partners" className="underline text-blue-600 underline-offset-4">
-              companies
-            </Link>{" "}
-            so you can get the most up-to-date quotes.You further agree to our{" "}
-            <Link to="/privacy-policy" className="underline text-blue-600 underline-offset-4">
-              Privacy Policy
-            </Link>{" "}
-            and{" "}
-            <Link to="/use-of-terms" className="underline text-blue-600 underline-offset-4">
-              Terms of Conditions.
-            </Link>
-          </label>
-        </div>
-        <FormButton
-          text="Submit"
-          type="submit"
-          className="mt-7"
-          // onClick={handleSubmit}
-          disabled={!value}
-          loading={loading}
-        />
-      </div>
-    </form>
+      </Modal>
+    </>
   );
 };
