@@ -15,7 +15,14 @@ import {
   AccessFromLandlord,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
-import { NumberOfWindows, WindowAge, WindowCondition, WindowMaterial, WindowStyle } from "./WindowsFormComponents";
+import {
+  NumberOfWindows,
+  WindowAge,
+  WindowCondition,
+  WindowMaterial,
+  WindowProjectType,
+  WindowStyle,
+} from "./WindowsFormComponents";
 import { HvacProjectTimelineForm } from "../hvacs/HvacsFormComponents";
 
 const WindowsForm = ({ slug }) => {
@@ -53,7 +60,7 @@ const WindowsForm = ({ slug }) => {
     },
     {
       label: "Form4",
-      component: (props) => <ProjectScopeForm props={props} />,
+      component: (props) => <WindowProjectType props={props} />,
     },
     {
       label: "Form5",

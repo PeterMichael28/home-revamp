@@ -164,3 +164,31 @@ export const WindowCondition = ({ props }) => {
     </div>
   );
 };
+
+export const WindowProjectType = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, ProjectType: value });
+    props.onNext();
+  };
+
+  const homeData = ["New Unit Installed", "Repair", "Replace Unit"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Project Type"} subtitle={"Please specify the type this project."} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};

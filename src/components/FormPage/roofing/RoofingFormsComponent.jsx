@@ -270,6 +270,34 @@ export const ProjectScopeForm = ({ props }) => {
   );
 };
 
+export const RoofType = ({ props }) => {
+  const [value, setValue] = useState("");
+
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, RoofType: value });
+    props.onNext();
+  };
+
+  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Roof Type"} subtitle={"Please specify the Roof type that suits your project."} />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {homeData.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
 export const RoofingProjectScopeForm = ({ props }) => {
   const [value, setValue] = useState("");
 
@@ -364,7 +392,7 @@ export const RoofingProjectTimelineForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks", "Not sure"];
+  const homeData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
@@ -598,7 +626,7 @@ export const PreferredTimeForm = ({ slug }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value) {
+    if (!value || !leadIdToken) {
       return;
     }
     setLoading(true);

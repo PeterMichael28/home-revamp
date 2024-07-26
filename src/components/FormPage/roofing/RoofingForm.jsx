@@ -17,6 +17,7 @@ import {
   AccessFromLandlord,
   RoofingProjectScopeForm,
   RoofingProjectTimelineForm,
+  RoofType,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
@@ -75,6 +76,11 @@ const RoofingForm = ({ slug }) => {
           label={customData.label}
         />
       ),
+    },
+
+    {
+      label: "Form4",
+      component: (props) => <RoofType props={props} />,
     },
     {
       label: "Form4",
