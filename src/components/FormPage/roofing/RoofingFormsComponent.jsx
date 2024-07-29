@@ -530,11 +530,58 @@ export const ContactDetailsForm = ({ props }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [dayPhone, setDayPhone] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [dayPhoneError, setDayPhoneError] = useState(false);
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!email || !phone) return;
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/;
+    return phoneRegex.test(phoneNumber);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (emailError || phoneError || dayPhoneError) {
+        setEmailError(false);
+        setPhoneError(false);
+        setDayPhoneError(false);
+      }
+    }, 3000);
+
+    // Cleanup the timer if the component unmounts or dependencies change
+    return () => clearTimeout(timer);
+  }, [emailError, phoneError, dayPhoneError]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    if (!email || !validateEmail(email)) {
+      toast.error("Invalid Email format!!!");
+      setEmailError(true);
+    }
+
+    if (!phone || !validatePhoneNumber(phone)) {
+      toast.error("Invalid Phone number format!!!");
+      setPhoneError(true);
+    }
+
+    if (!dayPhone || !validatePhoneNumber(dayPhone)) {
+      toast.error("Invalid Day Phone number format!!!");
+      setDayPhoneError(true);
+    }
+
+    if (!validateEmail(email) || !validatePhoneNumber(phone) || !validatePhoneNumber(dayPhone)) return;
+
+    setEmailError(false);
+    setPhoneError(false);
+    setDayPhoneError(false);
     updateFields({ ...allFields, email: email, phone: phone, dayPhoneNumber: dayPhone });
     props.onNext();
   };
@@ -543,34 +590,37 @@ export const ContactDetailsForm = ({ props }) => {
     <div className="w-full">
       <FormHeader title={"Contact Details"} subtitle={"Please share your contact information with us"} />
 
-      <div className="mt-7">
+      <form className="mt-7" onSubmit={handleClick}>
         <div className="space-y-5">
           <LabelInput
             id={"email"}
             required
-            placeholder={"Enter your email address"}
+            placeholder={"example@gmail.com"}
             value={email}
             setValue={setEmail}
+            error={emailError}
           />
           <LabelInput
             id={"phone"}
             required
-            placeholder={"Enter your phone number"}
+            placeholder={"1234567890"}
             type={"number"}
             value={phone}
             setValue={setPhone}
+            error={phoneError}
           />
           <LabelInput
             id={"dayPhone"}
             required
-            placeholder={"Enter your day phone number"}
+            placeholder={"1234567890"}
             type={"number"}
             value={dayPhone}
             setValue={setDayPhone}
+            error={dayPhoneError}
           />
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!email || !phone} />
-      </div>
+        <FormButton text="Continue" type="submit" className="mt-7" disabled={!email || !phone || !dayPhone} />
+      </form>
     </div>
   );
 };
