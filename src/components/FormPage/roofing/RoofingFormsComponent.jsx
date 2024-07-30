@@ -5,7 +5,7 @@ import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import LabelSelect from "../LabelSelect";
 import axios from "axios";
 import { statesNames } from "~/assets/data";
@@ -112,12 +112,13 @@ export const HomeOwnershipForm = ({ props }) => {
 
 export const HomeAuthorization = ({ props }) => {
   const [value, setValue] = useState("");
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
     if (!value) return;
-    if (value == "No") {
+    if (value == "No" && pathname == "/solars") {
       updateFields({});
       navigate("/thank-you");
       return;
