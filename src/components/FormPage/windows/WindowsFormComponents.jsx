@@ -74,7 +74,7 @@ export const WindowStyle = ({ props }) => {
 
 export const NumberOfWindows = ({ props }) => {
   const [value, setValue] = useState("");
-  const data = ["1 Window", "2 Windows", "3 to 5 Windows", "6 to 9 Windows", "10+ windows"];
+  const data = ["1 window", "2 windows", "3 to 5 windows", "6 to 9 windows", "10+ windows"];
 
   const { allFields, updateFields } = useFormStore((state) => state);
 

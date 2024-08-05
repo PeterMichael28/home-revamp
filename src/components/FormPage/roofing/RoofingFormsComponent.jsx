@@ -720,7 +720,7 @@ export const PreferredTimeForm = ({ slug }) => {
     }
   };
 
-  const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
+  const homeData = ["Any time", "Morning", "Afternoon", "Evening"];
   return (
     <>
       <form
