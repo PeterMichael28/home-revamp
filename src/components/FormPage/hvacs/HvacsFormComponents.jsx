@@ -84,7 +84,7 @@ export const HvacProjectTimelineForm = ({ props }) => {
     updateFields({ ...allFields, project_timeline: value });
     props.onNext();
   };
-  const homeData = ["Immediately", "1-3 months", "3-6 months", "Within a Year", "Not sure"];
+  const homeData = ["Immediately", "1-3 months", "3-6 months", "Within a Year", "Not Sure"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />

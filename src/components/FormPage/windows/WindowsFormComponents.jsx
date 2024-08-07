@@ -37,7 +37,7 @@ export const WindowStyle = ({ props }) => {
   const data = [
     "Bay or Bow",
     "Fixed (non-opening)",
-    "Sliding Glass Window",
+    "Sliding Glass window",
     "Garden window",
     "Casement",
     "Sliding Glass Door",
