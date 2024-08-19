@@ -187,7 +187,7 @@ const Table = ({
               </tr>
             )}
             {loading && (
-              <tr className="absolute top-0 h-full w-full bg-onPrimary/60">
+              <tr className="absolute top-0 h-full w-full bg-transparent">
                 <td className="h-full w-full flex items-center justify-center">
                   <Loading className="text-primary" height={48} width={48} />
                 </td>

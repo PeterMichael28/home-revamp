@@ -17,6 +17,7 @@ import ReactGA from "react-ga4";
 import BoberdooForm from "./pages/CustomForm";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminPage from "./pages/admin/AdminPage";
+import SolarDashbiard from "./pages/admin/SolarDashbiard";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -72,17 +73,21 @@ function App() {
       ],
       errorElement: <h1>Error Page</h1>,
     },
-    {
-      path: "/new",
-      element: <BoberdooForm />,
-    },
+    // {
+    //   path: "/new",
+    //   element: <BoberdooForm />,
+    // },
     {
       path: "/admin",
       element: <AdminLayout />,
       children: [
+        // {
+        //   path: "/admin/dashboard",
+        //   element: <SolarDashbiard />,
+        // },
         {
-          path: "/admin/dashboard",
-          element: <AdminPage />,
+          path: "/admin/solar",
+          element: <SolarDashbiard />,
         },
       ],
     },
