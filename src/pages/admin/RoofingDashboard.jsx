@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import img1 from "~/assets/images/img1.png";
 import TableDataComp from "./TableDataComp";
-const SolarDashbiard = () => {
+
+const RoofingDashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     const url = import.meta.env.VITE_API_BASE_URL;
-    fetch(`${url}/api/solar-services/`)
+    fetch(`${url}/api/roofing-services/`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -33,10 +34,9 @@ const SolarDashbiard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "solarLeadsData.csv"/>
+        <TableDataComp data={data} loading={loading} csv= "RoofingLeadData" />
       </div>
     </div>
   );
-};
-
-export default SolarDashbiard;
+}
+export default RoofingDashboard
