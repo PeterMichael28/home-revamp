@@ -6,25 +6,21 @@ import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import LabelSelect from "../LabelSelect";
-import axios from "axios";
+import LabelSelect, { LabelSelect2 } from "../LabelSelect";
 import { statesNames } from "~/assets/data";
 import Modal from "~/components/Modal/Modal";
-
 import Lottie from "lottie-react";
 import animation from "~/assets/Animation8.json";
+import zipState from "zip-state";
+import { City } from "country-state-city";
 
 export const LocationForm = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const [zipCode, setZipCode] = useState("");
-  const [isValid, setIsValid] = useState(true);
-
-  const handleClick = () => {
-    if (!zipCode) return;
-    updateFields({ zip_code: zipCode });
-    props.onNext();
-  };
+  const [isValid, setIsValid] = useState(false);
+  const [state, setState] = useState("");
+  const [error, setError] = useState("");
 
   const isZipValid = useMemo(() => {
     return /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
@@ -49,6 +45,27 @@ export const LocationForm = ({ props }) => {
     }
   }, [isValid]);
 
+  useEffect(() => {
+    if (!zipCode && !isValid) return;
+
+    const stateResult = zipState(zipCode);
+    if (stateResult) {
+      setState(stateResult);
+      setError("");
+    } else {
+      setState("");
+      setError(`${zipCode} code doesn't match any US state zip code`);
+    }
+  }, [isValid, zipCode]);
+
+  const handleClick = () => {
+    if (!zipCode || !isValid || !state) return;
+    const currentState = statesNames.find((dat) => dat.code == state);
+    updateFields({ zip_code: zipCode, state: currentState?.code });
+
+    props.onNext();
+  };
+
   return (
     <div className="w-full">
       <FormHeader
@@ -64,13 +81,26 @@ export const LocationForm = ({ props }) => {
           type="tel"
           value={zipCode}
           setValue={setZipCode}
+          label={"Zip Code"}
         />
-        {!isValid && <p className="text-[11px] text-red-500 mt-1">Enter a valid US Zip or postal code</p>}
+        {zipCode && !isValid && <p className="text-[11px] text-red-500 mt-1">Enter a valid US Zip or postal code</p>}
+        {zipCode && isValid && (
+          <div>
+            {state && (
+              <span className="text-[11px] text-green-600 font-medium">
+                The Zip code belongs to{" "}
+                <span className="font-bold text-sm">{statesNames.find((dat) => dat.code == state)?.name}</span> state
+              </span>
+            )}
+
+            {error && <span className="text-[11px] text-red-500font-medium">{error}</span>}
+          </div>
+        )}
         <FormButton
           text="Continue"
           className="mt-7"
           onClick={handleClick}
-          disabled={!zipCode || !isZipValid.test(zipCode)}
+          disabled={!zipCode || !isZipValid.test(zipCode) || !state}
         />
       </div>
     </div>
@@ -449,6 +479,7 @@ export const ProjectOwnerForm = ({ props }) => {
             placeholder={"Enter your first name"}
             value={firstName}
             setValue={setFirstName}
+            label={"First Name"}
           />
           <LabelInput
             id={"lastName"}
@@ -456,6 +487,7 @@ export const ProjectOwnerForm = ({ props }) => {
             placeholder={"Select your last name"}
             value={lastName}
             setValue={setLastName}
+            label={"Last Name"}
           />
           <LabelInput
             id={"dob"}
@@ -464,6 +496,7 @@ export const ProjectOwnerForm = ({ props }) => {
             value={dob}
             setValue={setDob}
             type="date"
+            label={"Date of Birth"}
           />
           <LabelSelect
             id={"gender"}
@@ -472,6 +505,7 @@ export const ProjectOwnerForm = ({ props }) => {
             value={gender}
             setValue={setGender}
             data={["Male", "Female", "Unspecified"]}
+            label={"Gender"}
           />
         </div>
         <FormButton
@@ -488,9 +522,9 @@ export const ProjectOwnerForm = ({ props }) => {
 export const AddressDetailsForm = ({ props }) => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-
   const { allFields, updateFields } = useFormStore((state) => state);
+  const [state, setState] = useState(allFields?.state);
+  const cities = City.getCitiesOfState("US", allFields?.state);
 
   const handleClick = () => {
     if (!address || !city || !state) return;
@@ -510,8 +544,18 @@ export const AddressDetailsForm = ({ props }) => {
             placeholder={"Enter your address"}
             value={address}
             setValue={setAddress}
+            label={"Address"}
           />
-          <LabelInput id={"city"} required placeholder={"Enter your city name"} value={city} setValue={setCity} />
+
+          <LabelSelect2
+            id={"city"}
+            required
+            placeholder={"Select your City"}
+            value={city}
+            setValue={setCity}
+            data={cities}
+            label={"City"}
+          />
           <LabelSelect
             id={"state"}
             required
@@ -519,6 +563,8 @@ export const AddressDetailsForm = ({ props }) => {
             value={state}
             setValue={setState}
             data={statesNames}
+            label={"State"}
+            disabled
           />
         </div>
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!address || !city || !state} />
@@ -569,12 +615,12 @@ export const ContactDetailsForm = ({ props }) => {
     }
 
     if (!phone || !validatePhoneNumber(phone)) {
-      toast.error("Invalid Phone number format!!!");
+      toast.error("Invalid US Phone number format!!!");
       setPhoneError(true);
     }
 
     if (!dayPhone || !validatePhoneNumber(dayPhone)) {
-      toast.error("Invalid Day Phone number format!!!");
+      toast.error("Invalid Us Day Phone number format!!!");
       setDayPhoneError(true);
     }
 
@@ -600,6 +646,7 @@ export const ContactDetailsForm = ({ props }) => {
             value={email}
             setValue={setEmail}
             error={emailError}
+            label={"Email"}
           />
           <LabelInput
             id={"phone"}
@@ -609,6 +656,7 @@ export const ContactDetailsForm = ({ props }) => {
             value={phone}
             setValue={setPhone}
             error={phoneError}
+            label={"Phone Number"}
           />
           <LabelInput
             id={"dayPhone"}
@@ -618,6 +666,7 @@ export const ContactDetailsForm = ({ props }) => {
             value={dayPhone}
             setValue={setDayPhone}
             error={dayPhoneError}
+            label={"Day Phone Number"}
           />
         </div>
         <FormButton text="Continue" type="submit" className="mt-7" disabled={!email || !phone || !dayPhone} />
