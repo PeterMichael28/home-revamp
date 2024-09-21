@@ -619,12 +619,7 @@ export const ContactDetailsForm = ({ props }) => {
       setPhoneError(true);
     }
 
-    if (!dayPhone || !validatePhoneNumber(dayPhone)) {
-      toast.error("Invalid Us Day Phone number format!!!");
-      setDayPhoneError(true);
-    }
-
-    if (!validateEmail(email) || !validatePhoneNumber(phone) || !validatePhoneNumber(dayPhone)) return;
+    if (!validateEmail(email) || !validatePhoneNumber(phone)) return;
 
     setEmailError(false);
     setPhoneError(false);
@@ -657,19 +652,20 @@ export const ContactDetailsForm = ({ props }) => {
             setValue={setPhone}
             error={phoneError}
             label={"Phone Number"}
+            maxLength={10}
           />
           <LabelInput
             id={"dayPhone"}
-            required
             placeholder={"1234567890"}
             type={"number"}
             value={dayPhone}
             setValue={setDayPhone}
             error={dayPhoneError}
             label={"Day Phone Number"}
+            maxLength={10}
           />
         </div>
-        <FormButton text="Continue" type="submit" className="mt-7" disabled={!email || !phone || !dayPhone} />
+        <FormButton text="Continue" type="submit" className="mt-7" disabled={!email || !phone} />
       </form>
     </div>
   );

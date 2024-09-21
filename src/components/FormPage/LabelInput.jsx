@@ -10,6 +10,7 @@ const LabelInput = ({
   value,
   setValue,
   error,
+  maxLength,
   ...props
 }) => {
   return (
@@ -27,7 +28,18 @@ const LabelInput = ({
         disabled={disabled}
         required={required}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        // max={maxLength}
+        // maxLength={maxLength}
+        onChange={(e) => {
+          const curValue = e.target.value;
+          if (maxLength) {
+            if (curValue.length <= maxLength || curValue.length < value.length) {
+              setValue(curValue);
+            }
+          } else {
+            setValue(curValue);
+          }
+        }}
         className={classNames(
           "py-4 mt-2 w-full px-3 first-line:rounded border border-[#e1e1e1] placeholder:text-xs text-sm placeholder:text-[#9e9e9e] focus:ring focus:ring-primary/20 focus:outline-none focus:bg-white focus:border-transparent transition-all rounded-lg",
           error && "border-red-600"
