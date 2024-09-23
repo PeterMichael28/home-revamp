@@ -18,6 +18,7 @@ import BoberdooForm from "./pages/CustomForm";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminPage from "./pages/admin/AdminPage";
 import SolarDashbiard from "./pages/admin/SolarDashbiard";
+import AffiliatePage from "./pages/AffiliatePage";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -69,6 +70,10 @@ function App() {
         {
           path: "/our-partners",
           element: <PartnersPage />,
+        },
+        {
+          path: "/join-our-affiliate-team",
+          element: <AffiliatePage />,
         },
       ],
       errorElement: <h1>Error Page</h1>,
