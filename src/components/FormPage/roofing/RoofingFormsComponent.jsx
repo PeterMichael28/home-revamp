@@ -15,7 +15,7 @@ import zipState from "zip-state";
 import { City } from "country-state-city";
 
 export const LocationForm = ({ props }) => {
-  const { allFields, updateFields } = useFormStore((state) => state);
+  const { updateFields } = useFormStore((state) => state);
 
   const [zipCode, setZipCode] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -85,11 +85,10 @@ export const LocationForm = ({ props }) => {
         />
         {zipCode && !isValid && <p className="text-[11px] text-red-500 mt-1">Enter a valid US Zip or postal code</p>}
         {zipCode && isValid && (
-          <div>
+          <div className="mt-1">
             {state && (
               <span className="text-[11px] text-green-600 font-medium">
-                The Zip code belongs to{" "}
-                <span className="font-bold text-sm">{statesNames.find((dat) => dat.code == state)?.name}</span> state
+                <span className="font-bold text-sm">{statesNames.find((dat) => dat.code == state)?.name}</span>
               </span>
             )}
 
@@ -576,10 +575,10 @@ export const AddressDetailsForm = ({ props }) => {
 export const ContactDetailsForm = ({ props }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [dayPhone, setDayPhone] = useState("");
+  // const [dayPhone, setDayPhone] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
-  const [dayPhoneError, setDayPhoneError] = useState(false);
+  // const [dayPhoneError, setDayPhoneError] = useState(false);
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
@@ -595,16 +594,15 @@ export const ContactDetailsForm = ({ props }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (emailError || phoneError || dayPhoneError) {
+      if (emailError || phoneError) {
         setEmailError(false);
         setPhoneError(false);
-        setDayPhoneError(false);
       }
     }, 3000);
 
     // Cleanup the timer if the component unmounts or dependencies change
     return () => clearTimeout(timer);
-  }, [emailError, phoneError, dayPhoneError]);
+  }, [emailError, phoneError]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -623,8 +621,7 @@ export const ContactDetailsForm = ({ props }) => {
 
     setEmailError(false);
     setPhoneError(false);
-    setDayPhoneError(false);
-    updateFields({ ...allFields, email: email, phone: phone, dayPhoneNumber: dayPhone });
+    updateFields({ ...allFields, email: email, phone: phone });
     props.onNext();
   };
 
@@ -654,7 +651,7 @@ export const ContactDetailsForm = ({ props }) => {
             label={"Phone Number"}
             maxLength={10}
           />
-          <LabelInput
+          {/* <LabelInput
             id={"dayPhone"}
             placeholder={"1234567890"}
             type={"number"}
@@ -663,7 +660,7 @@ export const ContactDetailsForm = ({ props }) => {
             error={dayPhoneError}
             label={"Day Phone Number"}
             maxLength={10}
-          />
+          /> */}
         </div>
         <FormButton text="Continue" type="submit" className="mt-7" disabled={!email || !phone} />
       </form>

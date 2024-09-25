@@ -67,7 +67,7 @@ const AffiliatePage = () => {
                 <a href="mailto:affiliates@homerevampexpert.com" className="text-blue-600">
                   affiliates@homerevampexpert.com
                 </a>
-              </span>
+              </span>{" "}
               to schedule a call with our affiliate team.
             </li>
 

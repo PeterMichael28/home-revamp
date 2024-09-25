@@ -18,7 +18,7 @@ import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import { Kitchen } from "./KitchenFormComponent";
 
 const KitchenForm = ({ slug }) => {
-  const [activeIndex, setActiveIndex] = useState(8);
+  const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
