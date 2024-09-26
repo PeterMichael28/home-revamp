@@ -26,6 +26,11 @@ const Footer = () => {
                 Our Partners{" "}
               </Link>
             </li>
+            <li>
+              <Link to="/join-our-affiliate-team" className="text-secondary font-semibold md:text-sm text-lg">
+                Join Our Affiliate
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="text-secondary font-semibold md:text-sm text-lg">

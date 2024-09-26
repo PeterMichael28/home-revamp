@@ -323,6 +323,12 @@ export const statesNames = [
   { name: "West Virginia", code: "WV" },
   { name: "Wisconsin", code: "WI" },
   { name: "Wyoming", code: "WY" },
+  { name: "District of Columbia", code: "DC" },
+  { name: "American Samoa", code: "AS" },
+  { name: "Guam", code: "GU" },
+  { name: "Northern Mariana Islands", code: "MP" },
+  { name: "Puerto Rico", code: "PR" },
+  { name: "United States Virgin Islands", code: "VI" },
 ];
 
 export const CCPAData = [

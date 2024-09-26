@@ -75,6 +75,10 @@ function App() {
           path: "/our-partners",
           element: <PartnersPage />,
         },
+        {
+          path: "/join-our-affiliate-team",
+          element: <AffiliatePage />,
+        },
       ],
       errorElement: <h1>Error Page</h1>,
     },
