@@ -9,7 +9,7 @@ import { ourServices } from "~/assets/data";
 import Select from "react-select";
 import { CSVLink } from "react-csv";
 
-const TableDataComp = ({ data, loading }) => {
+const TableDataComp = ({ data, loading, csv }) => {
   const [searchFilter, setSearchFilter] = useState("");
   const [value, setValue] = useState("");
   const [page, setPage] = useState(1);
@@ -105,7 +105,7 @@ const TableDataComp = ({ data, loading }) => {
           </div>
 
           {/*  */}
-          <CSVLink data={data} filename={"solarLeadsData.csv"}>
+          <CSVLink data={data} filename={csv}>
             <div className="border border-[#F2F2F2] bg-white min-w-fit rounded-[4px] px-4 py-2 flex items-center justify-center gap-2 h-[44px]">
               <img src={uploadImg} alt="image" className="size-[18px]" />
               <span className="text-sm font-medium text-[#34403B]">Export List</span>

@@ -18,7 +18,11 @@ import BoberdooForm from "./pages/CustomForm";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminPage from "./pages/admin/AdminPage";
 import SolarDashbiard from "./pages/admin/SolarDashbiard";
-import AffiliatePage from "./pages/AffiliatePage";
+import BathroomDashboard from "./pages/admin/BathroomDashboard";
+import RoofingDashboard from "./pages/admin/RoofingDashboard";
+import WindowsDashboatd from "./pages/admin/WindowsDashboard";
+import HavcsDashboard from "./pages/admin/HavcsDashboard";
+import WindowsDashboard from "./pages/admin/WindowsDashboard";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -93,6 +97,22 @@ function App() {
         {
           path: "/admin/solar",
           element: <SolarDashbiard />,
+        },
+        {
+          path: "/admin/bathrooms",
+          element: <BathroomDashboard />,
+        },
+        {
+          path: "/admin/roofing",
+          element: <RoofingDashboard />,
+        },
+        {
+          path: "/admin/windows",
+          element: <WindowsDashboard />,
+        },
+        {
+          path: "/admin/havcs",
+          element: <HavcsDashboard />,
         },
       ],
     },

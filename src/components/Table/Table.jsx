@@ -39,7 +39,7 @@ const Table = ({
   serverSidePagination, // set true to control pagination with server
   showPagination = true, // set false to hide pagination row
   currentPage = 1, // current page in pagination
-  perPage = 10, // number of items per page
+  perPage = 20, // number of items per page
   perPageOptions = PER_PAGE_OPTIONS, // Array of numbers to use as select options to control perPage
   totalPageCount = -1, // total number of pages
   totalItemsCount, // total number of items in the data
