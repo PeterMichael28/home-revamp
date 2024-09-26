@@ -14,15 +14,13 @@ import "react-toastify/dist/ReactToastify.css";
 import ThankyouPage from "./pages/ThankyouPage";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
-import BoberdooForm from "./pages/CustomForm";
 import AdminLayout from "./layouts/AdminLayout";
-import AdminPage from "./pages/admin/AdminPage";
 import SolarDashbiard from "./pages/admin/SolarDashbiard";
 import BathroomDashboard from "./pages/admin/BathroomDashboard";
 import RoofingDashboard from "./pages/admin/RoofingDashboard";
-import WindowsDashboatd from "./pages/admin/WindowsDashboard";
 import HavcsDashboard from "./pages/admin/HavcsDashboard";
 import WindowsDashboard from "./pages/admin/WindowsDashboard";
+import AffiliatePage from "./pages/AffiliatePage";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
