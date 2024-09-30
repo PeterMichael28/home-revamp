@@ -4,7 +4,6 @@ import { MdSolarPower, MdOutlineRoofing, MdMenu, MdClose } from "react-icons/md"
 import { TbAirConditioning } from "react-icons/tb";
 import { PanelsTopLeft, Bath } from "lucide-react";
 import { Outlet } from "react-router-dom";
-import fileImg from "~/assets/images/fileImg.png";
 
 const adminNav = [
   {

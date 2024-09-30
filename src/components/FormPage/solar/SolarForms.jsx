@@ -54,10 +54,10 @@ const SolarForms = ({ slug }) => {
       label: "Form2",
       component: (props) => <AccessFromLandlord props={props} />,
     },
-    {
-      label: "Form3",
-      component: (props) => <PropertyTypeForm props={props} />,
-    },
+    // {
+    //   label: "Form3",
+    //   component: (props) => <PropertyTypeForm props={props} />,
+    // },
     {
       label: "Form23",
       component: (props) => <PropertyStories props={props} />,
@@ -93,10 +93,10 @@ const SolarForms = ({ slug }) => {
       label: "Form7",
       component: (props) => <ProjectTimelineForm props={props} />,
     },
-    {
-      label: "Form37",
-      component: (props) => <ProjectStatus props={props} />,
-    },
+    // {
+    //   label: "Form37",
+    //   component: (props) => <ProjectStatus props={props} />,
+    // },
     {
       label: "Form8",
       component: (props) => <ProjectOwnerForm props={props} />,

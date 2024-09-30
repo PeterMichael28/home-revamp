@@ -61,7 +61,7 @@ export const LocationForm = ({ props }) => {
   const handleClick = () => {
     if (!zipCode || !isValid || !state) return;
     const currentState = statesNames.find((dat) => dat.code == state);
-    updateFields({ zip_code: zipCode, state: currentState?.code });
+    updateFields({ zip_code: zipCode, state: currentState?.code, stateName: currentState?.name });
 
     props.onNext();
   };
@@ -394,17 +394,26 @@ export const ProjectTimelineForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
+  // const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
+        {/* <div className="space-y-5">
           {homeData.map((dat) => (
             <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
           ))}
-        </div>
+        </div> */}
+        <LabelInput
+          id={"projectTimeline"}
+          required
+          placeholder={"Enter your project timeline"}
+          value={value}
+          setValue={setValue}
+          label={"Project Timeline"}
+        />
+
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -497,13 +506,14 @@ export const ProjectOwnerForm = ({ props }) => {
             type="date"
             label={"Date of Birth"}
           />
-          <LabelSelect
+
+          <LabelInput
             id={"gender"}
             required
-            placeholder={"Select your gender"}
+            placeholder={"Enter your gender"}
             value={gender}
             setValue={setGender}
-            data={["Male", "Female", "Unspecified"]}
+            type="text"
             label={"Gender"}
           />
         </div>

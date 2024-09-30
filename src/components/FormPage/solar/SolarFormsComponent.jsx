@@ -1,9 +1,10 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import LabelInput from "../LabelInput";
 import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import utilityData from "~/utils/electricity.json";
+import { CustomLabelSelect } from "../LabelSelect";
 
 export const MonthlyBill = ({ props }) => {
   const [value, setValue] = useState("");
@@ -217,6 +218,8 @@ export const SolarInstallationLocation = ({ props }) => {
 
 export const CurrentUtilityProvider = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
+  // console.log("utilityData", utilityData);
+  // console.log("state", allFields.stateName);
 
   const [currentUtilityProvider, setCurrentUtilityProvider] = useState("");
 
@@ -234,13 +237,14 @@ export const CurrentUtilityProvider = ({ props }) => {
       />
 
       <div className="mt-5">
-        <LabelInput
+        <CustomLabelSelect
           id={"CurrentUtilityProvider"}
           required
-          placeholder={"Enter your current utility provider name"}
-          type="text"
+          placeholder={"Select your current utility provider"}
           value={currentUtilityProvider}
           setValue={setCurrentUtilityProvider}
+          data={utilityData[allFields.stateName]}
+          label={"Current Utility Provider"}
         />
 
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!currentUtilityProvider} />
