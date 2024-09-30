@@ -405,6 +405,7 @@ export const ProjectTimelineForm = ({ props }) => {
             <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
           ))}
         </div>
+
         {/* <LabelInput
           id={"projectTimeline"}
           required
@@ -506,16 +507,6 @@ export const ProjectOwnerForm = ({ props }) => {
             type="date"
             label={"Date of Birth"}
           />
-          {/* 
-          <LabelInput
-            id={"gender"}
-            required
-            placeholder={"Enter your gender"}
-            value={gender}
-            setValue={setGender}
-            type="text"
-            label={"Gender"}
-          /> */}
 
           <LabelSelect
             id={"gender"}
