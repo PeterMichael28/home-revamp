@@ -393,26 +393,26 @@ export const ProjectTimelineForm = ({ props }) => {
     updateFields({ ...allFields, project_timeline: value });
     props.onNext();
   };
+  const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
 
-  // const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
-        {/* <div className="space-y-5">
+        <div className="space-y-5">
           {homeData.map((dat) => (
             <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
           ))}
-        </div> */}
-        <LabelInput
+        </div>
+        {/* <LabelInput
           id={"projectTimeline"}
           required
           placeholder={"Enter your project timeline"}
           value={value}
           setValue={setValue}
           label={"Project Timeline"}
-        />
+        /> */}
 
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
