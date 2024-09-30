@@ -506,7 +506,7 @@ export const ProjectOwnerForm = ({ props }) => {
             type="date"
             label={"Date of Birth"}
           />
-
+          {/* 
           <LabelInput
             id={"gender"}
             required
@@ -514,6 +514,16 @@ export const ProjectOwnerForm = ({ props }) => {
             value={gender}
             setValue={setGender}
             type="text"
+            label={"Gender"}
+          /> */}
+
+          <LabelSelect
+            id={"gender"}
+            required
+            placeholder={"Select your gender"}
+            value={gender}
+            setValue={setGender}
+            data={["Male", "Female", "Unspecified"]}
             label={"Gender"}
           />
         </div>
