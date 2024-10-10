@@ -27,3 +27,8 @@
 @keyframes l1 {
   0% {background-position: right}
 }
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}

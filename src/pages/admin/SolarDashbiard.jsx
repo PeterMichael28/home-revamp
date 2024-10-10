@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import img1 from "~/assets/images/img1.png";
 import TableDataComp from "./TableDataComp";
+import { Button } from "~/components/ui/button";
+// import Message from "~/components/MessageModal/Message";
+
+
 const SolarDashbiard = () => {
+  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -33,7 +38,8 @@ const SolarDashbiard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "solarLeadsData.csv"/>
+        <TableDataComp data={data} loading={loading} csv= "solarLeadsData.csv" />
+      
       </div>
     </div>
   );
