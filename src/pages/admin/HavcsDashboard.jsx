@@ -4,6 +4,7 @@ import TableDataComp from "./TableDataComp";
 
 
 const HavcsDashboard = () => {
+  const MessageModal = 'hello'
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {

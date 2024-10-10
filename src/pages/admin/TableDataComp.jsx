@@ -8,8 +8,10 @@ import uploadImg from "~/assets/images/uploadPic.png";
 import { ourServices } from "~/assets/data";
 import Select from "react-select";
 import { CSVLink } from "react-csv";
+import Message from "~/components/MessageModal/Message";
+import { Button } from "~/components/ui/button";
 
-const TableDataComp = ({ data, loading, csv }) => {
+const TableDataComp = ({ data, loading, csv, messageChild }) => {
   const [searchFilter, setSearchFilter] = useState("");
   const [value, setValue] = useState("");
   const [page, setPage] = useState(1);
@@ -111,6 +113,12 @@ const TableDataComp = ({ data, loading, csv }) => {
               <span className="text-sm font-medium text-[#34403B]">Export List</span>
             </div>
           </CSVLink>
+
+          <Message>
+          <Button variant="outline">Send Message</Button>
+          </Message>
+            {/* {messageChild} */}
+       
         </div>
       </div>
       <div className="w-full overflow-x-auto">

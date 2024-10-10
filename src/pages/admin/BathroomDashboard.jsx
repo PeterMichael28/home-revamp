@@ -3,8 +3,10 @@ import img1 from "~/assets/images/img1.png";
 import TableDataComp from "./TableDataComp";
 
 const BathroomDashboard = () => {
+  const MessageModal = 'hello'
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     setLoading(true);
     const url = import.meta.env.VITE_API_BASE_URL;
