@@ -4,9 +4,7 @@ import TableDataComp from "./TableDataComp";
 import { Button } from "~/components/ui/button";
 // import Message from "~/components/MessageModal/Message";
 
-
 const SolarDashbiard = () => {
-  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -23,7 +21,7 @@ const SolarDashbiard = () => {
         setLoading(false);
       });
   }, []);
-  
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto w-full ">
@@ -38,8 +36,7 @@ const SolarDashbiard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "solarLeadsData.csv" />
-      
+        <TableDataComp data={data} loading={loading} csv="solarLeadsData.csv" service="solars" />
       </div>
     </div>
   );
