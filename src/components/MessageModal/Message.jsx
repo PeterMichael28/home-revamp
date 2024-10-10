@@ -15,6 +15,8 @@ import {
   Font,
   FontFamily,
   Alignment,
+  SourceEditing,
+  Markdown,
 } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
 
@@ -28,6 +30,7 @@ import { toast } from "react-toastify";
 export default function Message({ service }) {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
+  const [from, setFrom] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -47,7 +50,7 @@ export default function Message({ service }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: body, subject: subject, service }),
+        body: JSON.stringify({ message: body, from, subject: subject, service }),
       });
 
       if (!response.ok) {
@@ -97,6 +100,18 @@ export default function Message({ service }) {
               required
             />
           </div>
+          <div className="space-y-2 mt-5">
+            <Label htmlFor="from" className="text-xl font- medium">
+              From
+            </Label>
+            <Input
+              id="from"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              placeholder="Enter sender's name"
+              required
+            />
+          </div>
           <div className="space-y-2 flex flex-col mt-5">
             <Label htmlFor="body" className="text-xl font- medium">
               Body
@@ -141,6 +156,7 @@ export default function Message({ service }) {
                     "fontFamily",
                     "|",
                     "alignment",
+                    "sourceEditing",
                   ],
                 },
                 plugins: [
@@ -158,6 +174,8 @@ export default function Message({ service }) {
                   Link,
                   FontFamily,
                   Alignment,
+                  SourceEditing,
+                  Markdown,
                 ],
 
                 heading: {
