@@ -35,7 +35,7 @@ const RoofingDashboard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "RoofingLeadData" />
+        <TableDataComp data={data} loading={loading} csv= "RoofingLeadData" service="roofings" />
       </div>
     </div>
   );

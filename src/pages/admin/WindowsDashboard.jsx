@@ -36,7 +36,7 @@ const WindowsDashboard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "windowLeadsData.csv" />
+        <TableDataComp data={data} loading={loading} csv= "windowLeadsData.csv" service="windows" />
       </div>
     </div>
   );
