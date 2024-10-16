@@ -36,7 +36,7 @@ const BathroomDashboard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "BathroomLeadsData.csv"/>
+        <TableDataComp data={data} loading={loading} csv= "BathroomLeadsData.csv" service="bathrooms"/>
       </div>
     </div>
   );

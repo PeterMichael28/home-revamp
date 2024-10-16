@@ -36,7 +36,7 @@ const HavcsDashboard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv="HvacLeadData" />
+        <TableDataComp data={data} loading={loading} csv="HvacLeadData"  service="hvacs"/>
       </div>
     </div>
   );
