@@ -7,6 +7,7 @@ import { formatDateTime, getRandomColorFromName } from "~/utils/getRandomColorFr
 import uploadImg from "~/assets/images/uploadPic.png";
 import { CSVLink } from "react-csv";
 import Message from "~/components/MessageModal/Message";
+import FilterButton from "~/components/FilterButton/Filter";
 
 const TableDataComp = ({ data, loading, csv, service }) => {
   const [searchFilter, setSearchFilter] = useState("");
@@ -14,6 +15,19 @@ const TableDataComp = ({ data, loading, csv, service }) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
+
+  const [formData, setFormData] = useState({
+    state: null,
+    gender: null,
+    homeowner:null,
+    dateRange:{
+      from: null,
+      to: null
+    }
+
+    
+  })
+
 
   const COLUMNS = [
     { header: "Lead ID", accessor: "LeadiD" },
@@ -111,7 +125,9 @@ const TableDataComp = ({ data, loading, csv, service }) => {
             </div>
           </CSVLink>
 
-          {service && <Message service={service} />}
+          {service && <Message formData={formData} setFormData={setFormData} service={service} />}
+
+           {service && <FilterButton formData={formData} setFormData={setFormData} service={service} />}
         </div>
       </div>
       <div className="w-full overflow-x-auto">
