@@ -690,6 +690,10 @@ export const PreferredTimeForm = ({ slug }) => {
 
   const clickId = searchParams.get("click_id");
   const networkName = searchParams.get("network_name");
+  const offerId = searchParams.get("offer_id");
+  const affId = searchParams.get("aff_id");
+
+  // console.log("All url:", window.location.href);
 
   const params = new URLSearchParams();
   let newUrl = `/${slug}/completed`;
@@ -698,6 +702,12 @@ export const PreferredTimeForm = ({ slug }) => {
   }
   if (networkName) {
     params.append("network_name", networkName);
+  }
+  if (offerId) {
+    params.append("offer_id", offerId);
+  }
+  if (affId) {
+    params.append("aff_id", affId);
   }
 
   if (params.toString()) {
@@ -741,13 +751,24 @@ export const PreferredTimeForm = ({ slug }) => {
 
     updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
 
+    let body = {
+      ...allFields,
+      contact_time: value,
+      LeadiD: leadIdToken,
+      service: slug,
+      ...(clickId && { click_id: clickId }),
+      ...(networkName && { network_name: networkName }),
+      ...(offerId && { offer_id: offerId }),
+      ...(affId && { aff_id: affId }),
+    };
+
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug }),
+        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
