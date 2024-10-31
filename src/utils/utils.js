@@ -378,3 +378,6 @@ export const getState = (zip) => {
   const prefix2 = zip.substring(0, 2);
   return zipCodeToState2[prefix3] || zipCodeToState2[prefix2] || "Unknown";
 };
+
+
+

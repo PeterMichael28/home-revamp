@@ -1,27 +1,44 @@
 import { useEffect, useState } from "react";
 import img1 from "~/assets/images/img1.png";
 import TableDataComp from "./TableDataComp";
+import { useLocation } from "react-router-dom";
+import useAuthRedirect from "~/hooks/useAuthRedirect";
+import { useUserStore } from "~/store/userStore";
 
 const BathroomDashboard = () => {
-  const MessageModal = 'hello'
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+  const token = useUserStore((state) => state.token);
+  const { isDataAuthenticated } = useAuthRedirect();
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [perPage, setPerPage] = useState(10);
+  const location = useLocation();
+
   useEffect(() => {
     setLoading(true);
     const url = import.meta.env.VITE_API_BASE_URL;
-    fetch(`${url}/api/bathroom-services/`)
+    // Get all URL parameters and add them to the endpoint
+    const searchParams = new URLSearchParams(location.search);
+    const endpointWithParams = `${url}/api/bathroom-service-filter/?page=${page}&${searchParams.toString()}`;
+
+    fetch(endpointWithParams, { headers: { Authorization: `Token ${token}` } })
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        isDataAuthenticated(data);
+
+        setData(data?.results);
+        setTotalPages(data?.total_pages);
+        setPerPage(data?.page_size);
         setLoading(false);
+        // console.log("firstw22", data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("error", error);
         setLoading(false);
       });
-  }, []);
-  
+  }, [location.search, token, page]);
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-y-auto w-full ">
@@ -36,9 +53,19 @@ const BathroomDashboard = () => {
       </div>
 
       <div className="mt-10 pb-28 min-w-[1000px] overflow-x-auto">
-        <TableDataComp data={data} loading={loading} csv= "BathroomLeadsData.csv" service="bathrooms"/>
+        <TableDataComp
+          data={data}
+          loading={loading}
+          csv="BathroomLeadsData.csv"
+          service="bathrooms"
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+          perPage={perPage}
+          setPerPage={setPerPage}
+        />
       </div>
     </div>
   );
-}
-export default BathroomDashboard
+};
+export default BathroomDashboard;

@@ -6,6 +6,7 @@ import Select from "react-select";
 import { Filter } from "lucide-react";
 import { statesNames } from "../../assets/data";
 import DateRangePicker from "../DateRange/DateRange";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const genderOptions = [
   { value: "Male", label: "Male" },
@@ -26,11 +27,21 @@ const formatDateToYYYYMMDD = (date) => {
 
 export default function FilterButton({ formData, setFormData }) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Initialize local state with values from formData
   const [localState, setLocalState] = useState(() => {
-    const stateOption = formData.state ? statesNames.find((s) => s.code === formData.state) : null;
-    return stateOption ? { value: stateOption.code, label: stateOption.name } : null;
+    const stateOptions = formData.state
+      ? formData.state
+          .map((code) => {
+            const stateOption = statesNames.find((s) => s.code === code);
+            return stateOption ? { value: stateOption.code, label: stateOption.name } : null;
+          })
+          .filter(Boolean) // Filter out any nulls in case of unmatched codes
+      : [];
+
+    return stateOptions;
   });
 
   const [localGender, setLocalGender] = useState(() =>
@@ -52,16 +63,49 @@ export default function FilterButton({ formData, setFormData }) {
     setLocalDateRange(range);
   };
 
-  const handleApply = () => {
+  const handleApply2 = () => {
+    const searchParams = new URLSearchParams(location.search);
+
+    const updateSearchParams = (key, value) => {
+      // Remove existing params with the same key to handle multi-select options cleanly
+      searchParams.delete(key);
+
+      if (Array.isArray(value)) {
+        // Add each value separately for multi-select arrays
+        value.forEach((item) => {
+          if (item.value) {
+            searchParams.append(key, item.value);
+          }
+        });
+      } else if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+    };
+
+    // Apply updates for each form field
+    updateSearchParams("state", localState); // Pass the array directly
+    updateSearchParams("gender", localGender?.value);
+    updateSearchParams("homeowner", localHomeowner?.value);
+    updateSearchParams("dateFrom", localDateRange?.from ? formatDateToYYYYMMDD(localDateRange.from) : null);
+    updateSearchParams("dateTo", localDateRange?.to ? formatDateToYYYYMMDD(localDateRange.to) : null);
+
+    // Use navigate to update the URL with new search parameters
+    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+
+    // Set form data for local state
     setFormData({
-      state: localState?.value || null,
+      state: localState.map((option) => option.value), // Store as array of codes in formData
       gender: localGender?.value || null,
       homeowner: localHomeowner?.value || null,
       dateRange: {
-        from: formatDateToYYYYMMDD(localDateRange.from),
-        to: formatDateToYYYYMMDD(localDateRange.to),
+        from: localDateRange?.from ? formatDateToYYYYMMDD(localDateRange.from) : null,
+        to: localDateRange?.to ? formatDateToYYYYMMDD(localDateRange.to) : null,
       },
     });
+
+    // Close the form or modal if needed
     setOpen(false);
   };
 
@@ -72,9 +116,9 @@ export default function FilterButton({ formData, setFormData }) {
           <Button variant="outline" className="w-[140px] justify-start">
             <Filter className="mr-2 h-4 w-4" />
             Filter
-            {(localState || localGender || localHomeowner || (localDateRange.from && localDateRange.to)) && (
+            {/* {(localState || localGender || localHomeowner || (localDateRange.from && localDateRange.to)) && (
               <span className="ml-2 px-2 py-1 bg-primary/10 rounded-full text-xs">Active</span>
-            )}
+            )} */}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-80" align="start" sideOffset={4} alignOffset={0} side="bottom">
@@ -84,10 +128,13 @@ export default function FilterButton({ formData, setFormData }) {
                 <label className="text-sm font-medium">State</label>
                 <Select
                   value={localState}
-                  onChange={setLocalState}
+                  onChange={(selectedOptions) => {
+                    setLocalState(selectedOptions || []); // Set to empty array if cleared
+                  }}
                   options={statesNames.map((dat) => ({ value: dat.code, label: dat.name }))}
                   className="w-full"
                   isClearable
+                  isMulti
                 />
               </div>
 
@@ -119,7 +166,7 @@ export default function FilterButton({ formData, setFormData }) {
               </div>
             </div>
 
-            <Button className="w-full mt-[8px]" onClick={handleApply}>
+            <Button className="w-full mt-[8px]" onClick={handleApply2}>
               Apply Filters
             </Button>
           </div>

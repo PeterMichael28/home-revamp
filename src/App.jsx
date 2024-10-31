@@ -21,6 +21,8 @@ import RoofingDashboard from "./pages/admin/RoofingDashboard";
 import HavcsDashboard from "./pages/admin/HavcsDashboard";
 import WindowsDashboard from "./pages/admin/WindowsDashboard";
 import AffiliatePage from "./pages/AffiliatePage";
+import AuthLoginPage from "./pages/admin/AuthLoginPage";
+import ProtectedAdminRoutes from "./layouts/ProtectedRoutes";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -84,33 +86,40 @@ function App() {
     //   path: "/new",
     //   element: <BoberdooForm />,
     // },
+
+    // admin login
     {
-      path: "/admin",
-      element: <AdminLayout />,
+      path: "/admin/login",
+      element: <AuthLoginPage />,
+    },
+    {
+      element: <ProtectedAdminRoutes />,
       children: [
-        // {
-        //   path: "/admin/dashboard",
-        //   element: <SolarDashbiard />,
-        // },
         {
-          path: "/admin/solar",
-          element: <SolarDashbiard />,
-        },
-        {
-          path: "/admin/bathrooms",
-          element: <BathroomDashboard />,
-        },
-        {
-          path: "/admin/roofing",
-          element: <RoofingDashboard />,
-        },
-        {
-          path: "/admin/windows",
-          element: <WindowsDashboard />,
-        },
-        {
-          path: "/admin/havcs",
-          element: <HavcsDashboard />,
+          path: "/admin",
+          element: <AdminLayout />,
+          children: [
+            {
+              path: "/admin/solar",
+              element: <SolarDashbiard />,
+            },
+            {
+              path: "/admin/bathrooms",
+              element: <BathroomDashboard />,
+            },
+            {
+              path: "/admin/roofing",
+              element: <RoofingDashboard />,
+            },
+            {
+              path: "/admin/windows",
+              element: <WindowsDashboard />,
+            },
+            {
+              path: "/admin/havcs",
+              element: <HavcsDashboard />,
+            },
+          ],
         },
       ],
     },
