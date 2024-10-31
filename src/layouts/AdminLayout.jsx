@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdSolarPower, MdOutlineRoofing, MdMenu, MdClose } from "react-icons/md";
 import { TbAirConditioning } from "react-icons/tb";
-import { PanelsTopLeft, Bath } from "lucide-react";
+import { PanelsTopLeft, Bath, LogOutIcon } from "lucide-react";
 import { Outlet } from "react-router-dom";
+import { useUserStore } from "~/store/userStore";
 
 const adminNav = [
   {
@@ -38,6 +39,7 @@ const AdminLayout = () => {
   const navigate = useNavigate(); // Hook for navigation
   const [activeNav, setActiveNav] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar toggle
+  const updateToken = useUserStore((state) => state.updateToken);
 
   useEffect(() => {
     // Check if the current path is /admin, redirect to /admin/solar
@@ -54,12 +56,18 @@ const AdminLayout = () => {
 
   const currentNav = adminNav.find((item) => item.path === location.pathname);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    updateToken(null);
+    navigate("/admin/login");
+  };
+
   return (
     <div className="h-screen">
       <div className="flex">
         {/* Sidebar Container */}
         <div
-          className={`fixed top-[50px] md:top-[60px] left-0 w-[240px] h-[calc(100%-88px)] bg-white border-r border-[#F4F4F4] transform transition-transform duration-300 ${
+          className={`fixed top-[50px] md:top-[60px] left-0 w-[240px] h-[calc(100%-88px)] bg-white border-r border-[#F4F4F4] transform transition-transform duration-300 flex flex-col ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:relative md:translate-x-0`}
         >
@@ -81,6 +89,12 @@ const AdminLayout = () => {
                 </p>
               </Link>
             ))}
+
+            {/* logout */}
+            <button className="w-full flex items-center gap-2 mt-20 text-sm p-3 text-red-500" onClick={handleLogout}>
+              <LogOutIcon className="size-5" />
+              Logout
+            </button>
           </div>
         </div>
 
@@ -91,10 +105,7 @@ const AdminLayout = () => {
             {/* Toggle button and logo on the left */}
             <div className="flex items-center space-x-4 md:gap-[150px]">
               {/* Toggle button for mobile screens */}
-              <button
-                className="md:hidden text-2xl"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              >
+              <button className="md:hidden text-2xl" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                 {isSidebarOpen ? <MdClose /> : <MdMenu />}
               </button>
 

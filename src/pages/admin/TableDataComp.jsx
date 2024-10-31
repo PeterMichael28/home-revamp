@@ -9,12 +9,19 @@ import { CSVLink } from "react-csv";
 import Message from "~/components/MessageModal/Message";
 import FilterButton from "~/components/FilterButton/Filter";
 
-const TableDataComp = ({ data, loading, csv, service }) => {
+const TableDataComp = ({
+  data,
+  page = 1,
+  setPage = () => {},
+  perPage = 10,
+  setPerPage,
+  totalPages,
+  loading,
+  csv,
+  service,
+}) => {
   const [searchFilter, setSearchFilter] = useState("");
   const [value, setValue] = useState("");
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
-  const [totalPages, setTotalPages] = useState(0);
 
   const [formData, setFormData] = useState({
     state: null,
@@ -29,8 +36,9 @@ const TableDataComp = ({ data, loading, csv, service }) => {
   const COLUMNS = [
     { header: "Lead ID", accessor: "LeadiD" },
     { header: "Users", accessor: "user" },
+    { header: "Gender", accessor: "gender" },
     { header: "Location", accessor: "location" },
-    { header: "Property Type", accessor: "property_type" },
+    { header: "Home Ownership", accessor: "home_owner" },
     { header: "Project Timeline", accessor: "project_timeline" },
     { header: "Created Date", accessor: "created_at" },
     // { header: "Actions", accessor: "action" },
@@ -56,14 +64,24 @@ const TableDataComp = ({ data, loading, csv, service }) => {
         </div>
       ) : col.accessor === "location" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.city} ${info.row.original?.state}`}</p>
+      ) : col.accessor === "gender" ? (
+        <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.gender}`}</p>
+      ) : col.accessor === "home_owner" ? (
+        <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.home_owner}`}</p>
       ) : col.accessor === "property_type" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.property_type}`}</p>
       ) : col.accessor === "project_timeline" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.project_timeline}`}</p>
       ) : col.accessor === "created_at" ? (
-        <p className="text-[#1E1C1C] text-sm ">{`${formatDateTime(info.row.original?.created_at).customDate}`}</p>
+        <div className="flex flex-col">
+          <span className="line-clamp-1 overflow-hidden text-ellipsis text-sm font-normal leading-[150%] text-neutralBlack">
+            {formatDateTime(value).customDate}
+          </span>
+
+          <span className="text-xs font-normal leading-[150%] text-gray800">{formatDateTime(value).timeOnly}</span>
+        </div>
       ) : col.accessor === "LeadiD" ? (
-        <p className="text-[#1E1C1C] text-sm line-clamp-1 overflow-hidden">{`${value.slice(0, 20)}...`}</p>
+        <p className="text-[#1E1C1C] text-sm line-clamp-1 overflow-hidden">{`${value.slice(0, 10)}...`}</p>
       ) : col.accessor === "action" ? (
         <Dropdown
           toggleElement={
@@ -138,11 +156,12 @@ const TableDataComp = ({ data, loading, csv, service }) => {
           }}
           searchFilter={searchFilter}
           setSearchFilter={setSearchFilter}
-          serverSidePagination={false}
+          serverSidePagination={true}
           currentPage={page}
           perPage={perPage}
           totalPageCount={totalPages}
           enableRowSelection={false}
+          // tableClassName={"min-w-[1200px]"}
         />
       </div>
     </div>
