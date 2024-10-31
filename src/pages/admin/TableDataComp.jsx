@@ -19,15 +19,12 @@ const TableDataComp = ({ data, loading, csv, service }) => {
   const [formData, setFormData] = useState({
     state: null,
     gender: null,
-    homeowner:null,
-    dateRange:{
+    homeowner: null,
+    dateRange: {
       from: null,
-      to: null
-    }
-
-    
-  })
-
+      to: null,
+    },
+  });
 
   const COLUMNS = [
     { header: "Lead ID", accessor: "LeadiD" },
@@ -127,7 +124,7 @@ const TableDataComp = ({ data, loading, csv, service }) => {
 
           {service && <Message formData={formData} setFormData={setFormData} service={service} />}
 
-           {service && <FilterButton formData={formData} setFormData={setFormData} service={service} />}
+          {service && <FilterButton formData={formData} setFormData={setFormData} service={service} />}
         </div>
       </div>
       <div className="w-full overflow-x-auto">

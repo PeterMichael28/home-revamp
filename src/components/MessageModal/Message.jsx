@@ -69,7 +69,7 @@ import { Switch } from "../ui/switch";
 import { toast } from "react-toastify";
 import { Mail, Send, Plus, X } from "lucide-react";
 
-export default function Message({ service,formData }) {
+export default function Message({ service, formData }) {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [from, setFrom] = useState("");
@@ -79,7 +79,7 @@ export default function Message({ service,formData }) {
   const [testEmail, setTestEmail] = useState([""]);
 
   // const url = import.meta.env.VITE_API_BASE_URL;
-  const url = "https://zrrz3dl8-8000.uks1.devtunnels.ms/"
+  const url = "https://zrrz3dl8-8000.uks1.devtunnels.ms/";
 
   const editorRef = useRef();
 
@@ -108,13 +108,10 @@ export default function Message({ service,formData }) {
             gender: formData.gender,
             homeowner: formData.homeowner,
             date_from: formData.dateRange.from,
-            date_to: formData.dateRange.to
-          }
+            date_to: formData.dateRange.to,
+          },
         }),
-        
-      }
-    
-    );
+      });
 
       if (!response.ok) {
         throw new Error("Error Sending Email!, Please try again");
