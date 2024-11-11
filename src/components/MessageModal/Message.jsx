@@ -78,8 +78,7 @@ export default function Message({ service, formData }) {
   const [isLive, setIsLive] = useState(true);
   const [testEmail, setTestEmail] = useState([""]);
 
-  // const url = import.meta.env.VITE_API_BASE_URL;
-  const url = "https://zrrz3dl8-8000.uks1.devtunnels.ms/";
+  const url = import.meta.env.VITE_API_BASE_URL;
 
   const editorRef = useRef();
 
