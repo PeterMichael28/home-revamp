@@ -19,7 +19,11 @@ const OffersSection = () => {
         </div>
 
         <div className="w-full md:w-[54%] md:h-[25rem]" onClick={() => navigate("/admin/dashboard")}>
-          <img src={img1} alt="img" className="w-full h-full object-contain" />
+          <img
+            src={img1}
+            alt="Discover transparent and affordable quotes tailored to your needs. Explore our diverse services and get personalized quotes for your home improvement project today."
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
     </section>
