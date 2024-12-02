@@ -2,7 +2,7 @@ import { ourServices } from "~/assets/data";
 import Dropdown from "./Dropdown/DropDown";
 import chevron_down from "~/assets/images/chevron_down.svg";
 import { classNames } from "~/utils/classNames";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const OurServicesDropdown = () => {
   return (
     <Dropdown
@@ -17,7 +17,8 @@ const OurServicesDropdown = () => {
         <p className="text-lsm font-semibold mb-5">Select any service to continue:</p>
         <div className=" grid grid-cols-2 place-item-center gap-4">
           {ourServices.map((ser, id) => (
-            <Link to={ser.label.toLowerCase()}
+            <Link
+              to={ser.label.toLowerCase()}
               className="text-sm font-medium text-secondary hover:text-primary transition-all duration-500 hover:scale-110 cursor-pointer"
               key={id}
             >
