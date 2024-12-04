@@ -52,13 +52,14 @@ const TableDataComp = ({
       return col.accessor === "user" ? (
         <div className={classNames("flex justify-start gap-x-2 items-center")}>
           <div
-            className="size-[32px] rounded-full flex items-center justify-center text-white font-medium text-sm"
+            className="size-[32px] rounded-full flex items-center justify-center text-white font-medium text-[13px]] uppercase"
             style={{ backgroundColor: getRandomColorFromName(info.row.original?.first_name) }}
           >
-            {info.row.original?.first_name[0]} {info.row.original?.last_name[0]}
+            {info.row.original?.first_name[0]}
+            {info.row.original?.last_name[0]}
           </div>
           <div>
-            <p className="text-[#1E1C1C] text-sm font-medium">{`${info.row.original?.first_name} ${info.row.original?.last_name}`}</p>
+            <p className="text-[#1E1C1C] text-sm font-medium capitalize">{`${info.row.original?.first_name} ${info.row.original?.last_name}`}</p>
             <span className="text-[#868686] text-xs font-normal mt-1">{`${info.row.original?.email}`}</span>
           </div>
         </div>
@@ -133,12 +134,14 @@ const TableDataComp = ({
           </div>
 
           {/*  */}
-          <CSVLink data={data} filename={csv}>
-            <div className="border border-[#F2F2F2] bg-white min-w-fit rounded-[4px] px-4 py-2 flex items-center justify-center gap-2 h-[44px]">
-              <img src={uploadImg} alt="image" className="size-[18px]" />
-              <span className="text-sm font-medium text-[#34403B]">Export List</span>
-            </div>
-          </CSVLink>
+          {data && (
+            <CSVLink data={data} filename={csv}>
+              <div className="border border-[#F2F2F2] bg-white min-w-fit rounded-[4px] px-4 py-2 flex items-center justify-center gap-2 h-[44px]">
+                <img src={uploadImg} alt="image" className="size-[18px]" />
+                <span className="text-sm font-medium text-[#34403B]">Export List</span>
+              </div>
+            </CSVLink>
+          )}
 
           {service && <Message formData={formData} setFormData={setFormData} service={service} />}
 

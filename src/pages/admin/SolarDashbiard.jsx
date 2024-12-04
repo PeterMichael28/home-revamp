@@ -21,6 +21,7 @@ const SolarDashbiard = () => {
     const url = import.meta.env.VITE_API_BASE_URL;
     // Get all URL parameters and add them to the endpoint
     const searchParams = new URLSearchParams(location.search);
+    // console.log("searchParams", searchParams)
     const endpointWithParams = `${url}/api/solar-service-filter/?page=${page}&${searchParams.toString()}`;
 
     fetch(endpointWithParams, { headers: { Authorization: `Token ${token}` } })
@@ -38,7 +39,7 @@ const SolarDashbiard = () => {
         console.log("error", error);
         setLoading(false);
       });
-  }, [location.search, token, page]);
+  }, [location.search, token, page, isDataAuthenticated]);
 
   // console.log("loading", loading);
   return (
@@ -49,7 +50,7 @@ const SolarDashbiard = () => {
 
           <div>
             <span className="text-sm text-[#7A7A7A]">All Quotes</span>
-            <p className="text-black font-bold tracking-[0.12px] text-[24px] mt-2">300</p>
+            <p className="text-black font-bold tracking-[0.12px] text-[24px] mt-2">{data?.allQuotes ?? 0}</p>
           </div>
         </div>
       </div>
