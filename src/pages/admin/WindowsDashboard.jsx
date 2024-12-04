@@ -37,7 +37,7 @@ const WindowsDashboard = () => {
         console.log("error", error);
         setLoading(false);
       });
-  }, [location.search, token, page]);
+  }, [location.search, token, page, isDataAuthenticated]);
 
   return (
     <div>
@@ -47,7 +47,7 @@ const WindowsDashboard = () => {
 
           <div>
             <span className="text-sm text-[#7A7A7A]">All Quotes</span>
-            <p className="text-black font-bold tracking-[0.12px] text-[24px] mt-2">300</p>
+            <p className="text-black font-bold tracking-[0.12px] text-[24px] mt-2">{data?.allQuotes ?? 0}</p>
           </div>
         </div>
       </div>
