@@ -1,29 +1,16 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ourServices } from "~/assets/data";
 import FormHeader from "~/components/FormPage/FormHeader";
 import SectionHeader from "~/components/SectionHeader";
 import Services from "~/components/Services";
+import ThumbtackCard from "~/components/ThumbtackCard";
 
 const CompletedPage = () => {
   const { slug } = useParams();
+  const { state: thumbTackData } = useLocation();
+
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
-
-  // useEffect(() => {
-  //   const iframe = document.createElement("iframe");
-  //   iframe.src = "https://encyl.offerstrack.net/pixelBack.php?type=2&offer_id=6899&adv_id=2417";
-  //   iframe.scrolling = "no";
-  //   iframe.frameBorder = "0";
-  //   iframe.width = "1";
-  //   iframe.height = "1";
-  //   iframe.style.display = "none";
-
-  //   document.head.appendChild(iframe);
-
-  //   return () => {
-  //     document.head.removeChild(iframe);
-  //   };
-  // }, []);
 
   useEffect(() => {
     // Ensure the tdl object is available
@@ -42,12 +29,31 @@ const CompletedPage = () => {
 
   return (
     <div>
-      <div className="max-w-[750px] px-4 mx-auto pt-12 py-28">
+      <div className="max-w-[750px] px-4 mx-auto pt-12  py-28 md:pb-16">
         <FormHeader
           title={"Congratulations !!!"}
           subtitle={"Your information has been successfully submitted. Our experts will contact you shortly."}
         />
       </div>
+
+      {/* thumb tack data */}
+
+      {thumbTackData && (
+        <div className="w-full px-4 sm:px-8 max-w-[1000px] mx-auto mb-28">
+          {/* <SectionHeader title="Recommended Business(es)" subtitle="" /> */}
+          <h3 className="text-2xl text-center tracking-[-0.24px] font-bold text-secondary md:tracking-[-0.36px] md:text-3xl mb-6">
+            Recommended Businesses
+          </h3>
+
+          <div>
+            {thumbTackData?.map((data, i) => (
+              <div key={i} className="w-full">
+                <ThumbtackCard data={data} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <section className=" w-full h-full px-4 sm:px-8 md:px-14  max-w-[1300px] mx-auto">
         <SectionHeader
@@ -57,7 +63,6 @@ const CompletedPage = () => {
 
         <Services data={remainingServices} />
       </section>
-      {/* <img src="http://encyl.offerstrack.net/pixelBack.php?offer_id=6899&adv_id=2417" width="1" height="1" /> */}
     </div>
   );
 };

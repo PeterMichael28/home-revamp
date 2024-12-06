@@ -774,12 +774,13 @@ export const PreferredTimeForm = ({ slug }) => {
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
-      // console.log(error);
+      const data = await response.json();
+      // console.log(data);
       toast.success("Submitted Successfully!!!");
       updateFields({});
       setOpenModal(false); // Close the modal
       clearTimeout(modalTimer);
-      navigate(newUrl);
+      navigate(newUrl, { state: data?.thumbtack_data?.results ?? undefined });
       setLoading(false);
       window.location.reload();
     } catch (error) {
