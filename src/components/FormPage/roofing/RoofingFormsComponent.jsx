@@ -782,7 +782,7 @@ export const PreferredTimeForm = ({ slug }) => {
       clearTimeout(modalTimer);
       navigate(newUrl, { state: data?.thumbtack_data?.results ?? undefined });
       setLoading(false);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Error submitting lead:", error);
       if (error.response) {

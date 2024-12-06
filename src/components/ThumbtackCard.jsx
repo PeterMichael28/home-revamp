@@ -14,7 +14,7 @@ export default function ThumbtackCard({ data }) {
           <img
             src={data?.image_url}
             alt="Profile"
-            className="min-w-32 min-h-32 sm:min-w-[150px] sm:h-[150px] rounded-full object-cover"
+            className="w-32 sm:min-w-[150px] sm:h-[150px] rounded-full object-cover"
           />
         </div>
 
@@ -56,7 +56,7 @@ export default function ThumbtackCard({ data }) {
                   {pill}
                 </Badge>  
               ))} */}
-            <Badge variant="outline" className={cn("bg-green-50 text-green-600 font-medium text-xs sm:text-sm")}>
+            <Badge variant="outline" className={cn("bg-green-50 w-fit text-green-600 font-medium text-xs sm:text-sm")}>
               Free on-site estimate
             </Badge>
           </div>
