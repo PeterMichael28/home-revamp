@@ -82,7 +82,9 @@ export default function ThumbtackCard({ data }) {
             <span className="font-medium">Nicole B.</span> says, {data?.introduction}
             <button className="text-blue-500 hover:underline ml-1">See more</button>
           </div> */}
-          <div className="text-gray-600 text-sm sm:text-base">{data?.introduction}</div>
+          <p className="text-gray-600 text-sm sm:text-base line-clamp-2  overflow-hidden w-full">
+            {data?.introduction}
+          </p>
 
           {/* Action Button */}
           <div>
