@@ -53,7 +53,7 @@ const seoMetadata = {
     description:
       "Find top-rated bathroom renovations services in the USA. Get free quotes from expert contractors to upgrade your bathroom with ease and affordability.",
     name: "@yourcompanyhandle",
-    bigTitle: "Save BIG On A Bathroom Remodeling! <br /> Get Free, No Obligation Quotes from Top Experts Near You!",
+    bigTitle: "Save BIG On A Bathroom Remodeling! Get Free, No Obligation Quotes from Top Experts Near You!",
     type: "website",
     canonicalLink: "https://homerevampexpert.com/bathrooms",
     keywords: "Bathroom renovations service in usa",
