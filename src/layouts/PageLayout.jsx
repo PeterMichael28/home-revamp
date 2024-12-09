@@ -5,7 +5,7 @@ import Footer from "./Footer";
 const PageLayout = () => {
   return (
     <div>
-      <header className="bg-onPrimaryContainer border-b shadow-md shadow-[rgba(100,100,100,0.16)] w-full">
+      <header className="bg-onPrimaryContainer border-b shadow-md shadow-[rgba(100,100,100,0.16)] w-full h-full overflow-y-auto">
         <Header />
       </header>
       <main>
