@@ -33,8 +33,13 @@ const LabelInput = ({
         onChange={(e) => {
           const curValue = e.target.value;
           if (maxLength) {
-            if (curValue.length <= maxLength || curValue.length < value.length) {
-              setValue(curValue);
+            // Remove non-numeric characters before checking length
+            // / Remove all non-numeric characters and limit to maxLength
+            const sanitizedValue = curValue.replace(/[^0-9]/g, "").slice(0, maxLength);
+
+            // Only update if the sanitized value meets the length requirement
+            if (sanitizedValue.length <= maxLength) {
+              setValue(sanitizedValue);
             }
           } else {
             setValue(curValue);

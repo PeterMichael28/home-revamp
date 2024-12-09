@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import icons from "~/assets/icons/icons";
 
 const Modal = ({ isOpen, onClose, className, title, subtitle, showCloseBtn = false, children, maxWidth = 480 }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [isOpen]);
 
   return (
     <div

@@ -868,31 +868,33 @@ export const PreferredTimeForm = ({ slug }) => {
         </div>
       </form>
 
-      <Modal isOpen={openModal} className="max-w-5xl py-8" onClose={() => setOpenModal(false)} maxWidth="700px">
-        <div className="flex justify-center items-center gap-4 flex-col w-full">
-          {/* <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+      {openModal && (
+        <Modal isOpen={openModal} className="max-w-5xl py-8" onClose={() => setOpenModal(false)} maxWidth="700px">
+          <div className="flex justify-center items-center gap-4 flex-col w-full">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
             <circle cx="44.0007" cy="43.9997" r="36.6667" fill="#D5EBDC" />
             <path
               d="M59.2519 37.068L41.5419 54.778C41.0285 55.2913 40.3319 55.5846 39.5985 55.5846C38.8652 55.5846 38.1685 55.2913 37.6552 54.778L28.7819 45.9046C27.7185 44.8413 27.7185 43.0813 28.7819 42.018C29.8452 40.9546 31.6052 40.9546 32.6685 42.018L39.5985 48.948L55.3652 33.1813C56.4285 32.118 58.1885 32.118 59.2519 33.1813C60.3152 34.2446 60.3152 36.0046 59.2519 37.068Z"
               fill="#008726"
             />
           </svg> */}
-          <div>
-            <Lottie animationData={animation} loop={true} className="size-[200px] p-0" />
-          </div>
-          <FormHeader
-            title={"Successfully Submitted!!!"}
-            subtitle={"Thank your for your time, You are been redirected now."}
-            className="text-center"
-            titleClassName="text-[38px]"
-          />
+            <div>
+              <Lottie animationData={animation} loop={true} className="size-[200px] p-0" />
+            </div>
+            <FormHeader
+              title={"Successfully Submitted!!!"}
+              subtitle={"Thank your for your time, You are been redirected now."}
+              className="text-center"
+              titleClassName="text-[38px]"
+            />
 
-          <div className="">
-            <p className="animate-pulse italic text-gray-dark text-sm text-center">Redirecting... Please wait!!!</p>
-            <div className="loader mt-2 mx-auto"></div>
+            <div className="">
+              <p className="animate-pulse italic text-gray-dark text-sm text-center">Redirecting... Please wait!!!</p>
+              <div className="loader mt-2 mx-auto"></div>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
     </>
   );
 };
