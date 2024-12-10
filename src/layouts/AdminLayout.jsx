@@ -3,8 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdSolarPower, MdOutlineRoofing, MdMenu, MdClose } from "react-icons/md";
 import { TbAirConditioning } from "react-icons/tb";
 import { PanelsTopLeft, Bath, LogOutIcon } from "lucide-react";
+import { GiKitchenTap } from "react-icons/gi";
+import { FaKitchenSet } from "react-icons/fa6";
+import { FaPaintRoller } from "react-icons/fa";
+
 import { Outlet } from "react-router-dom";
 import { useUserStore } from "~/store/userStore";
+
 
 const adminNav = [
   {
@@ -31,6 +36,27 @@ const adminNav = [
     name: "HAVCs",
     icon: <TbAirConditioning />,
     path: "/admin/havcs",
+  },
+
+   {
+    name: "Kitchen",
+    icon: <FaKitchenSet />,
+    path: "/admin/kitchen",
+  },
+  {
+    name: "Painting",
+    icon: <FaPaintRoller />,
+    path: "/admin/Painting",
+  },
+  {
+    name: "Plumbing",
+    icon: <GiKitchenTap />,
+    path: "/admin/plumbing",
+  },
+  {
+    name: "Gutter",
+    icon: <MdOutlineRoofing />,
+    path: "/admin/gutter",
   },
 ];
 
