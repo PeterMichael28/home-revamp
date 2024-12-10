@@ -23,6 +23,10 @@ import WindowsDashboard from "./pages/admin/WindowsDashboard";
 import AffiliatePage from "./pages/AffiliatePage";
 import AuthLoginPage from "./pages/admin/AuthLoginPage";
 import ProtectedAdminRoutes from "./layouts/ProtectedRoutes";
+import GutterDashboard from "./pages/admin/GutterDashboard";
+import PlumbingDashboard from "./pages/admin/PlumbingDashboard";
+import KitchenDashboard from "./pages/admin/KitchenDashboard";
+import PaintingDashboard from "./pages/admin/PaintingDashboard";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -118,6 +122,22 @@ function App() {
             {
               path: "/admin/havcs",
               element: <HavcsDashboard />,
+            },
+            {
+              path: "/admin/kitchen",
+              element: <KitchenDashboard />,
+            },
+            {
+              path: "/admin/gutter",
+              element: <GutterDashboard />,
+            },
+            {
+              path: "/admin/plumbing",
+              element: <PlumbingDashboard/>,
+            },
+            {
+              path: "/admin/painting",
+              element: <PaintingDashboard/>,
             },
           ],
         },
