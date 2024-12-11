@@ -15,6 +15,7 @@ import {
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import {
+  CreditRating,
   CurrentUtilityProvider,
   MonthlyBill,
   ProjectStatus,
@@ -74,6 +75,10 @@ const SolarForms = ({ slug }) => {
     {
       label: "Form95",
       component: (props) => <CurrentUtilityProvider props={props} />,
+    },
+    {
+      label: "Form111",
+      component: (props) => <CreditRating props={props} />,
     },
 
     {

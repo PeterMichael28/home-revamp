@@ -252,3 +252,37 @@ export const CurrentUtilityProvider = ({ props }) => {
     </div>
   );
 };
+
+export const CreditRating = ({ props }) => {
+  const { allFields, updateFields } = useFormStore((state) => state);
+  // console.log("utilityData", utilityData);
+  // console.log("state", allFields.stateName);
+
+  const data = ["Poor", "Fair", "Good", "Excellent", "NA"];
+
+  const [creditRating, setCreditRating] = useState("");
+
+  const handleClick = () => {
+    if (!creditRating) return;
+    updateFields({ ...allFields, creditRating: creditRating });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Your Credit Rating"}
+        subtitle={"Select the range that best describes your current credit standing."}
+      />
+
+      <div className="mt-5">
+        <div className="space-y-5">
+          {data.map((dat) => (
+            <FormSelectBox key={dat} active={creditRating === dat} onClick={() => setCreditRating(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!creditRating} />
+      </div>
+    </div>
+  );
+};
