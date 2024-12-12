@@ -5,7 +5,7 @@ import { Card } from "~/components/ui/card";
 import { Clock, MapPin, Trophy } from "lucide-react";
 import { cn } from "~/lib/utils";
 
-export default function ThumbtackCard({ data }) {
+export default function ThumbtackCard({ data, onSelect }) {
   return (
     <Card className="p-4 sm:p-6 w-full mx-auto">
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
@@ -75,10 +75,10 @@ export default function ThumbtackCard({ data }) {
 
           {/* Action Button */}
           <div>
-            <Button className="bg-blue-500 hover:bg-blue-600 w-full sm:w-auto">
-              <a href={data?.thumbtack_url} target="_blank" rel="noopener noreferrer">
-                View Profile
-              </a>
+            <Button className="bg-blue-500 hover:bg-blue-600 w-full sm:w-auto" onClick={onSelect}>
+              {/* <a href={data?.thumbtack_url} target="_blank" rel="noopener noreferrer"> */}
+              View Profile
+              {/* </a> */}
             </Button>
           </div>
         </div>

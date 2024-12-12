@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { ourServices } from "~/assets/data";
 import FormHeader from "~/components/FormPage/FormHeader";
+import Modal from "~/components/Modal/Modal";
 import SectionHeader from "~/components/SectionHeader";
 import Services from "~/components/Services";
 import ThumbtackCard, { ThumbtackCardText } from "~/components/ThumbtackCard";
@@ -9,9 +10,11 @@ import ThumbtackCard, { ThumbtackCardText } from "~/components/ThumbtackCard";
 const CompletedPage = () => {
   const { slug } = useParams();
   const { state: thumbTackData } = useLocation();
+  const [openModal, setOpenModal] = useState(false);
+  const [isSelected, setIsSelected] = useState("");
 
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
-  console.log("first", thumbTackData);
+  console.log("first", isSelected);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
@@ -30,6 +33,11 @@ const CompletedPage = () => {
       }
     }
   }, []);
+
+  const handleOnSelect = (data) => {
+    setOpenModal(true);
+    setIsSelected(data?.request_flow_iframe_url);
+  };
 
   return (
     <div className="min-h-screen h-full overflow-y-auto">
@@ -51,7 +59,7 @@ const CompletedPage = () => {
           <div className="">
             {thumbTackData?.map((data, i) => (
               <div key={i} className="w-full my-3">
-                <ThumbtackCard data={data} />
+                <ThumbtackCard data={data} onSelect={() => handleOnSelect(data)} />
               </div>
             ))}
           </div>
@@ -79,6 +87,34 @@ const CompletedPage = () => {
 
         <Services data={remainingServices} />
       </section>
+
+      {/* modal */}
+      <Modal
+        isOpen={openModal}
+        className="max-w-[632px] py-8"
+        onClose={() => {
+          setOpenModal(false);
+          setIsSelected("");
+        }}
+        maxWidth="700px"
+        showCloseBtn={true}
+      >
+        <div className="flex justify-center items-center gap-4 flex-col w-full">
+          {isSelected && (
+            <iframe
+              src={isSelected}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              width="632px"
+              height="600px"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="w-[650px] h-[500px]"
+              // className="border"
+            ></iframe>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 };

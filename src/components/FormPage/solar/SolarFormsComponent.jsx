@@ -258,7 +258,14 @@ export const CreditRating = ({ props }) => {
   // console.log("utilityData", utilityData);
   // console.log("state", allFields.stateName);
 
-  const data = ["Poor", "Fair", "Good", "Excellent", "NA"];
+  const data = [
+    "Poor (300–579)",
+    "Fair (580–669)",
+    "Good (670–739)",
+    "Very Good (740–799)",
+    "Excellent (800–850)",
+    "NA",
+  ];
 
   const [creditRating, setCreditRating] = useState("");
 
