@@ -6,7 +6,6 @@ import {
   LocationForm,
   PreferredTimeForm,
   ProjectOwnerForm,
-  PropertyTypeForm,
   ProjectTimelineForm,
   AddressDetailsForm,
   HomeAuthorization,
@@ -18,8 +17,8 @@ import {
   CreditRating,
   CurrentUtilityProvider,
   MonthlyBill,
-  ProjectStatus,
   PropertyStories,
+  PropertyTypeDetails,
   PropertyUsage,
   SolarInstallationLocation,
   SolarSystemType,
@@ -62,6 +61,10 @@ const SolarForms = ({ slug }) => {
     {
       label: "Form23",
       component: (props) => <PropertyStories props={props} />,
+    },
+    {
+      label: "Form99123",
+      component: (props) => <PropertyTypeDetails props={props} />,
     },
     {
       label: "Form123",

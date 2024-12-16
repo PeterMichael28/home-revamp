@@ -133,6 +133,36 @@ export const PropertyStories = ({ props }) => {
   );
 };
 
+export const PropertyTypeDetails = ({ props }) => {
+  const [value, setValue] = useState("");
+  const data = ["condo", "mobile", "multi", "single", "townhome"];
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, property_type_detail: value });
+    props.onNext();
+  };
+
+  return (
+    <div className="w-full">
+      <FormHeader
+        title={"Property Type Detail"}
+        subtitle={"Select the property detail that best describes your home"}
+      />
+
+      <div className="mt-7">
+        <div className="space-y-5">
+          {data.map((dat) => (
+            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          ))}
+        </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
 export const PropertyUsage = ({ props }) => {
   const [value, setValue] = useState("");
   const data = ["Residential", "Commercial"];
