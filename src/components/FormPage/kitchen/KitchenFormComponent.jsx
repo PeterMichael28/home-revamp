@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
+// import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 
@@ -18,9 +18,9 @@ export const Kitchen = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, kitchen: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, kitchen: selectedValue });
     props.onNext();
   };
 
@@ -31,10 +31,18 @@ export const Kitchen = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );

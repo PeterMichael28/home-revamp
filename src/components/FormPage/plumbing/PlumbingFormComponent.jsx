@@ -1,6 +1,5 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 
@@ -16,9 +15,9 @@ export const Plumbing = ({ props }) => {
   ];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, plumbing: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, plumbing: selectedValue });
     props.onNext();
   };
   return (
@@ -28,10 +27,18 @@ export const Plumbing = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );

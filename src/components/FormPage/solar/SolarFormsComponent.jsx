@@ -25,9 +25,9 @@ export const MonthlyBill = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, electric_bill: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, electric_bill: selectedValue });
     props.onNext();
   };
 
@@ -38,10 +38,18 @@ export const MonthlyBill = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -53,12 +61,11 @@ export const SunlightExposure = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, sunlight_exposure: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, sunlight_exposure: selectedValue });
     props.onNext();
   };
-
   return (
     <div className="w-full">
       <FormHeader title={"Sunlight Exposure on Roof"} subtitle={"Which of these options best describes your needs?"} />
@@ -66,10 +73,18 @@ export const SunlightExposure = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -81,9 +96,9 @@ export const ProjectStatus = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, projectStatus: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, projectStatus: selectedValue });
     props.onNext();
   };
 
@@ -97,10 +112,18 @@ export const ProjectStatus = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -111,9 +134,9 @@ export const PropertyStories = ({ props }) => {
   const data = ["One story", "Two stories", "Three stories or more"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, propertyStories: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, propertyStories: selectedValue });
     props.onNext();
   };
 
@@ -124,10 +147,18 @@ export const PropertyStories = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -138,12 +169,11 @@ export const PropertyTypeDetails = ({ props }) => {
   const data = ["condo", "mobile", "multi", "single", "townhome"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, property_type_detail: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, property_type_detail: selectedValue });
     props.onNext();
   };
-
   return (
     <div className="w-full">
       <FormHeader
@@ -154,10 +184,18 @@ export const PropertyTypeDetails = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -169,12 +207,11 @@ export const PropertyUsage = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, propertyUsage: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, propertyUsage: selectedValue });
     props.onNext();
   };
-
   return (
     <div className="w-full">
       <FormHeader title={"Property Usage"} subtitle={"Whats the property used for?"} />
@@ -182,10 +219,18 @@ export const PropertyUsage = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -196,9 +241,9 @@ export const SolarSystemType = ({ props }) => {
   const data = ["Solar electricity", "Solar hot water", "Solar electricity and hot water"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, solarSystemType: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, solarSystemType: selectedValue });
     props.onNext();
   };
 
@@ -209,10 +254,18 @@ export const SolarSystemType = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -224,9 +277,9 @@ export const SolarInstallationLocation = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, solarInstallationLocation: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, solarInstallationLocation: selectedValue });
     props.onNext();
   };
 
@@ -237,10 +290,18 @@ export const SolarInstallationLocation = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -299,9 +360,9 @@ export const CreditRating = ({ props }) => {
 
   const [creditRating, setCreditRating] = useState("");
 
-  const handleClick = () => {
-    if (!creditRating) return;
-    updateFields({ ...allFields, creditRating: creditRating });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, creditRating: selectedValue });
     props.onNext();
   };
 
@@ -315,10 +376,18 @@ export const CreditRating = ({ props }) => {
       <div className="mt-5">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={creditRating === dat} onClick={() => setCreditRating(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={creditRating === dat}
+              onClick={() => {
+                setCreditRating(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!creditRating} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!creditRating} /> */}
       </div>
     </div>
   );

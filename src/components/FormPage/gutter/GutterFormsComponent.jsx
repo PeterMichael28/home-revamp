@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
+// import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 
@@ -10,9 +10,15 @@ export const Gutters = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, gutter: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   updateFields({ ...allFields, gutter: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, gutter: selectedValue });
     props.onNext();
   };
 
@@ -23,10 +29,18 @@ export const Gutters = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
