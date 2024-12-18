@@ -108,18 +108,29 @@ export const LocationForm = ({ props }) => {
 
 export const HomeOwnershipForm = ({ props }) => {
   const [value, setValue] = useState("");
-  const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    if (value == "Rented") {
-      updateFields({ ...allFields, home_owner: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   if (value == "Rented") {
+  //     updateFields({ ...allFields, home_owner: value });
+  //     props.onNext();
+  //     return;
+  //   }
+  //   updateFields({ ...allFields, home_owner: value });
+  //   props.goto(5);
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+
+    updateFields({ ...allFields, home_owner: selectedValue });
+
+    if (selectedValue === "Rented") {
       props.onNext();
-      return;
+    } else {
+      props.goto(5);
     }
-    updateFields({ ...allFields, home_owner: value });
-    props.goto(5);
   };
   const homeData = ["Own", "Rented"];
 
@@ -130,10 +141,18 @@ export const HomeOwnershipForm = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -145,9 +164,20 @@ export const HomeAuthorization = ({ props }) => {
   const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    if (value == "No" && pathname == "/solars") {
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   if (value == "No" && pathname == "/solars") {
+  //     updateFields({});
+  //     navigate("/thank-you");
+  //     return;
+  //   }
+  //   updateFields({ ...allFields, homeAuthorization: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    if (selectedValue == "No" && pathname == "/solars") {
       updateFields({});
       navigate("/thank-you");
       return;
