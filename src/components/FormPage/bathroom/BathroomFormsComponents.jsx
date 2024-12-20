@@ -173,7 +173,7 @@ export const Floorplan = ({ props }) => {
 
   const handleSelection = (selectedValue) => {
     if (!selectedValue) return;
-    updateFields({ ...allFields, floorPlan: value });
+    updateFields({ ...allFields, floorPlan: selectedValue });
     props.onNext();
   };
 
