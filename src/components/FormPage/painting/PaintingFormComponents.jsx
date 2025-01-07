@@ -3,6 +3,8 @@ import FormHeader from "../FormHeader";
 // import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import { CustomLabelSelect } from "../LabelSelect";
+import FormButton from "../FormButton";
 
 export const PaintingTypeProject = ({ props }) => {
   const [value, setValue] = useState("");
@@ -63,9 +65,9 @@ export const PaintingTypeNeeded = ({ props }) => {
   ];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, painting_needed: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, painting_needed: value });
     props.onNext();
   };
   return (
@@ -76,20 +78,16 @@ export const PaintingTypeNeeded = ({ props }) => {
       />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                setValue(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <CustomLabelSelect
+          id={"painting_needed"}
+          required
+          placeholder={"Select the Type of Painting Needed"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Type of Painting Needed"}
+        />
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );

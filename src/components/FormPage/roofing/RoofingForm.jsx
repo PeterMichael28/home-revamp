@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   ContactDetailsForm,
-  CustomizedForm,
   HomeOwnershipForm,
   LocationForm,
   PreferredTimeForm,
   ProjectOwnerForm,
-  ProjectScopeForm,
   PropertyTypeForm,
-  ProjectTimelineForm,
   AddressDetailsForm,
   HomeAuthorization,
   LeaseAgreement,
@@ -18,6 +13,7 @@ import {
   RoofingProjectScopeForm,
   RoofingProjectTimelineForm,
   RoofType,
+  RoofingMaterials,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
@@ -27,13 +23,6 @@ const RoofingForm = ({ slug }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeIndex]);
-
-  const customData = {
-    data: ["Asphalt Shingle", "Tile", "Metal", "Tar Torchdown", "Natural Slate", "Tar", "Cedal Slate"],
-    header: "Roofing Material",
-    subText: "Which of these roofing materials best describes your needs",
-    label: "roofing_material",
-  };
 
   const STEPS = [
     {
@@ -67,15 +56,7 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form5",
-      component: (props) => (
-        <CustomizedForm
-          props={props}
-          data={customData.data}
-          header={customData.header}
-          subText={customData.subText}
-          label={customData.label}
-        />
-      ),
+      component: (props) => <RoofingMaterials props={props} />,
     },
 
     {

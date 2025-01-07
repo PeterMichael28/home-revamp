@@ -25,9 +25,9 @@ export const MonthlyBill = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, electric_bill: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, electric_bill: value });
     props.onNext();
   };
 
@@ -36,20 +36,16 @@ export const MonthlyBill = ({ props }) => {
       <FormHeader title={"Monthly Electric Bill"} subtitle={"What is your average monthly electric bill?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                setValue(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <CustomLabelSelect
+          id={"electric_bill"}
+          required
+          placeholder={"Your Monthly Electric Bill"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Monthly Electric Bill"}
+        />
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );
@@ -169,9 +165,9 @@ export const PropertyTypeDetails = ({ props }) => {
   const data = ["condo", "mobile", "multi", "single", "townhome"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, property_type_detail: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, property_type_detail: value });
     props.onNext();
   };
   return (
@@ -182,20 +178,16 @@ export const PropertyTypeDetails = ({ props }) => {
       />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                setValue(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <CustomLabelSelect
+          id={"property_type_detail"}
+          required
+          placeholder={"Select your Property Type Detail"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Property Type Detail"}
+        />
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );
@@ -346,8 +338,6 @@ export const CurrentUtilityProvider = ({ props }) => {
 
 export const CreditRating = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
-  // console.log("utilityData", utilityData);
-  // console.log("state", allFields.stateName);
 
   const data = [
     "Poor (300–579)",
@@ -358,11 +348,11 @@ export const CreditRating = ({ props }) => {
     "NA",
   ];
 
-  const [creditRating, setCreditRating] = useState("");
+  const [value, setValue] = useState("");
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, creditRating: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, creditRating: value });
     props.onNext();
   };
 
@@ -374,20 +364,16 @@ export const CreditRating = ({ props }) => {
       />
 
       <div className="mt-5">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={creditRating === dat}
-              onClick={() => {
-                setCreditRating(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!creditRating} /> */}
+        <CustomLabelSelect
+          id={"creditRating"}
+          required
+          placeholder={"Select your Credit Rating"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Your Credit Rating"}
+        />
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );

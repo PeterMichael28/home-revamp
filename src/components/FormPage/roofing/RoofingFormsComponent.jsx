@@ -6,7 +6,7 @@ import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import LabelSelect, { LabelSelect2 } from "../LabelSelect";
+import LabelSelect, { CustomLabelSelect, LabelSelect2 } from "../LabelSelect";
 import { statesNames } from "~/assets/data";
 import Modal from "~/components/Modal/Modal";
 import Lottie from "lottie-react";
@@ -388,29 +388,61 @@ export const ProjectScopeForm = ({ props }) => {
   );
 };
 
+export const RoofingMaterials = ({ props }) => {
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const [value, setValue] = useState("");
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, roofing_material: value });
+    props.onNext();
+  };
+  const data = ["Asphalt Shingle", "Tile", "Metal", "Tar Torchdown", "Natural Slate", "Tar", "Cedal Slate"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Roofing Material"} subtitle={"Which of these roofing materials best describes your needs"} />
+
+      <div className="mt-5">
+        <CustomLabelSelect
+          id={"roofing_material"}
+          required
+          placeholder={"Select your roofing material"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Roofing Material"}
+        />
+
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div>
+    </div>
+  );
+};
+
 export const RoofType = ({ props }) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  // const handleClick = () => {
-  //   if (!value) return;
-  //   updateFields({ ...allFields, RoofType: value });
+  // const handleSelection = (selectedValue) => {
+  //   if (!selectedValue) return;
+  //   updateFields({ ...allFields, RoofType: selectedValue });
   //   props.onNext();
   // };
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, RoofType: selectedValue });
+  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, RoofType: value });
     props.onNext();
   };
-
-  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
   return (
     <div className="w-full">
       <FormHeader title={"Roof Type"} subtitle={"Please specify the Roof type that suits your project."} />
 
-      <div className="mt-7">
+      {/* <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
             <FormSelectBox
@@ -424,7 +456,21 @@ export const RoofType = ({ props }) => {
             />
           ))}
         </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div> */}
+
+      <div className="mt-5">
+        <CustomLabelSelect
+          id={"RoofType"}
+          required
+          placeholder={"Select your roof type"}
+          value={value}
+          setValue={setValue}
+          data={homeData}
+          label={"Roof Type"}
+        />
+
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );
@@ -506,15 +552,9 @@ export const ProjectTimelineForm = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  // const handleClick = () => {
-  //   if (!value) return;
-  //   updateFields({ ...allFields, project_timeline: value });
-  //   props.onNext();
-  // };
-
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, project_timeline: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, project_timeline: value });
     props.onNext();
   };
 
@@ -525,30 +565,17 @@ export const ProjectTimelineForm = ({ props }) => {
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                setValue(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-
-        {/* <LabelInput
-          id={"projectTimeline"}
+        <CustomLabelSelect
+          id={"project_timeline"}
           required
-          placeholder={"Enter your project timeline"}
+          placeholder={"Select your Project Timeline"}
           value={value}
           setValue={setValue}
+          data={homeData}
           label={"Project Timeline"}
-        /> */}
+        />
 
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );

@@ -2,6 +2,8 @@ import { ourServices } from "~/assets/data";
 import heroImg from "~/assets/images/hero.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { cn } from "~/lib/utils";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -27,24 +29,12 @@ const HeroSection = () => {
 
           {/* select */}
           <form className="mt-8 w-full flex items-center sm:max-w-[400px]">
-            <select
-              name="our_services"
-              id="our_services"
-              className="flex-1 border text-sm outline-none border-[#E3E3E3] border-r-[10px] border-r-transparent rounded-l bg-white p-4 gap-y-2"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            >
-              <option value="" className="p-2 text-secondary text-sm">
-                Select you project
-              </option>
-              {ourServices.map((service, id) => (
-                <option key={id} value={service.label} className="p-2 text-secondary text-xs md:text-sm">
-                  {service.label}
-                </option>
-              ))}
-            </select>
+            <div className="flex-1">
+              <CustomSelect value={value} onChange={setValue} options={ourServices} placeholder="Select your project" />
+            </div>
             <button
-              className="px-5 py-4 rounded-r text-sm flex justify-center items-center font-medium text-white bg-primary hover:bg-onPrimary transition-all duration-500"
+              type="button"
+              className="px-5 h-[53px] rounded-r text-sm flex justify-center items-center font-medium text-white bg-primary hover:bg-onPrimary transition-all duration-500"
               onClick={handleGoToNext}
             >
               Get Started
@@ -63,3 +53,26 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+function CustomSelect({ value, onChange, options, placeholder }) {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger
+        className={cn(
+          "flex-1 border text-sm outline-none border-[#E3E3E3] rounded-l bg-white p-4 h-[53px]",
+          "data-[placeholder]:text-secondary data-[placeholder]:text-sm",
+          "focus:ring-0 focus:ring-offset-0 focus:border-[#E3E3E3] rounded-r-none"
+        )}
+      >
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent className="bg-white rounded-lg shadow-lg border border-gray-200">
+        {options.map((option, id) => (
+          <SelectItem key={id} value={option.label} clssName="p-2 text-secondary text-xs md:text-sm">
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}

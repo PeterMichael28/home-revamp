@@ -3,6 +3,8 @@ import FormHeader from "../FormHeader";
 // import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import { CustomLabelSelect } from "../LabelSelect";
+import FormButton from "../FormButton";
 
 export const Bathroom = ({ props }) => {
   const [value, setValue] = useState("");
@@ -16,9 +18,9 @@ export const Bathroom = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleSelection = (selectedValue) => {
-    if (!selectedValue) return;
-    updateFields({ ...allFields, bathroom: selectedValue });
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, bathroom: value });
     props.onNext();
   };
 
@@ -27,20 +29,16 @@ export const Bathroom = ({ props }) => {
       <FormHeader title={"Bathroom"} subtitle={"What type of Bathroom system best suits your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox
-              key={dat}
-              active={value === dat}
-              onClick={() => {
-                setValue(dat);
-                handleSelection(dat);
-              }}
-              text={dat}
-            />
-          ))}
-        </div>
-        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+        <CustomLabelSelect
+          id={"Bathroom"}
+          required
+          placeholder={"Select a bathroom system"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Bathroom"}
+        />
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );
