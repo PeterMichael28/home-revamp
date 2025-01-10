@@ -34,6 +34,20 @@ const CompletedPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleMessageEvent = (event) => {
+      if (event.data === "THUMBTACK_RF_CLOSE") {
+        setOpenModal(false);
+      }
+    };
+
+    window.addEventListener("message", handleMessageEvent);
+
+    return () => {
+      window.removeEventListener("message", handleMessageEvent);
+    };
+  }, []);
+
   const handleOnSelect = (data) => {
     setOpenModal(true);
     setIsSelected(data?.request_flow_iframe_url);

@@ -349,10 +349,14 @@ export const CreditRating = ({ props }) => {
   ];
 
   const [value, setValue] = useState("");
-
   const handleClick = () => {
     if (!value) return;
-    updateFields({ ...allFields, creditRating: value });
+
+    // Extract the text before the parentheses
+    const extractedValue = value.split(" (")[0];
+
+    // Update the form with the extracted value
+    updateFields({ ...allFields, creditRating: extractedValue });
     props.onNext();
   };
 
