@@ -27,6 +27,7 @@ import GutterDashboard from "./pages/admin/GutterDashboard";
 import PlumbingDashboard from "./pages/admin/PlumbingDashboard";
 import KitchenDashboard from "./pages/admin/KitchenDashboard";
 import PaintingDashboard from "./pages/admin/PaintingDashboard";
+import V2FormPage from "./pages/V2FormPage";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -45,6 +46,10 @@ function App() {
         {
           path: "/:slug",
           element: <FormPage />,
+        },
+        {
+          path: "/:slug/v2",
+          element: <V2FormPage />,
         },
         {
           path: "/:slug/completed",
