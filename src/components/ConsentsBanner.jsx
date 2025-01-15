@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const ConsentBanner = () => {
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [preferences, setPreferences] = useState({
     necessary: true,

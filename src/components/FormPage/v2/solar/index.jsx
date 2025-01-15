@@ -452,7 +452,7 @@ export const SolarV2ProjectDetails = ({ props, slug }) => {
 
   const projectTimelineData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
 
-  const contactTimeData = ["Any time", "Morning", "Afternoon", "Evening"];
+  const contactTimeData = ["Anytime", "Morning", "Afternoon", "Evening"];
 
   const handleSubmit = async (e) => {
     e.preventDefault();

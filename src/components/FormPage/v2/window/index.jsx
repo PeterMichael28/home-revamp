@@ -269,7 +269,7 @@ export const WindowV2ProjectDetails = ({ props, slug }) => {
 
   const projectTimelineData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
 
-  const contactTimeData = ["Any time", "Morning", "Afternoon", "Evening"];
+  const contactTimeData = ["Anytime", "Morning", "Afternoon", "Evening"];
 
   const scopeData = ["New Roof for New Home", "New Roof for an Existing Home", "Repair", "Shingle over Existing Roof"];
 

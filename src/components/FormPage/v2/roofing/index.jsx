@@ -225,7 +225,7 @@ export const RoofingV2ProjectDetails = ({
   //   'More than 2 weeks',
   //  ];
 
-  const contactTimeData = ["Any time", "Morning", "Afternoon", "Evening"];
+  const contactTimeData = ["Anytime", "Morning", "Afternoon", "Evening"];
 
   //  const scopeData = [
   //   'New Roof for New Home',
