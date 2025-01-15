@@ -28,6 +28,7 @@
     "clsx": "^2.1.1",
     "country-state-city": "^3.2.1",
     "date-fns": "^3.6.0",
+    "framer-motion": "^11.18.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.441.0",
     "react": "^18.2.0",

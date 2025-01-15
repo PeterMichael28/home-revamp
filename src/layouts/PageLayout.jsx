@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "~/layouts/Header";
 import Footer from "./Footer";
+import ConsentBanner from "~/components/ConsentsBanner";
 
 const PageLayout = () => {
   return (
@@ -12,6 +13,7 @@ const PageLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ConsentBanner />
     </div>
   );
 };
