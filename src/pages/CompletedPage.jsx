@@ -5,7 +5,7 @@ import FormHeader from "~/components/FormPage/FormHeader";
 import Modal from "~/components/Modal/Modal";
 import SectionHeader from "~/components/SectionHeader";
 import Services from "~/components/Services";
-import ThumbtackCard, { ThumbtackCardText } from "~/components/ThumbtackCard";
+import ThumbtackCard from "~/components/ThumbtackCard";
 
 const CompletedPage = () => {
   const { slug } = useParams();
@@ -14,7 +14,7 @@ const CompletedPage = () => {
   const [isSelected, setIsSelected] = useState("");
 
   const remainingServices = ourServices.filter((ser) => ser.label.toLowerCase() !== slug);
-  console.log("first", isSelected);
+  // console.log("first", isSelected);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
