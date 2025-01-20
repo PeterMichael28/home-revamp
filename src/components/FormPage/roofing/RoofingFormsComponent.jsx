@@ -861,7 +861,7 @@ export const PreferredTimeForm = ({ slug }) => {
   const networkName = searchParams.get("network_name");
   const offerId = searchParams.get("offer_id");
   const affId = searchParams.get("aff_id");
-
+  const [trustedFormUrl, setTrustedFormUrl] = useState(null);
   // console.log("All url:", window.location.href);
 
   const params = new URLSearchParams();
@@ -887,6 +887,15 @@ export const PreferredTimeForm = ({ slug }) => {
   const formRef = useRef(null);
 
   useEffect(() => {
+    const tfField = document.getElementById("xxTrustedFormCertUrl");
+    // console.log("tfField", window.TrustedForm);
+    if (window.TrustedForm && tfField) {
+      window.TrustedForm.setField(tfField);
+    }
+  }, []);
+
+  // lead token url
+  useEffect(() => {
     const retryGetLeadIdToken = () => {
       return new Promise((resolve) => {
         const interval = setInterval(() => {
@@ -907,9 +916,40 @@ export const PreferredTimeForm = ({ slug }) => {
     getLeadIdToken();
   }, []);
 
+  // trusted form useeffect
+  useEffect(() => {
+    const retryTrustedFormUrl = () => {
+      return new Promise((resolve) => {
+        const interval = setInterval(() => {
+          const trustedFormUrl = formRef.current?.querySelector("#xxTrustedFormCertUrl")?.value;
+          // console.log("xxTrustedFormCertUrl", trustedFormUrl);
+          if (trustedFormUrl) {
+            clearInterval(interval);
+            resolve(trustedFormUrl);
+          }
+        }, 100); // Retry every 100 milliseconds
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+      });
+    };
+
+    const getTrustedFormUrl = async () => {
+      try {
+        const url = await retryTrustedFormUrl();
+        // console.log("url", url);
+        setTrustedFormUrl(url);
+      } catch (error) {
+        console.error("Error fetching TrustedFormUrl", error);
+      }
+    };
+
+    getTrustedFormUrl();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value || !leadIdToken) {
+    if (!value || !leadIdToken || !trustedFormUrl) {
       return;
     }
     setLoading(true);
@@ -918,12 +958,19 @@ export const PreferredTimeForm = ({ slug }) => {
       setOpenModal(true);
     }, 2000);
 
-    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
+    updateFields({
+      ...allFields,
+      contact_time: value,
+      LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
+      service: slug,
+    });
 
     let body = {
       ...allFields,
       contact_time: value,
       LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
       service: slug,
       ...(clickId && { click_id: clickId }),
       ...(networkName && { network_name: networkName }),
@@ -970,6 +1017,7 @@ export const PreferredTimeForm = ({ slug }) => {
       <form
         className="w-full"
         onSubmit={handleSubmit}
+        id="leadForm"
         // onSubmit={ handleSubmit }
         ref={formRef}
       >
@@ -1001,6 +1049,7 @@ export const PreferredTimeForm = ({ slug }) => {
           />
           <div className="my-4">
             <input type="hidden" id="leadid_tcpa_disclosure" />
+            <input type="hidden" name="xxTrustedFormCertUrl" id="xxTrustedFormCertUrl" />
             <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
               <span className="font-semibold text-base">Note: </span>
               By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}

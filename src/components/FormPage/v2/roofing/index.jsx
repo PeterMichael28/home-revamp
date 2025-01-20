@@ -186,6 +186,7 @@ export const RoofingV2ProjectDetails = ({
     newUrl += `?${params.toString()}`;
   }
   const [leadIdToken, setLeadIdToken] = useState(null);
+  const [trustedFormUrl, setTrustedFormUrl] = useState(null);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -218,26 +219,59 @@ export const RoofingV2ProjectDetails = ({
     getLeadIdToken();
   }, []);
 
-  //  const projectTimelineData = [
-  //   'Time is flexible',
-  //   'Within 1 week',
-  //   '1-2 weeks',
-  //   'More than 2 weeks',
-  //  ];
+  useEffect(() => {
+    const tfField = document.getElementById("xxTrustedFormCertUrl");
+    // console.log("tfField", window.TrustedForm);
+    if (window.TrustedForm && tfField) {
+      window.TrustedForm.setField(tfField);
+    }
+  }, []);
+  // trusted form useeffect
+  useEffect(() => {
+    const retryTrustedFormUrl = () => {
+      return new Promise((resolve) => {
+        const interval = setInterval(() => {
+          const trustedFormUrl = formRef.current?.querySelector("#xxTrustedFormCertUrl")?.value;
+          // console.log("xxTrustedFormCertUrl", trustedFormUrl);
+          if (trustedFormUrl) {
+            clearInterval(interval);
+            resolve(trustedFormUrl);
+          }
+        }, 100); // Retry every 100 milliseconds
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+      });
+    };
+
+    const getTrustedFormUrl = async () => {
+      try {
+        const url = await retryTrustedFormUrl();
+        // console.log("url", url);
+        setTrustedFormUrl(url);
+      } catch (error) {
+        console.error("Error fetching TrustedFormUrl", error);
+      }
+    };
+
+    getTrustedFormUrl();
+  }, []);
 
   const contactTimeData = ["Anytime", "Morning", "Afternoon", "Evening"];
-
-  //  const scopeData = [
-  //   'New Roof for New Home',
-  //   'New Roof for an Existing Home',
-  //   'Repair',
-  //   'Shingle over Existing Roof',
-  //  ];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!projectTimeline || !projectScope || !address || !city || !state || !contactTime || !leadIdToken) return;
+    if (
+      !projectTimeline ||
+      !projectScope ||
+      !address ||
+      !city ||
+      !state ||
+      !contactTime ||
+      !leadIdToken ||
+      !trustedFormUrl
+    )
+      return;
 
     setLoading(true);
 
@@ -250,6 +284,7 @@ export const RoofingV2ProjectDetails = ({
       state,
       contact_time: contactTime,
       LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
       service: slug,
     });
 
@@ -266,6 +301,7 @@ export const RoofingV2ProjectDetails = ({
       state,
       contact_time: contactTime,
       LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
       service: slug,
       ...(clickId && { click_id: clickId }),
       ...(networkName && { network_name: networkName }),
@@ -433,6 +469,7 @@ export const RoofingV2ProjectDetails = ({
         />
         <div className="my-4">
           <input type="hidden" id="leadid_tcpa_disclosure" />
+          <input type="hidden" name="xxTrustedFormCertUrl" id="xxTrustedFormCertUrl" />
           <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
             <span className="font-semibold text-base">Note: </span>
             By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}

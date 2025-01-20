@@ -31,7 +31,7 @@
     <!-- adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9214580526760578"
     crossorigin="anonymous"></script>
-    <script type="module" crossorigin src="/assets/index-Cu8f9wCP.js"></script>
+    <script type="module" crossorigin src="/assets/index-CEsrx-13.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-C7_WNA-F.css">
   </head>
   <body>
@@ -52,7 +52,14 @@
       ><img
         src="https://create.leadid.com/noscript.gif?lac=918FB88A-BD8D-A32D-8844-ED7502BF3E5C&lck=afa5c330-8960-a9ab-a329-b23e9fb88250&snippet_version=2"
     /></noscript> 
-
+    <!-- <script type="text/javascript">
+      function trustedFormCertIdCallback(certificateId) {
+        alert("Certificate ID: " + certificateId);
+      }
+      function trustedFormCertUrlCallback(certificateUrl) {
+        alert("Certificate URL: " + certificateUrl);
+      }
+    </script> -->
     <script type="text/javascript">
       (function () {
         var tf = document.createElement("script");
@@ -67,6 +74,16 @@
         s.parentNode.insertBefore(tf, s);
       })();
     </script>
+
+<script>
+  // Generate the TrustedForm certificate when the form is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const tfField = document.getElementById('trustedFormCertificate');
+    if (window.TrustedForm) {
+      window.TrustedForm.setField(tfField);
+    }
+  });
+ </script>
     <noscript>
   <img src='https://api.trustedform.com/ns.gif' />
 <noscript>

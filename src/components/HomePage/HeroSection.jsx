@@ -68,7 +68,7 @@ function CustomSelect({ value, onChange, options, placeholder }) {
       </SelectTrigger>
       <SelectContent className="bg-white rounded-lg shadow-lg border border-gray-200">
         {options.map((option, id) => (
-          <SelectItem key={id} value={option.label} clssName="p-2 text-secondary text-xs md:text-sm">
+          <SelectItem key={id} value={option.label}>
             {option.label}
           </SelectItem>
         ))}
