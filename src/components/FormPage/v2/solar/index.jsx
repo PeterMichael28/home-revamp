@@ -365,7 +365,7 @@ export const SolarPersonalDetails = ({ props }) => {
               placeholder={"Select your gender"}
               value={gender}
               setValue={setGender}
-              data={["Male", "Female", "Unspecified"]}
+              data={["Male", "Female", "Unspecific"]}
               label={"Gender"}
             />
           </div>
