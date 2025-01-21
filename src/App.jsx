@@ -28,6 +28,7 @@ import PlumbingDashboard from "./pages/admin/PlumbingDashboard";
 import KitchenDashboard from "./pages/admin/KitchenDashboard";
 import PaintingDashboard from "./pages/admin/PaintingDashboard";
 import V2FormPage from "./pages/V2FormPage";
+import TrustedForm from "./scripts/trusted-form";
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
@@ -156,7 +157,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-
+      <TrustedForm />
       <ToastContainer
         position="top-right"
         autoClose={5000}
