@@ -105,7 +105,10 @@ export const SolarV2PropertyDetails = ({ props }) => {
   );
 };
 
-export const SolarV2ServicesDetails = ({ props }) => {
+export const SolarV2ServicesDetails = ({
+  props,
+  roofTypeData = ["Asphalt Shingle", "Tile", "Metal", "Tar", "Natural Slate", "Tar", "Cedal Slate"],
+}) => {
   const [monthlyElect, setMonthlyElect] = useState("");
   const [currentUtils, setCurrentUtils] = useState("");
   const [creditRating, setCreditRating] = useState("");
@@ -142,8 +145,13 @@ export const SolarV2ServicesDetails = ({ props }) => {
 
   const solarLocationData = ["Roof", "On the ground", "Nearby structure"];
 
-  const roofTypeData = ["Asphalt Shingle", "Tile", "Metal", "Tar", "Natural Slate", "Tar", "Cedal Slate"];
-
+  // const roofTypeData = ["Asphalt Shingle", "Tile", "Metal", "Tar", "Natural Slate", "Tar", "Cedal Slate"];
+  // Asphalt Shingle
+  // Cedar Shake
+  // Metal
+  // Natural Slate
+  // Tar
+  // Other
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
@@ -468,7 +476,7 @@ export const SolarV2ProjectDetails = ({ props, slug }) => {
     getLeadIdToken();
   }, []);
 
-  const projectTimelineData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
+  const projectTimelineData = ["Immediately", "Within 1 months", "1-3 months", "3+ months"];
 
   const contactTimeData = ["Anytime", "Morning", "Afternoon", "Evening"];
 

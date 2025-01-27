@@ -95,7 +95,9 @@ const SolarForms = ({ slug }) => {
     },
     {
       label: "Form14",
-      component: (props) => <RoofType props={props} />,
+      component: (props) => (
+        <RoofType props={props} data={["Asphalt Shingle", "Cedar Shake", "Metal", "Natural Slate", "Tar", "Other"]} />
+      ),
     },
     {
       label: "Form15",
@@ -104,7 +106,9 @@ const SolarForms = ({ slug }) => {
 
     {
       label: "Form16",
-      component: (props) => <ProjectTimelineForm props={props} />,
+      component: (props) => (
+        <ProjectTimelineForm props={props} data={["Immediately", "Within 1 months", "1-3 months", "3+ months"]} />
+      ),
     },
     // {
     //   label: "Form37",

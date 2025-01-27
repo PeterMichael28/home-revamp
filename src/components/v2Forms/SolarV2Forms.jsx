@@ -26,7 +26,12 @@ const SolarV2Forms = ({ slug }) => {
     },
     {
       label: "Form3",
-      component: (props) => <SolarV2ServicesDetails props={props} />,
+      component: (props) => (
+        <SolarV2ServicesDetails
+          props={props}
+          roofTypeData={["Asphalt Shingle", "Cedar Shake", "Metal", "Natural Slate", "Tar", "Other"]}
+        />
+      ),
     },
     {
       label: "Form4",

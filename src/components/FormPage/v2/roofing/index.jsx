@@ -15,13 +15,13 @@ import Lottie from "lottie-react";
 import animation from "~/assets/Animation8.json";
 import LabelInput from "../../LabelInput";
 
-export const RoofingV2PropertyDetails = ({ props }) => {
+export const RoofingV2PropertyDetails = ({ props, propertyTypeData = ["Residential", "Commercial"] }) => {
   const [homeOwnerShip, setHomeOwnerShip] = useState("");
   const [propertyType, setPropertyType] = useState("");
 
   const homeOwnerShipData = ["Own", "Rented"];
 
-  const propertyTypeData = ["Residential", "Commercial"];
+  // const propertyTypeData = ["Residential", "Commercial"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
@@ -78,27 +78,26 @@ export const RoofingV2PropertyDetails = ({ props }) => {
 };
 
 export const RoofingV2RoofingDetails = ({ props }) => {
-  const [roofingMaterial, setRoofingMaterial] = useState("");
+  // const [roofingMaterial, setRoofingMaterial] = useState("");
   const [roomType, setRoomType] = useState("");
 
-  const roofingMaterialData = [
-    "Asphalt Shingle",
-    "Tile",
-    "Metal",
-    "Tar Torchdown",
-    "Natural Slate",
-    "Tar",
-    "Cedal Slate",
-  ];
+  // const roofingMaterialData = [
+  //   "Asphalt Shingle",
+  //   "Tile",
+  //   "Metal",
+  //   "Tar Torchdown",
+  //   "Natural Slate",
+  //   "Tar",
+  //   "Cedal Slate",
+  // ];
 
   const roofTypeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
-    if (!roofingMaterial || !roomType) return;
+    if (!roomType) return;
     updateFields({
       ...allFields,
-      roofing_material: roofingMaterial,
       RoofType: roomType,
     });
     props.onNext();
@@ -114,7 +113,7 @@ export const RoofingV2RoofingDetails = ({ props }) => {
       <div className="mt-12 w-full">
         <div className="space-y-6">
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
-            <CustomLabelSelect
+            {/* <CustomLabelSelect
               id={"roofing_material"}
               required
               placeholder={"Select your preferred roofing material"}
@@ -122,7 +121,7 @@ export const RoofingV2RoofingDetails = ({ props }) => {
               setValue={setRoofingMaterial}
               data={roofingMaterialData}
               label={"Roofing Material"}
-            />
+            /> */}
 
             <CustomLabelSelect
               id={"RoofingType"}
@@ -136,7 +135,7 @@ export const RoofingV2RoofingDetails = ({ props }) => {
           </div>
         </div>
 
-        <FormButton text="Continue" className="mt-16" onClick={handleClick} disabled={!roofingMaterial || !roomType} />
+        <FormButton text="Continue" className="mt-16" onClick={handleClick} disabled={!roomType} />
       </div>
     </div>
   );

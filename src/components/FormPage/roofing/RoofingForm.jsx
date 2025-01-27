@@ -48,16 +48,21 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form3",
-      component: (props) => <PropertyTypeForm props={props} />,
+      component: (props) => (
+        <PropertyTypeForm
+          props={props}
+          data={["Single Family Home", "Apartment", "Commercial", "Condo", "Mobile Home", "Multi-Unit", "Other"]}
+        />
+      ),
     },
     {
       label: "Form4",
       component: (props) => <RoofingProjectScopeForm props={props} />,
     },
-    {
-      label: "Form5",
-      component: (props) => <RoofingMaterials props={props} />,
-    },
+    // {
+    //   label: "Form5",
+    //   component: (props) => <RoofingMaterials props={props} />,
+    // },
 
     {
       label: "Form4",
@@ -65,7 +70,12 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form4",
-      component: (props) => <RoofingProjectTimelineForm props={props} />,
+      component: (props) => (
+        <RoofingProjectTimelineForm
+          props={props}
+          data={["Immediately", "Within 1 months", "1-3 months", "3+ months"]}
+        />
+      ),
     },
     {
       label: "Form4",

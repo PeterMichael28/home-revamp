@@ -304,7 +304,7 @@ export const AccessFromLandlord = ({ props }) => {
   );
 };
 
-export const PropertyTypeForm = ({ props }) => {
+export const PropertyTypeForm = ({ props, data = ["Commercial", "Residential"] }) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -321,14 +321,14 @@ export const PropertyTypeForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Commercial", "Residential"];
+  // const homeData = ;
   return (
     <div className="w-full">
       <FormHeader title={"Property Type"} subtitle={"Please specify the type of content for this project."} />
 
       <div className="mt-7">
         <div className="space-y-5">
-          {homeData.map((dat) => (
+          {data.map((dat) => (
             <FormSelectBox
               key={dat}
               active={value === dat}
@@ -420,7 +420,10 @@ export const RoofingMaterials = ({ props }) => {
   );
 };
 
-export const RoofType = ({ props }) => {
+export const RoofType = ({
+  props,
+  data = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -431,7 +434,7 @@ export const RoofType = ({ props }) => {
   //   props.onNext();
   // };
 
-  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"];
+  // const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"];
 
   const handleClick = () => {
     if (!value) return;
@@ -466,7 +469,7 @@ export const RoofType = ({ props }) => {
           placeholder={"Select your roof type"}
           value={value}
           setValue={setValue}
-          data={homeData}
+          data={data}
           label={"Roof Type"}
         />
 
@@ -547,7 +550,10 @@ export const CustomizedForm = ({ props, header, subText, data = [] }) => {
   );
 };
 
-export const ProjectTimelineForm = ({ props }) => {
+export const ProjectTimelineForm = ({
+  props,
+  data = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -558,7 +564,7 @@ export const ProjectTimelineForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
+  // const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
 
   return (
     <div className="w-full">
@@ -571,7 +577,7 @@ export const ProjectTimelineForm = ({ props }) => {
           placeholder={"Select your Project Timeline"}
           value={value}
           setValue={setValue}
-          data={homeData}
+          data={data}
           label={"Project Timeline"}
         />
 
@@ -581,7 +587,10 @@ export const ProjectTimelineForm = ({ props }) => {
   );
 };
 
-export const RoofingProjectTimelineForm = ({ props }) => {
+export const RoofingProjectTimelineForm = ({
+  props,
+  data = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -592,14 +601,14 @@ export const RoofingProjectTimelineForm = ({ props }) => {
     props.onNext();
   };
 
-  const homeData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
+  // const homeData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
         <div className="space-y-5">
-          {homeData.map((dat) => (
+          {data.map((dat) => (
             <FormSelectBox
               key={dat}
               active={value === dat}
