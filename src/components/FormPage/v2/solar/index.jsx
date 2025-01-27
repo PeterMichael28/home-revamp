@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useFormStore } from "~/store/formStore";
 import FormHeader from "../../FormHeader";
-import LabelSelect, { CustomLabelSelect } from "../../LabelSelect";
+import { CustomLabelSelect } from "../../LabelSelect";
 import FormButton from "../../FormButton";
 import utilityData from "~/utils/electricity.json";
 import { handleFormatDate, validateEmail, validatePhoneNumber } from "~/utils/funcs";
@@ -112,6 +112,7 @@ export const SolarV2ServicesDetails = ({ props }) => {
   const [sunlight, setSunlight] = useState("");
   const [solarType, setSolarType] = useState("");
   const [solarLocation, setSolarLocation] = useState("");
+  const [roofType, setRoofType] = useState("");
 
   const monthlyBillData = [
     "$0-25",
@@ -141,10 +142,13 @@ export const SolarV2ServicesDetails = ({ props }) => {
 
   const solarLocationData = ["Roof", "On the ground", "Nearby structure"];
 
+  const roofTypeData = ["Asphalt Shingle", "Tile", "Metal", "Tar", "Natural Slate", "Tar", "Cedal Slate"];
+
   const { allFields, updateFields } = useFormStore((state) => state);
 
   const handleClick = () => {
-    if (!monthlyElect || !currentUtils || !creditRating || !sunlight || !solarType || !solarLocation) return;
+    if (!monthlyElect || !currentUtils || !creditRating || !sunlight || !solarType || !solarLocation || !roofType)
+      return;
     updateFields({
       ...allFields,
       electric_bill: monthlyElect,
@@ -153,6 +157,7 @@ export const SolarV2ServicesDetails = ({ props }) => {
       sunlight_exposure: sunlight,
       solarSystemType: solarType,
       solarInstallationLocation: solarLocation,
+      RoofType: roofType,
     });
     props.onNext();
   };
@@ -231,13 +236,26 @@ export const SolarV2ServicesDetails = ({ props }) => {
               label={"Sunlight Exposure on Roof"}
             />
           </div>
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+            <CustomLabelSelect
+              id={"RoofingType"}
+              required
+              placeholder={"Select your preferred Roof type"}
+              value={roofType}
+              setValue={setRoofType}
+              data={roofTypeData}
+              label={"Roof Type"}
+            />
+          </div>
         </div>
 
         <FormButton
           text="Continue"
           className="mt-16"
           onClick={handleClick}
-          disabled={!monthlyElect || !currentUtils || !creditRating || !sunlight || !solarType || !solarLocation}
+          disabled={
+            !monthlyElect || !currentUtils || !creditRating || !sunlight || !solarType || !solarLocation || !roofType
+          }
         />
       </div>
     </div>

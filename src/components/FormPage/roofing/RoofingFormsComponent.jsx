@@ -431,7 +431,7 @@ export const RoofType = ({ props }) => {
   //   props.onNext();
   // };
 
-  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
+  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"];
 
   const handleClick = () => {
     if (!value) return;

@@ -125,13 +125,13 @@ export const RoofingV2RoofingDetails = ({ props }) => {
             />
 
             <CustomLabelSelect
-              id={"property_type"}
+              id={"RoofingType"}
               required
-              placeholder={"Select property type"}
+              placeholder={"Select your preferred Roof type"}
               value={roomType}
               setValue={setRoomType}
               data={roofTypeData}
-              label={"Property Type"}
+              label={"Roof Type"}
             />
           </div>
         </div>
