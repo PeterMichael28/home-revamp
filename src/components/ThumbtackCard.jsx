@@ -94,8 +94,9 @@ export function ThumbtackCardText({ data }) {
         {/* Profile Image */}
         <div className=" flex justify-center h-fit">
           <img
-            src={"/logo.png"}
+            src={"/logo.webp"}
             alt="Profile"
+            loading="lazy"
             className="w-32 sm:min-w-[150px] sm:h-[150px] rounded-full object-cover"
           />
         </div>

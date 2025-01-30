@@ -10,7 +10,6 @@ import { FaPaintRoller } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 import { useUserStore } from "~/store/userStore";
 
-
 const adminNav = [
   {
     name: "Solar",
@@ -38,7 +37,7 @@ const adminNav = [
     path: "/admin/havcs",
   },
 
-   {
+  {
     name: "Kitchen",
     icon: <FaKitchenSet />,
     path: "/admin/kitchen",
@@ -135,7 +134,7 @@ const AdminLayout = () => {
                 {isSidebarOpen ? <MdClose /> : <MdMenu />}
               </button>
 
-              <img src="/logo.png" className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px]" alt="logo" />
+              <img src="/logo.webp" loading="lazy" className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px]" alt="logo" />
 
               {/* Current page title with margin-left */}
               <h1 className="ml-4 text-[20px] md:text-[24px] font-medium leading-[30px] text-[#01100A]">

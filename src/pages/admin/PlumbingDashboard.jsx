@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import img1 from "~/assets/images/img1.png";
+import img1 from "~/assets/images/img1.webp";
 import TableDataComp from "./TableDataComp";
 import { useLocation } from "react-router-dom";
 import useAuthRedirect from "~/hooks/useAuthRedirect";
 import { useUserStore } from "~/store/userStore";
 
-
 const PlumbingDashboard = () => {
- const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = useUserStore((state) => state.token);
   const { isDataAuthenticated } = useAuthRedirect();
@@ -70,5 +69,5 @@ const PlumbingDashboard = () => {
       </div>
     </div>
   );
-}
-export default PlumbingDashboard
+};
+export default PlumbingDashboard;

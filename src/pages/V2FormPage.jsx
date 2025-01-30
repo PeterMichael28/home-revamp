@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import SEOHelmet from "~/components/SeoHelmet";
-import { seoMetadata } from "~/constants/seo-constants";
 
 import solarImg from "~/assets/v2/solarbg.webp";
 import roofingImg from "~/assets/v2/roofingBg.webp";
@@ -23,6 +22,11 @@ import KitchenV2Forms from "~/components/v2Forms/KitchenV2Forms";
 import GutterV2Forms from "~/components/v2Forms/GutterV2Forms";
 import PaintingV2Forms from "~/components/v2Forms/PaintingV2Forms";
 import PlumbingV2Forms from "~/components/v2Forms/PlumbingV2Forms";
+
+async function getSeoMetadata() {
+  const { seoMetadata } = await import("~/constants/seo-constants");
+  return seoMetadata;
+}
 
 const V2FormPage = () => {
   const { slug } = useParams();
@@ -64,6 +68,21 @@ const V2FormPage = () => {
       navigate("/");
     }
   }, [navigate, ActiveForm]);
+
+  const [seoMetadata, setSeoMetadata] = useState(null);
+
+  useEffect(() => {
+    async function fetchMetadata() {
+      try {
+        const data = await getSeoMetadata(slug);
+        setSeoMetadata(data);
+      } catch (error) {
+        console.error("Failed to load SEO metadata:", error);
+      }
+    }
+
+    fetchMetadata();
+  }, [slug]);
 
   // Get SEO metadata for the current slug
   const currentSeoMetadata = seoMetadata[slug] || {

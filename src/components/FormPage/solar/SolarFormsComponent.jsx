@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormHeader from "../FormHeader";
 import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
-import utilityData from "~/utils/electricity.json";
 import { CustomLabelSelect } from "../LabelSelect";
 
 export const MonthlyBill = ({ props }) => {
@@ -301,16 +300,33 @@ export const SolarInstallationLocation = ({ props }) => {
 
 export const CurrentUtilityProvider = ({ props }) => {
   const { allFields, updateFields } = useFormStore((state) => state);
-  // console.log("utilityData", utilityData);
-  // console.log("state", allFields.stateName);
 
   const [currentUtilityProvider, setCurrentUtilityProvider] = useState("");
+  const [utilityData, setUtilityData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadUtilityData() {
+      try {
+        const data = await import("~/utils/electricity.json");
+        setUtilityData(data.default);
+      } catch (error) {
+        console.error("Failed to load utility data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadUtilityData();
+  }, []);
 
   const handleClick = () => {
     if (!currentUtilityProvider) return;
-    updateFields({ ...allFields, currentUtilityProvider: currentUtilityProvider });
+    updateFields({ ...allFields, currentUtilityProvider });
     props.onNext();
   };
+
+  if (loading) return <p>Loading utilities...</p>;
 
   return (
     <div className="w-full">

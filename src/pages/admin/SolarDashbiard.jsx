@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import img1 from "~/assets/images/img1.png";
+import img1 from "~/assets/images/img1.webp";
 import TableDataComp from "./TableDataComp";
 import useAuthRedirect from "~/hooks/useAuthRedirect";
 import { useUserStore } from "~/store/userStore";

@@ -4,7 +4,7 @@ import Dropdown from "~/components/Dropdown/DropDown";
 import Table from "~/components/Table/Table";
 import { classNames } from "~/utils/classNames";
 import { formatDateTime, getRandomColorFromName } from "~/utils/getRandomColorFromName";
-import uploadImg from "~/assets/images/uploadPic.png";
+import uploadImg from "~/assets/images/uploadPic.webp";
 import { CSVLink } from "react-csv";
 import Message from "~/components/MessageModal/Message";
 import FilterButton from "~/components/FilterButton/Filter";

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BathroomForms from "~/components/FormPage/bathroom/BathroomForms";
 import GutterForms from "~/components/FormPage/gutter/GutterForms";
@@ -9,8 +9,13 @@ import PlumbingForm from "~/components/FormPage/plumbing/PlumbingForm";
 import RoofingForm from "~/components/FormPage/roofing/RoofingForm";
 import SolarForms from "~/components/FormPage/solar/SolarForms";
 import WindowsForm from "~/components/FormPage/windows/WindowsForm";
-import SEOHelmet from "~/components/SeoHelmet";
-import { seoMetadata } from "~/constants/seo-constants";
+// import SEOHelmet from "~/components/SeoHelmet";
+// import { seoMetadata } from "~/constants/seo-constants";
+const SEOHelmet = React.lazy(() => import("~/components/SeoHelmet"));
+async function getSeoMetadata() {
+  const { seoMetadata } = await import("~/constants/seo-constants");
+  return seoMetadata;
+}
 
 const FormPage = () => {
   const { slug } = useParams();
@@ -41,15 +46,32 @@ const FormPage = () => {
     }
   }, [navigate, ActiveForm]);
 
+  const [seoMetadata, setSeoMetadata] = useState(null);
+
+  useEffect(() => {
+    async function fetchMetadata() {
+      try {
+        const data = await getSeoMetadata(slug);
+        setSeoMetadata(data);
+      } catch (error) {
+        console.error("Failed to load SEO metadata:", error);
+      }
+    }
+
+    fetchMetadata();
+  }, [slug]);
+
   // Get SEO metadata for the current slug
-  const currentSeoMetadata = seoMetadata[slug] || {
-    title: "Affordable Home Renovation Services | Home Revamp Expert Near You",
-    description:
-      "Home Revamp Expert connects you with affordable local home remodelers near you. Get tailored quotes for renovation services today!",
-    type: "website",
-    canonicalLink: "https://homerevampexpert.com",
-    keywords: "affordable home renovation services, Home Revamp Expert, local home remodelers near me",
-  };
+  const currentSeoMetadata = seoMetadata
+    ? seoMetadata[slug]
+    : {
+        title: "Affordable Home Renovation Services | Home Revamp Expert Near You",
+        description:
+          "Home Revamp Expert connects you with affordable local home remodelers near you. Get tailored quotes for renovation services today!",
+        type: "website",
+        canonicalLink: "https://homerevampexpert.com",
+        keywords: "affordable home renovation services, Home Revamp Expert, local home remodelers near me",
+      };
 
   return (
     <div className="pt-5 md:pt-10">

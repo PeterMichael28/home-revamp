@@ -1,12 +1,12 @@
-import roofingImg from "./images/roofing.png";
-import windowsImg from "./images/windows.png";
-import solarsImg from "./images/solar.png";
-import HVACsImg from "./images/Hvacs.png";
-import bathroomsImg from "./images/bathroom.png";
-import guttersImg from "./images/gutters.png";
-import paintingImg from "./images/painting.png";
-import plumbingImg from "./images/plumbing.png";
-import kitchenImg from "./images/kitchen.png";
+import roofingImg from "./images/roofing.webp";
+import windowsImg from "./images/windows.webp";
+import solarsImg from "./images/solar.webp";
+import HVACsImg from "./images/Hvacs.webp";
+import bathroomsImg from "./images/bathroom.webp";
+import guttersImg from "./images/gutters.webp";
+import paintingImg from "./images/painting.webp";
+import plumbingImg from "./images/plumbing.webp";
+import kitchenImg from "./images/kitchen.webp";
 
 export const ourServices = [
   {

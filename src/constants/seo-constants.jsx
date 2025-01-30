@@ -1,5 +1,4 @@
-export // SEO metadata for each form type
-const seoMetadata = {
+export const seoMetadata = {
   roofings: {
     title: "Compare Roofing Quotes in USA | Homerevampexpert",
     description:
