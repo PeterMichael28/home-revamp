@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdSolarPower, MdOutlineRoofing, MdMenu, MdClose } from "react-icons/md";
 import { TbAirConditioning } from "react-icons/tb";
-import { PanelsTopLeft, Bath } from "lucide-react";
+import { PanelsTopLeft, Bath, LogOutIcon } from "lucide-react";
+import { GiKitchenTap } from "react-icons/gi";
+import { FaKitchenSet } from "react-icons/fa6";
+import { FaPaintRoller } from "react-icons/fa";
+
 import { Outlet } from "react-router-dom";
+import { useUserStore } from "~/store/userStore";
 
 const adminNav = [
   {
@@ -31,6 +36,27 @@ const adminNav = [
     icon: <TbAirConditioning />,
     path: "/admin/havcs",
   },
+
+  {
+    name: "Kitchen",
+    icon: <FaKitchenSet />,
+    path: "/admin/kitchen",
+  },
+  {
+    name: "Painting",
+    icon: <FaPaintRoller />,
+    path: "/admin/Painting",
+  },
+  {
+    name: "Plumbing",
+    icon: <GiKitchenTap />,
+    path: "/admin/plumbing",
+  },
+  {
+    name: "Gutter",
+    icon: <MdOutlineRoofing />,
+    path: "/admin/gutter",
+  },
 ];
 
 const AdminLayout = () => {
@@ -38,6 +64,7 @@ const AdminLayout = () => {
   const navigate = useNavigate(); // Hook for navigation
   const [activeNav, setActiveNav] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar toggle
+  const updateToken = useUserStore((state) => state.updateToken);
 
   useEffect(() => {
     // Check if the current path is /admin, redirect to /admin/solar
@@ -54,12 +81,18 @@ const AdminLayout = () => {
 
   const currentNav = adminNav.find((item) => item.path === location.pathname);
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    updateToken(null);
+    navigate("/admin/login");
+  };
+
   return (
     <div className="h-screen">
       <div className="flex">
         {/* Sidebar Container */}
         <div
-          className={`fixed top-[50px] md:top-[60px] left-0 w-[240px] h-[calc(100%-88px)] bg-white border-r border-[#F4F4F4] transform transition-transform duration-300 ${
+          className={`fixed top-[50px] md:top-[60px] left-0 w-[240px] h-[calc(100%-88px)] bg-white border-r border-[#F4F4F4] transform transition-transform duration-300 flex flex-col ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:relative md:translate-x-0`}
         >
@@ -81,6 +114,12 @@ const AdminLayout = () => {
                 </p>
               </Link>
             ))}
+
+            {/* logout */}
+            <button className="w-full flex items-center gap-2 mt-20 text-sm p-3 text-red-500" onClick={handleLogout}>
+              <LogOutIcon className="size-5" />
+              Logout
+            </button>
           </div>
         </div>
 
@@ -91,14 +130,11 @@ const AdminLayout = () => {
             {/* Toggle button and logo on the left */}
             <div className="flex items-center space-x-4 md:gap-[150px]">
               {/* Toggle button for mobile screens */}
-              <button
-                className="md:hidden text-2xl"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              >
+              <button className="md:hidden text-2xl" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                 {isSidebarOpen ? <MdClose /> : <MdMenu />}
               </button>
 
-              <img src="/logo.png" className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px]" alt="logo" />
+              <img src="/logo.webp" loading="lazy" className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px]" alt="logo" />
 
               {/* Current page title with margin-left */}
               <h1 className="ml-4 text-[20px] md:text-[24px] font-medium leading-[30px] text-[#01100A]">

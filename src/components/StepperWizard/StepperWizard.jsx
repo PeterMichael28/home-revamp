@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { classNames } from "~/utils/classNames";
 import ProgressBar from "./ProgressBar";
+import { cn } from "~/lib/utils";
 
 export const StepperIndicator = ({ steps, activeIndex }) => {
   const [percentageCompleted, setPercentageCompleted] = useState(0);
@@ -23,7 +24,7 @@ export const StepperIndicator = ({ steps, activeIndex }) => {
   );
 };
 
-const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
+const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex, fullWidth = false }) => {
   const handleNext = () => {
     if (activeIndex === steps.length - 1) return;
     setActiveIndex((prev) => prev + 1);
@@ -52,7 +53,7 @@ const StepperWizard = ({ steps = [], activeIndex = 0, setActiveIndex }) => {
       {/* indicators */}
       <StepperIndicator steps={steps} activeIndex={activeIndex} />
       {/* content */}
-      <div className="overflow-x-hidden max-w-[500px] w-full mx-auto mt-9 px-2">
+      <div className={cn("overflow-x-hidden  w-full mx-auto mt-9 px-2", fullWidth ? "w-full" : "max-w-[500px]")}>
         <RenderComponent component={steps[activeIndex]?.component || steps[activeIndex]} />
       </div>
     </div>

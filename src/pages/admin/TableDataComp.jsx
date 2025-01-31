@@ -4,23 +4,41 @@ import Dropdown from "~/components/Dropdown/DropDown";
 import Table from "~/components/Table/Table";
 import { classNames } from "~/utils/classNames";
 import { formatDateTime, getRandomColorFromName } from "~/utils/getRandomColorFromName";
-import uploadImg from "~/assets/images/uploadPic.png";
-import { ourServices } from "~/assets/data";
-import Select from "react-select";
+import uploadImg from "~/assets/images/uploadPic.webp";
 import { CSVLink } from "react-csv";
+import Message from "~/components/MessageModal/Message";
+import FilterButton from "~/components/FilterButton/Filter";
 
-const TableDataComp = ({ data, loading, csv }) => {
+const TableDataComp = ({
+  data,
+  page = 1,
+  setPage = () => {},
+  perPage = 10,
+  setPerPage,
+  totalPages,
+  loading,
+  csv,
+  service,
+}) => {
   const [searchFilter, setSearchFilter] = useState("");
   const [value, setValue] = useState("");
-  const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
-  const [totalPages, setTotalPages] = useState(0);
+
+  const [formData, setFormData] = useState({
+    state: null,
+    gender: null,
+    homeowner: null,
+    dateRange: {
+      from: null,
+      to: null,
+    },
+  });
 
   const COLUMNS = [
     { header: "Lead ID", accessor: "LeadiD" },
     { header: "Users", accessor: "user" },
+    { header: "Gender", accessor: "gender" },
     { header: "Location", accessor: "location" },
-    { header: "Property Type", accessor: "property_type" },
+    { header: "Home Ownership", accessor: "home_owner" },
     { header: "Project Timeline", accessor: "project_timeline" },
     { header: "Created Date", accessor: "created_at" },
     // { header: "Actions", accessor: "action" },
@@ -34,26 +52,37 @@ const TableDataComp = ({ data, loading, csv }) => {
       return col.accessor === "user" ? (
         <div className={classNames("flex justify-start gap-x-2 items-center")}>
           <div
-            className="size-[32px] rounded-full flex items-center justify-center text-white font-medium text-sm"
+            className="size-[32px] rounded-full flex items-center justify-center text-white font-medium text-[13px]] uppercase"
             style={{ backgroundColor: getRandomColorFromName(info.row.original?.first_name) }}
           >
-            {info.row.original?.first_name[0]} {info.row.original?.last_name[0]}
+            {info.row.original?.first_name[0]}
+            {info.row.original?.last_name[0]}
           </div>
           <div>
-            <p className="text-[#1E1C1C] text-sm font-medium">{`${info.row.original?.first_name} ${info.row.original?.last_name}`}</p>
+            <p className="text-[#1E1C1C] text-sm font-medium capitalize">{`${info.row.original?.first_name} ${info.row.original?.last_name}`}</p>
             <span className="text-[#868686] text-xs font-normal mt-1">{`${info.row.original?.email}`}</span>
           </div>
         </div>
       ) : col.accessor === "location" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.city} ${info.row.original?.state}`}</p>
+      ) : col.accessor === "gender" ? (
+        <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.gender}`}</p>
+      ) : col.accessor === "home_owner" ? (
+        <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.home_owner}`}</p>
       ) : col.accessor === "property_type" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.property_type}`}</p>
       ) : col.accessor === "project_timeline" ? (
         <p className="text-[#1E1C1C] text-sm ">{`${info.row.original?.project_timeline}`}</p>
       ) : col.accessor === "created_at" ? (
-        <p className="text-[#1E1C1C] text-sm ">{`${formatDateTime(info.row.original?.created_at).customDate}`}</p>
+        <div className="flex flex-col">
+          <span className="line-clamp-1 overflow-hidden text-ellipsis text-sm font-normal leading-[150%] text-neutralBlack">
+            {formatDateTime(value).customDate}
+          </span>
+
+          <span className="text-xs font-normal leading-[150%] text-gray800">{formatDateTime(value).timeOnly}</span>
+        </div>
       ) : col.accessor === "LeadiD" ? (
-        <p className="text-[#1E1C1C] text-sm line-clamp-1 overflow-hidden">{`${value.slice(0, 20)}...`}</p>
+        <p className="text-[#1E1C1C] text-sm line-clamp-1 overflow-hidden">{`${value.slice(0, 10)}...`}</p>
       ) : col.accessor === "action" ? (
         <Dropdown
           toggleElement={
@@ -105,12 +134,18 @@ const TableDataComp = ({ data, loading, csv }) => {
           </div>
 
           {/*  */}
-          <CSVLink data={data} filename={csv}>
-            <div className="border border-[#F2F2F2] bg-white min-w-fit rounded-[4px] px-4 py-2 flex items-center justify-center gap-2 h-[44px]">
-              <img src={uploadImg} alt="image" className="size-[18px]" />
-              <span className="text-sm font-medium text-[#34403B]">Export List</span>
-            </div>
-          </CSVLink>
+          {data && (
+            <CSVLink data={data} filename={csv}>
+              <div className="border border-[#F2F2F2] bg-white min-w-fit rounded-[4px] px-4 py-2 flex items-center justify-center gap-2 h-[44px]">
+                <img src={uploadImg} alt="image" className="size-[18px]" />
+                <span className="text-sm font-medium text-[#34403B]">Export List</span>
+              </div>
+            </CSVLink>
+          )}
+
+          {service && <Message formData={formData} setFormData={setFormData} service={service} />}
+
+          {service && <FilterButton formData={formData} setFormData={setFormData} service={service} />}
         </div>
       </div>
       <div className="w-full overflow-x-auto">
@@ -124,11 +159,12 @@ const TableDataComp = ({ data, loading, csv }) => {
           }}
           searchFilter={searchFilter}
           setSearchFilter={setSearchFilter}
-          serverSidePagination={false}
+          serverSidePagination={true}
           currentPage={page}
           perPage={perPage}
           totalPageCount={totalPages}
           enableRowSelection={false}
+          // tableClassName={"min-w-[1200px]"}
         />
       </div>
     </div>

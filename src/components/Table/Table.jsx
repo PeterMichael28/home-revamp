@@ -12,6 +12,7 @@ import icons from "~/assets/icons/icons";
 import Loading from "../Loading/Loading";
 import emptyFiles from "~/assets/images/empty-files.jpg";
 import { classNames } from "~/utils/classNames";
+import { cn } from "~/lib/utils";
 
 const PER_PAGE_OPTIONS = [5, 10, 25, 50, 100];
 
@@ -26,7 +27,8 @@ function IndeterminateCheckbox({ indeterminate, className = "", ...rest }) {
 
   return <input type="checkbox" ref={ref} className={className + " cursor-pointer h-4 w-4 accent-primary"} {...rest} />;
 }
-
+// perPage
+// totalPageCount
 const Table = ({
   tableData,
   tableColumns, // Array of objects ({ header: required, accessor: required }) to use as column title, key, and control the display
@@ -44,6 +46,7 @@ const Table = ({
   totalPageCount = -1, // total number of pages
   totalItemsCount, // total number of items in the data
   onPaginationChange = console.log, // function to handle pagination change - contains the object {perPage: number, currentPage: number } as parameters
+  tableClassName,
 }) => {
   const [sorting, setSorting] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
@@ -127,7 +130,7 @@ const Table = ({
   return (
     <div>
       <div className="">
-        <table className="min-w-full sm:w-full" border={0}>
+        <table className={cn("w-full min-w-[1000px] overflow-x-auto", tableClassName)} border={0}>
           <thead className="bg-[#F2F6FF] text-tertiary">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -198,8 +201,8 @@ const Table = ({
       </div>
 
       {table.getRowModel().rows.length && showPagination ? (
-        <div className="mt-3 flex flex-col-reverse md:flex-row justify-between md:items-center gap-3 px-3">
-          <label className="inline-flex gap-2 items-center text-sm font-semibold text-primary">
+        <div className="mt-3 flex flex-col-reverse md:flex-row justify-end md:items-center gap-3 px-3 pb-5">
+          {/* <label className="inline-flex gap-2 items-center text-sm font-semibold text-primary">
             Showing
             <select
               value={table.getState().pagination.pageSize}
@@ -218,7 +221,7 @@ const Table = ({
               ))}
             </select>
             out of {serverSidePagination ? totalItemsCount : table.getPrePaginationRowModel().rows.length}
-          </label>
+          </label> */}
           {/* pagination buttons */}
           <div className="ml-auto md:ml-0 flex items-center gap-1 text-primary">
             <button

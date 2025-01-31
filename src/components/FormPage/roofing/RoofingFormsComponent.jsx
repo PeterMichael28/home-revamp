@@ -6,7 +6,7 @@ import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
 import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import LabelSelect, { LabelSelect2 } from "../LabelSelect";
+import LabelSelect, { CustomLabelSelect, LabelSelect2 } from "../LabelSelect";
 import { statesNames } from "~/assets/data";
 import Modal from "~/components/Modal/Modal";
 import Lottie from "lottie-react";
@@ -108,18 +108,29 @@ export const LocationForm = ({ props }) => {
 
 export const HomeOwnershipForm = ({ props }) => {
   const [value, setValue] = useState("");
-  const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    if (value == "Rented") {
-      updateFields({ ...allFields, home_owner: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   if (value == "Rented") {
+  //     updateFields({ ...allFields, home_owner: value });
+  //     props.onNext();
+  //     return;
+  //   }
+  //   updateFields({ ...allFields, home_owner: value });
+  //   props.goto(5);
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+
+    updateFields({ ...allFields, home_owner: selectedValue });
+
+    if (selectedValue === "Rented") {
       props.onNext();
-      return;
+    } else {
+      props.goto(5);
     }
-    updateFields({ ...allFields, home_owner: value });
-    props.goto(5);
   };
   const homeData = ["Own", "Rented"];
 
@@ -130,10 +141,18 @@ export const HomeOwnershipForm = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -145,14 +164,25 @@ export const HomeAuthorization = ({ props }) => {
   const navigate = useNavigate();
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    if (value == "No" && pathname == "/solars") {
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   if (value == "No" && pathname == "/solars") {
+  //     updateFields({});
+  //     navigate("/thank-you");
+  //     return;
+  //   }
+  //   updateFields({ ...allFields, homeAuthorization: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    if (selectedValue == "No" && pathname == "/solars") {
       updateFields({});
       navigate("/thank-you");
       return;
     }
-    updateFields({ ...allFields, homeAuthorization: value });
+    updateFields({ ...allFields, homeAuthorization: selectedValue });
     props.onNext();
   };
   const homeData = ["Yes", "No"];
@@ -166,10 +196,18 @@ export const HomeAuthorization = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -180,9 +218,9 @@ export const LeaseAgreement = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, leaseAgreement: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, leaseAgreement: selectedValue });
     props.onNext();
   };
 
@@ -199,10 +237,18 @@ export const LeaseAgreement = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -213,9 +259,15 @@ export const AccessFromLandlord = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, accessFromLandlord: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   updateFields({ ...allFields, accessFromLandlord: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, accessFromLandlord: selectedValue });
     props.onNext();
   };
 
@@ -235,38 +287,60 @@ export const AccessFromLandlord = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
 };
 
-export const PropertyTypeForm = ({ props }) => {
+export const PropertyTypeForm = ({ props, data = ["Commercial", "Residential"] }) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, property_type: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   updateFields({ ...allFields, property_type: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, property_type: selectedValue });
     props.onNext();
   };
 
-  const homeData = ["Commercial", "Residential"];
+  // const homeData = ;
   return (
     <div className="w-full">
       <FormHeader title={"Property Type"} subtitle={"Please specify the type of content for this project."} />
 
       <div className="mt-7">
         <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          {data.map((dat) => (
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -277,9 +351,15 @@ export const ProjectScopeForm = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, project_scope: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   updateFields({ ...allFields, project_scope: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, project_scope: selectedValue });
     props.onNext();
   };
 
@@ -291,37 +371,108 @@ export const ProjectScopeForm = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
+      </div>
+    </div>
+  );
+};
+
+export const RoofingMaterials = ({ props }) => {
+  const { allFields, updateFields } = useFormStore((state) => state);
+
+  const [value, setValue] = useState("");
+
+  const handleClick = () => {
+    if (!value) return;
+    updateFields({ ...allFields, roofing_material: value });
+    props.onNext();
+  };
+  const data = ["Asphalt Shingle", "Tile", "Metal", "Tar Torchdown", "Natural Slate", "Tar", "Cedal Slate"];
+  return (
+    <div className="w-full">
+      <FormHeader title={"Roofing Material"} subtitle={"Which of these roofing materials best describes your needs"} />
+
+      <div className="mt-5">
+        <CustomLabelSelect
+          id={"roofing_material"}
+          required
+          placeholder={"Select your roofing material"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Roofing Material"}
+        />
+
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
   );
 };
 
-export const RoofType = ({ props }) => {
+export const RoofType = ({
+  props,
+  data = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
+
+  // const handleSelection = (selectedValue) => {
+  //   if (!selectedValue) return;
+  //   updateFields({ ...allFields, RoofType: selectedValue });
+  //   props.onNext();
+  // };
+
+  // const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar", "Tile", "Natural Slate"];
 
   const handleClick = () => {
     if (!value) return;
     updateFields({ ...allFields, RoofType: value });
     props.onNext();
   };
-
-  const homeData = ["Cedar Shake", "Asphalt Shingle", "Metal", "Tar Torchdown", "Tile", "Natural Slate"];
   return (
     <div className="w-full">
       <FormHeader title={"Roof Type"} subtitle={"Please specify the Roof type that suits your project."} />
 
-      <div className="mt-7">
+      {/* <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
+        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+      </div> */}
+
+      <div className="mt-5">
+        <CustomLabelSelect
+          id={"RoofType"}
+          required
+          placeholder={"Select your roof type"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Roof Type"}
+        />
+
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -333,9 +484,9 @@ export const RoofingProjectScopeForm = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, project_scope: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, project_scope: selectedValue });
     props.onNext();
   };
 
@@ -347,10 +498,18 @@ export const RoofingProjectScopeForm = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -361,9 +520,9 @@ export const CustomizedForm = ({ props, header, subText, data = [] }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, roofing_material: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, roofing_material: selectedValue });
     props.onNext();
   };
 
@@ -374,16 +533,27 @@ export const CustomizedForm = ({ props, header, subText, data = [] }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
 };
 
-export const ProjectTimelineForm = ({ props }) => {
+export const ProjectTimelineForm = ({
+  props,
+  data = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
@@ -393,26 +563,23 @@ export const ProjectTimelineForm = ({ props }) => {
     updateFields({ ...allFields, project_timeline: value });
     props.onNext();
   };
-  const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
+
+  // const homeData = ["Emergency", "Flexible", "Within a week", "Within a month", "Within a year"];
 
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
-        {/* <LabelInput
-          id={"projectTimeline"}
+        <CustomLabelSelect
+          id={"project_timeline"}
           required
-          placeholder={"Enter your project timeline"}
+          placeholder={"Select your Project Timeline"}
           value={value}
           setValue={setValue}
+          data={data}
           label={"Project Timeline"}
-        /> */}
+        />
 
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
@@ -420,33 +587,45 @@ export const ProjectTimelineForm = ({ props }) => {
   );
 };
 
-export const RoofingProjectTimelineForm = ({ props }) => {
+export const RoofingProjectTimelineForm = ({
+  props,
+  data = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"],
+}) => {
   const [value, setValue] = useState("");
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, project_timeline: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, project_timeline: selectedValue });
     props.onNext();
   };
 
-  const homeData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
+  // const homeData = ["Time is flexible", "Within 1 week", "1-2 weeks", "More than 2 weeks"];
   return (
     <div className="w-full">
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
         <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+          {data.map((dat) => (
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
 };
+
 export const ProjectOwnerForm = ({ props }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -506,16 +685,6 @@ export const ProjectOwnerForm = ({ props }) => {
             type="date"
             label={"Date of Birth"}
           />
-          {/* 
-          <LabelInput
-            id={"gender"}
-            required
-            placeholder={"Enter your gender"}
-            value={gender}
-            setValue={setGender}
-            type="text"
-            label={"Gender"}
-          /> */}
 
           <LabelSelect
             id={"gender"}
@@ -523,7 +692,7 @@ export const ProjectOwnerForm = ({ props }) => {
             placeholder={"Select your gender"}
             value={gender}
             setValue={setGender}
-            data={["Male", "Female", "Unspecified"]}
+            data={["Male", "Female", "Unspecific"]}
             label={"Gender"}
           />
         </div>
@@ -699,6 +868,10 @@ export const PreferredTimeForm = ({ slug }) => {
 
   const clickId = searchParams.get("click_id");
   const networkName = searchParams.get("network_name");
+  const offerId = searchParams.get("offer_id");
+  const affId = searchParams.get("aff_id");
+  const [trustedFormUrl, setTrustedFormUrl] = useState(null);
+  // console.log("All url:", window.location.href);
 
   const params = new URLSearchParams();
   let newUrl = `/${slug}/completed`;
@@ -708,6 +881,12 @@ export const PreferredTimeForm = ({ slug }) => {
   if (networkName) {
     params.append("network_name", networkName);
   }
+  if (offerId) {
+    params.append("offer_id", offerId);
+  }
+  if (affId) {
+    params.append("aff_id", affId);
+  }
 
   if (params.toString()) {
     newUrl += `?${params.toString()}`;
@@ -716,6 +895,15 @@ export const PreferredTimeForm = ({ slug }) => {
   const [leadIdToken, setLeadIdToken] = useState(null);
   const formRef = useRef(null);
 
+  useEffect(() => {
+    const tfField = document.getElementById("xxTrustedFormCertUrl");
+    // console.log("tfField", window.TrustedForm);
+    if (window.TrustedForm && tfField) {
+      window.TrustedForm.setField(tfField);
+    }
+  }, []);
+
+  // lead token url
   useEffect(() => {
     const retryGetLeadIdToken = () => {
       return new Promise((resolve) => {
@@ -737,9 +925,40 @@ export const PreferredTimeForm = ({ slug }) => {
     getLeadIdToken();
   }, []);
 
+  // trusted form useeffect
+  useEffect(() => {
+    const retryTrustedFormUrl = () => {
+      return new Promise((resolve) => {
+        const interval = setInterval(() => {
+          const trustedFormUrl = formRef.current?.querySelector("#xxTrustedFormCertUrl")?.value;
+          // console.log("xxTrustedFormCertUrl", trustedFormUrl);
+          if (trustedFormUrl) {
+            clearInterval(interval);
+            resolve(trustedFormUrl);
+          }
+        }, 100); // Retry every 100 milliseconds
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+      });
+    };
+
+    const getTrustedFormUrl = async () => {
+      try {
+        const url = await retryTrustedFormUrl();
+        // console.log("url", url);
+        setTrustedFormUrl(url);
+      } catch (error) {
+        console.error("Error fetching TrustedFormUrl", error);
+      }
+    };
+
+    getTrustedFormUrl();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value || !leadIdToken) {
+    if (!value || !leadIdToken || !trustedFormUrl) {
       return;
     }
     setLoading(true);
@@ -748,7 +967,25 @@ export const PreferredTimeForm = ({ slug }) => {
       setOpenModal(true);
     }, 2000);
 
-    updateFields({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug });
+    updateFields({
+      ...allFields,
+      contact_time: value,
+      LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
+      service: slug,
+    });
+
+    let body = {
+      ...allFields,
+      contact_time: value,
+      LeadiD: leadIdToken,
+      trusted_form: trustedFormUrl,
+      service: slug,
+      ...(clickId && { click_id: clickId }),
+      ...(networkName && { network_name: networkName }),
+      ...(offerId && { offer_id: offerId }),
+      ...(affId && { aff_id: affId }),
+    };
 
     try {
       const response = await fetch(`${url}/api/home-quote/`, {
@@ -756,20 +993,21 @@ export const PreferredTimeForm = ({ slug }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...allFields, contact_time: value, LeadiD: leadIdToken, service: slug }),
+        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
         throw new Error("Error submitting!, Please try again");
       }
-      // console.log(error);
+      const data = await response.json();
+      // console.log(data);
       toast.success("Submitted Successfully!!!");
       updateFields({});
       setOpenModal(false); // Close the modal
       clearTimeout(modalTimer);
-      navigate(newUrl);
+      navigate(newUrl, { state: data?.thumbtack_data?.results ?? undefined });
       setLoading(false);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Error submitting lead:", error);
       if (error.response) {
@@ -782,12 +1020,13 @@ export const PreferredTimeForm = ({ slug }) => {
     }
   };
 
-  const homeData = ["Any time", "Morning", "Afternoon", "Evening"];
+  const homeData = ["Anytime", "Morning", "Afternoon", "Evening"];
   return (
     <>
       <form
         className="w-full"
         onSubmit={handleSubmit}
+        id="leadForm"
         // onSubmit={ handleSubmit }
         ref={formRef}
       >
@@ -819,6 +1058,7 @@ export const PreferredTimeForm = ({ slug }) => {
           />
           <div className="my-4">
             <input type="hidden" id="leadid_tcpa_disclosure" />
+            <input type="hidden" name="xxTrustedFormCertUrl" id="xxTrustedFormCertUrl" />
             <label htmlFor="leadid_tcpa_disclosure" className="text-xs text-black/80 text-balance ">
               <span className="font-semibold text-base">Note: </span>
               By submitting this form, you consent to receive marketing emails, calls, and texts from{" "}
@@ -855,31 +1095,33 @@ export const PreferredTimeForm = ({ slug }) => {
         </div>
       </form>
 
-      <Modal isOpen={openModal} className="max-w-5xl py-8" onClose={() => setOpenModal(false)} maxWidth="700px">
-        <div className="flex justify-center items-center gap-4 flex-col w-full">
-          {/* <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+      {openModal && (
+        <Modal isOpen={openModal} className="max-w-5xl py-8" onClose={() => setOpenModal(false)} maxWidth="700px">
+          <div className="flex justify-center items-center gap-4 flex-col w-full">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
             <circle cx="44.0007" cy="43.9997" r="36.6667" fill="#D5EBDC" />
             <path
               d="M59.2519 37.068L41.5419 54.778C41.0285 55.2913 40.3319 55.5846 39.5985 55.5846C38.8652 55.5846 38.1685 55.2913 37.6552 54.778L28.7819 45.9046C27.7185 44.8413 27.7185 43.0813 28.7819 42.018C29.8452 40.9546 31.6052 40.9546 32.6685 42.018L39.5985 48.948L55.3652 33.1813C56.4285 32.118 58.1885 32.118 59.2519 33.1813C60.3152 34.2446 60.3152 36.0046 59.2519 37.068Z"
               fill="#008726"
             />
           </svg> */}
-          <div>
-            <Lottie animationData={animation} loop={true} className="size-[200px] p-0" />
-          </div>
-          <FormHeader
-            title={"Successfully Submitted!!!"}
-            subtitle={"Thank your for your time, You are been redirected now."}
-            className="text-center"
-            titleClassName="text-[38px]"
-          />
+            <div>
+              <Lottie animationData={animation} loop={true} className="size-[200px] p-0" />
+            </div>
+            <FormHeader
+              title={"Successfully Submitted!!!"}
+              subtitle={"Thank your for your time, You are been redirected now."}
+              className="text-center"
+              titleClassName="text-[38px]"
+            />
 
-          <div className="">
-            <p className="animate-pulse italic text-gray-dark text-sm text-center">Redirecting... Please wait!!!</p>
-            <div className="loader mt-2 mx-auto"></div>
+            <div className="">
+              <p className="animate-pulse italic text-gray-dark text-sm text-center">Redirecting... Please wait!!!</p>
+              <div className="loader mt-2 mx-auto"></div>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
     </>
   );
 };

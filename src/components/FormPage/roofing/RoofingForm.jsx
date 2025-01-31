@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   ContactDetailsForm,
-  CustomizedForm,
   HomeOwnershipForm,
   LocationForm,
   PreferredTimeForm,
   ProjectOwnerForm,
-  ProjectScopeForm,
   PropertyTypeForm,
-  ProjectTimelineForm,
   AddressDetailsForm,
   HomeAuthorization,
   LeaseAgreement,
@@ -18,6 +13,7 @@ import {
   RoofingProjectScopeForm,
   RoofingProjectTimelineForm,
   RoofType,
+  RoofingMaterials,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 
@@ -27,13 +23,6 @@ const RoofingForm = ({ slug }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeIndex]);
-
-  const customData = {
-    data: ["Asphalt Shingle", "Tile", "Metal", "Tar Torchdown", "Natural Slate", "Tar", "Cedal Slate"],
-    header: "Roofing Material",
-    subText: "Which of these roofing materials best describes your needs",
-    label: "roofing_material",
-  };
 
   const STEPS = [
     {
@@ -59,24 +48,21 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form3",
-      component: (props) => <PropertyTypeForm props={props} />,
+      component: (props) => (
+        <PropertyTypeForm
+          props={props}
+          data={["Single Family Home", "Apartment", "Commercial", "Condo", "Mobile Home", "Multi-Unit", "Other"]}
+        />
+      ),
     },
     {
       label: "Form4",
       component: (props) => <RoofingProjectScopeForm props={props} />,
     },
-    {
-      label: "Form5",
-      component: (props) => (
-        <CustomizedForm
-          props={props}
-          data={customData.data}
-          header={customData.header}
-          subText={customData.subText}
-          label={customData.label}
-        />
-      ),
-    },
+    // {
+    //   label: "Form5",
+    //   component: (props) => <RoofingMaterials props={props} />,
+    // },
 
     {
       label: "Form4",
@@ -84,7 +70,12 @@ const RoofingForm = ({ slug }) => {
     },
     {
       label: "Form4",
-      component: (props) => <RoofingProjectTimelineForm props={props} />,
+      component: (props) => (
+        <RoofingProjectTimelineForm
+          props={props}
+          data={["Immediately", "Within 1 months", "1-3 months", "3+ months"]}
+        />
+      ),
     },
     {
       label: "Form4",

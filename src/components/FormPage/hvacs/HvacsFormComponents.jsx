@@ -1,8 +1,10 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
+// import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import { CustomLabelSelect } from "../LabelSelect";
+import FormButton from "../FormButton";
 
 export const HVACS = ({ props }) => {
   const [value, setValue] = useState("");
@@ -29,17 +31,20 @@ export const HVACS = ({ props }) => {
     updateFields({ ...allFields, AirSubType: value });
     props.onNext();
   };
-
   return (
     <div className="w-full">
       <FormHeader title={"HVACS"} subtitle={"What type of HVAC system best suits your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
+        <CustomLabelSelect
+          id={"AirSubType"}
+          required
+          placeholder={"Select your preferred HVAC system"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"HVACS"}
+        />
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -52,12 +57,11 @@ export const AirType = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, AirType: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, AirType: selectedValue });
     props.onNext();
   };
-
   return (
     <div className="w-full">
       <FormHeader title={"Air Type"} subtitle={"Your type of Air for this project?"} />
@@ -65,10 +69,18 @@ export const AirType = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -90,11 +102,15 @@ export const HvacProjectTimelineForm = ({ props }) => {
       <FormHeader title={"Project Timeline"} subtitle={"Which of these timelines best describe your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
+        <CustomLabelSelect
+          id={"project_timeline"}
+          required
+          placeholder={"Select your project timeline"}
+          value={value}
+          setValue={setValue}
+          data={homeData}
+          label={"Roofing Material"}
+        />
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>

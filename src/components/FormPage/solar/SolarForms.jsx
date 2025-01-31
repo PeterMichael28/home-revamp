@@ -6,19 +6,20 @@ import {
   LocationForm,
   PreferredTimeForm,
   ProjectOwnerForm,
-  PropertyTypeForm,
   ProjectTimelineForm,
   AddressDetailsForm,
   HomeAuthorization,
   LeaseAgreement,
   AccessFromLandlord,
+  RoofType,
 } from "~/components/FormPage/roofing/RoofingFormsComponent";
 import StepperWizard from "~/components/StepperWizard/StepperWizard";
 import {
+  CreditRating,
   CurrentUtilityProvider,
   MonthlyBill,
-  ProjectStatus,
   PropertyStories,
+  PropertyTypeDetails,
   PropertyUsage,
   SolarInstallationLocation,
   SolarSystemType,
@@ -43,15 +44,15 @@ const SolarForms = ({ slug }) => {
       component: (props) => <HomeOwnershipForm props={props} />,
     },
     {
-      label: "Form2",
+      label: "Form3",
       component: (props) => <HomeAuthorization props={props} />,
     },
     {
-      label: "Form2",
+      label: "Form4",
       component: (props) => <LeaseAgreement props={props} />,
     },
     {
-      label: "Form2",
+      label: "Form5",
       component: (props) => <AccessFromLandlord props={props} />,
     },
     // {
@@ -59,58 +60,74 @@ const SolarForms = ({ slug }) => {
     //   component: (props) => <PropertyTypeForm props={props} />,
     // },
     {
-      label: "Form23",
+      label: "Form6",
       component: (props) => <PropertyStories props={props} />,
     },
     {
-      label: "Form123",
+      label: "Form7",
+      component: (props) => <PropertyTypeDetails props={props} />,
+    },
+    {
+      label: "Form8",
       component: (props) => <PropertyUsage props={props} />,
     },
 
     {
-      label: "Form4",
+      label: "Form9",
       component: (props) => <MonthlyBill props={props} />,
     },
     {
-      label: "Form95",
+      label: "Form10",
       component: (props) => <CurrentUtilityProvider props={props} />,
+    },
+    {
+      label: "Form11",
+      component: (props) => <CreditRating props={props} />,
     },
 
     {
-      label: "Form5",
+      label: "Form12",
       component: (props) => <SunlightExposure props={props} />,
     },
     {
-      label: "Form25",
+      label: "Form13",
       component: (props) => <SolarSystemType props={props} />,
     },
     {
-      label: "Form245",
+      label: "Form14",
+      component: (props) => (
+        <RoofType props={props} data={["Asphalt Shingle", "Cedar Shake", "Metal", "Natural Slate", "Tar", "Other"]} />
+      ),
+    },
+    {
+      label: "Form15",
       component: (props) => <SolarInstallationLocation props={props} />,
     },
 
     {
-      label: "Form7",
-      component: (props) => <ProjectTimelineForm props={props} />,
+      label: "Form16",
+      component: (props) => (
+        <ProjectTimelineForm props={props} data={["Immediately", "Within 1 months", "1-3 months", "3+ months"]} />
+      ),
     },
     // {
     //   label: "Form37",
     //   component: (props) => <ProjectStatus props={props} />,
     // },
     {
-      label: "Form8",
+      label: "Form17",
       component: (props) => <ProjectOwnerForm props={props} />,
     },
     {
-      label: "Form9",
+      label: "Form18",
       component: (props) => <ContactDetailsForm props={props} />,
     },
     {
-      label: "Form4",
+      label: "Form19",
       component: (props) => <AddressDetailsForm props={props} />,
     },
     {
-      label: "Form10",
+      label: "Form20",
       component: (props) => (
         <PreferredTimeForm props={props} handleClick={() => navigate(`/${slug}/completed`)} slug={slug} />
       ),

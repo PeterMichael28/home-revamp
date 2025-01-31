@@ -1,8 +1,8 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
-import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import { CustomLabelSelect } from "../LabelSelect";
+import FormButton from "../FormButton";
 
 export const Plumbing = ({ props }) => {
   const [value, setValue] = useState("");
@@ -26,11 +26,15 @@ export const Plumbing = ({ props }) => {
       <FormHeader title={"Plumbing"} subtitle={"What type of Plumbing best suites your needs"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
+        <CustomLabelSelect
+          id={"Plumbing"}
+          required
+          placeholder={"Select a Plumbing type"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Plumbing"}
+        />
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>

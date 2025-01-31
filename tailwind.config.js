@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -14,7 +15,11 @@ export default {
         background: "#FDFBFC",
         error: "#FF4040",
         success: "#117E45",
-        gray: { DEFAULT: "#D9D9D9", light: "#E9E8E9", dark: "#545454" },
+        gray: {
+          DEFAULT: "#D9D9D9",
+          light: "#E9E8E9",
+          dark: "#545454",
+        },
       },
       animation: {
         slidein: "slidein 0.3s ease-in-out",
@@ -23,15 +28,20 @@ export default {
         slidein: {
           "0%": {
             transform: "translateX(-100%)",
-            opacity: 0,
+            opacity: "0",
           },
           "100%": {
             transform: "translateX(0)",
-            opacity: 1,
+            opacity: "1",
           },
         },
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };

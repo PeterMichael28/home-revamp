@@ -1,33 +1,44 @@
-import { RouterProvider, createBrowserRouter, useLocation } from "react-router-dom";
+// src/App.js
+import React, { Suspense, useEffect } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import PageLayout from "./layouts/PageLayout";
-import HomePage from "./pages/HomePage";
-import FormPage from "./pages/FormPage";
-import CompletedPage from "./pages/CompletedPage";
-import UseOfTerms from "./pages/UseOfTerms";
-import PrivacyPage from "./pages/PrivacyPage";
-import PartnersPage from "./pages/PartnersPage";
-import CCPAPage from "./pages/CCPA";
-import ContactPage from "./pages/ContactPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ThankyouPage from "./pages/ThankyouPage";
-import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import AdminLayout from "./layouts/AdminLayout";
-import SolarDashbiard from "./pages/admin/SolarDashbiard";
-import BathroomDashboard from "./pages/admin/BathroomDashboard";
-import RoofingDashboard from "./pages/admin/RoofingDashboard";
-import HavcsDashboard from "./pages/admin/HavcsDashboard";
-import WindowsDashboard from "./pages/admin/WindowsDashboard";
-import AffiliatePage from "./pages/AffiliatePage";
+import ProtectedAdminRoutes from "./layouts/ProtectedRoutes";
+import TrustedForm from "./scripts/trusted-form";
+import FullPageLoader from "./components/Loading/FullpageLoader";
+// import HomePage from "./pages/HomePage";
+
+import PrivacyPage from "./pages/PrivacyPage";
+import ThankyouPage from "./pages/ThankyouPage";
+import UseOfTerms from "./pages/UseOfTerms";
+import CCPAPage from "./pages/CCPA";
+import ContactPage from "./pages/ContactPage";
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+const FormPage = React.lazy(() => import("./pages/FormPage"));
+const CompletedPage = React.lazy(() => import("./pages/CompletedPage"));
+const PartnersPage = React.lazy(() => import("./pages/PartnersPage"));
+const AuthLoginPage = React.lazy(() => import("./pages/admin/AuthLoginPage"));
+const SolarDashbiard = React.lazy(() => import("./pages/admin/SolarDashbiard"));
+const BathroomDashboard = React.lazy(() => import("./pages/admin/BathroomDashboard"));
+const RoofingDashboard = React.lazy(() => import("./pages/admin/RoofingDashboard"));
+const HavcsDashboard = React.lazy(() => import("./pages/admin/HavcsDashboard"));
+const WindowsDashboard = React.lazy(() => import("./pages/admin/WindowsDashboard"));
+const AffiliatePage = React.lazy(() => import("./pages/AffiliatePage"));
+const GutterDashboard = React.lazy(() => import("./pages/admin/GutterDashboard"));
+const PlumbingDashboard = React.lazy(() => import("./pages/admin/PlumbingDashboard"));
+const KitchenDashboard = React.lazy(() => import("./pages/admin/KitchenDashboard"));
+const PaintingDashboard = React.lazy(() => import("./pages/admin/PaintingDashboard"));
+const V2FormPage = React.lazy(() => import("./pages/V2FormPage"));
 
 const measurementId = import.meta.env.VITE_GOOGLE_MEASUREMENT_ID;
 
 ReactGA.initialize(measurementId);
 
 function App() {
-  // const { pathname } = useLocation();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -35,82 +46,181 @@ function App() {
       children: [
         {
           index: true,
-          element: <HomePage />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <HomePage />
+            // </Suspense>
+          ),
         },
         {
           path: "/:slug",
-          element: <FormPage />,
+          element: (
+            <Suspense fallback={<FullPageLoader />}>
+              <FormPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/:slug/v2",
+          element: (
+            <Suspense fallback={<FullPageLoader />}>
+              <V2FormPage />
+            </Suspense>
+          ),
         },
         {
           path: "/:slug/completed",
-          element: <CompletedPage />,
+          element: (
+            <Suspense fallback={<FullPageLoader />}>
+              <CompletedPage />
+            </Suspense>
+          ),
         },
         {
           path: "/thank-you",
-          element: <ThankyouPage />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <ThankyouPage />
+            // </Suspense>
+          ),
         },
         {
           path: "/privacy-policy",
-          element: <PrivacyPage />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <PrivacyPage />
+            // </Suspense>
+          ),
         },
         {
           path: "/use-of-terms",
-          element: <UseOfTerms />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <UseOfTerms />
+            // </Suspense>
+          ),
         },
         {
           path: "/ccpa",
-          element: <CCPAPage />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <CCPAPage />
+            // </Suspense>
+          ),
         },
         {
           path: "/contact",
-          element: <ContactPage />,
+          element: (
+            // <Suspense fallback={<FullPageLoader />}>
+            <ContactPage />
+            // </Suspense>
+          ),
         },
-        {
-          path: "/contact",
-          element: <UseOfTerms />,
-        },
+
         {
           path: "/our-partners",
-          element: <PartnersPage />,
+          element: (
+            <Suspense fallback={<FullPageLoader />}>
+              <PartnersPage />
+            </Suspense>
+          ),
         },
         {
           path: "/join-our-affiliate-team",
-          element: <AffiliatePage />,
+          element: (
+            <Suspense fallback={<FullPageLoader />}>
+              <AffiliatePage />
+            </Suspense>
+          ),
         },
       ],
       errorElement: <h1>Error Page</h1>,
     },
-    // {
-    //   path: "/new",
-    //   element: <BoberdooForm />,
-    // },
+
     {
-      path: "/admin",
-      element: <AdminLayout />,
+      path: "/admin/login",
+      element: <AuthLoginPage />,
+    },
+    {
+      element: <ProtectedAdminRoutes />,
       children: [
-        // {
-        //   path: "/admin/dashboard",
-        //   element: <SolarDashbiard />,
-        // },
         {
-          path: "/admin/solar",
-          element: <SolarDashbiard />,
-        },
-        {
-          path: "/admin/bathrooms",
-          element: <BathroomDashboard />,
-        },
-        {
-          path: "/admin/roofing",
-          element: <RoofingDashboard />,
-        },
-        {
-          path: "/admin/windows",
-          element: <WindowsDashboard />,
-        },
-        {
-          path: "/admin/havcs",
-          element: <HavcsDashboard />,
+          path: "/admin",
+          element: <AdminLayout />,
+          children: [
+            {
+              path: "/admin/solar",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <SolarDashbiard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/bathrooms",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <BathroomDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/roofing",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <RoofingDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/windows",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <WindowsDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/havcs",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <HavcsDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/kitchen",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <KitchenDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/gutter",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <GutterDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/plumbing",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <PlumbingDashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "/admin/painting",
+              element: (
+                <Suspense fallback={<FullPageLoader />}>
+                  <PaintingDashboard />
+                </Suspense>
+              ),
+            },
+          ],
         },
       ],
     },
@@ -118,50 +228,12 @@ function App() {
 
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-
-    // Script injection logic here
-    // const leadIdScriptSrc = "//create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
-
-    // injectScript(leadIdScriptSrc);
-
-    // // TrustedForm script injection (dynamic URL)
-    // const trustedFormUrl =
-    //   ("https:" === document.location.protocol ? "https" : "http") +
-    //   "://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&ping_field=xxTrustedFormPingUrl&l=" +
-    //   new Date().getTime() +
-    //   Math.random();
-
-    // injectScript(trustedFormUrl);
   }, []);
-
-  //   <script id="LeadiDscript" type="text/javascript">
-  //   (function () {
-  //     var s = document.createElement("script");
-  //     s.id = "LeadiDscript_campaign";
-  //     s.type = "text/javascript";
-  //     s.async = true;
-  //     s.src = "https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2";
-  //     var LeadiDscript = document.getElementById("LeadiDscript");
-  //     LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
-  //   })();
-  // </script>
-  // useEffect(() => {
-  // if (typeof window !== "undefined") {
-  //   const script = document.createElement("script");
-  //   script.id = "LeadiDscript_campaign";
-  //   script.type = "text/javascript";
-  //   script.async = true;
-  //   script.defer = true;
-
-  //   script.src = `https://create.lidstatic.com/campaign/afa5c330-8960-a9ab-a329-b23e9fb88250.js?snippet_version=2`;
-  //   document.body.appendChild(script);
-  // }
-  // }, []);
 
   return (
     <>
       <RouterProvider router={router} />
-
+      <TrustedForm />
       <ToastContainer
         position="top-right"
         autoClose={5000}

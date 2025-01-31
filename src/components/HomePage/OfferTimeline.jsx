@@ -1,9 +1,8 @@
-import React from "react";
 import { offersData } from "~/assets/data";
 
 const OfferTimeline = () => {
   return (
-    <div className="w-full relative h-fit flex flex-col items-start justify-center gap-y-6" >
+    <div className="w-full relative h-fit flex flex-col items-start justify-center gap-y-6">
       {offersData.map((data, id) => (
         <TimelineElement key={id} icon={data.icon} title={data.title} subTitle={data.subTitle} />
       ))}

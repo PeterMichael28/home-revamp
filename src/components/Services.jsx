@@ -29,9 +29,10 @@ const Services = ({ data }) => {
           {/*  */}
           <img
             src={ser.img}
-            alt=""
+            alt={ser.subText}
             className="h-[60%] self-end w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
             onClick={() => navigate(`/${ser.label.toLowerCase()}`)}
+            loading="lazy"
           />
         </div>
       ))}

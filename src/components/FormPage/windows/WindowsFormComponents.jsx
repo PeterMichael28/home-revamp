@@ -1,8 +1,9 @@
 import { useState } from "react";
 import FormHeader from "../FormHeader";
-import FormButton from "../FormButton";
 import FormSelectBox from "../FormSelectBox";
 import { useFormStore } from "~/store/formStore";
+import FormButton from "../FormButton";
+import { CustomLabelSelect } from "../LabelSelect";
 
 export const WindowMaterial = ({ props }) => {
   const [value, setValue] = useState("");
@@ -10,6 +11,11 @@ export const WindowMaterial = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
+  // const handleSelection = (selectedValue) => {
+  //   if (!selectedValue) return;
+  //   updateFields({ ...allFields, window_material: selectedValue });
+  //   props.onNext();
+  // };
   const handleClick = () => {
     if (!value) return;
     updateFields({ ...allFields, window_material: value });
@@ -21,11 +27,28 @@ export const WindowMaterial = ({ props }) => {
       <FormHeader title={"Window Material"} subtitle={"Which of these windows material best describes your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
+        {/* <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
-        </div>
+        </div> */}
+        <CustomLabelSelect
+          id={"window_material"}
+          required
+          placeholder={"Select your window material"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Window Material"}
+        />
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -61,11 +84,15 @@ export const WindowStyle = ({ props }) => {
       <FormHeader title={"Window Style"} subtitle={"Which of these windows style best describes your needs?"} />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
+        <CustomLabelSelect
+          id={"WindowStyle"}
+          required
+          placeholder={"Select your window style"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Window Style"}
+        />
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -92,11 +119,16 @@ export const NumberOfWindows = ({ props }) => {
       />
 
       <div className="mt-7">
-        <div className="space-y-5">
-          {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
-          ))}
-        </div>
+        <CustomLabelSelect
+          id={"num_of_window"}
+          required
+          placeholder={"Select number of windows"}
+          value={value}
+          setValue={setValue}
+          data={data}
+          label={"Number of Windows"}
+        />
+
         <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
       </div>
     </div>
@@ -109,9 +141,9 @@ export const WindowAge = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, windowAge: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, windowAge: selectedValue });
     props.onNext();
   };
 
@@ -125,10 +157,18 @@ export const WindowAge = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -140,9 +180,15 @@ export const WindowCondition = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, windowCondition: value });
+  // const handleClick = () => {
+  //   if (!value) return;
+  //   updateFields({ ...allFields, windowCondition: value });
+  //   props.onNext();
+  // };
+
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, windowCondition: selectedValue });
     props.onNext();
   };
 
@@ -156,10 +202,18 @@ export const WindowCondition = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {data.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );
@@ -170,9 +224,9 @@ export const WindowProjectType = ({ props }) => {
 
   const { allFields, updateFields } = useFormStore((state) => state);
 
-  const handleClick = () => {
-    if (!value) return;
-    updateFields({ ...allFields, ProjectType: value });
+  const handleSelection = (selectedValue) => {
+    if (!selectedValue) return;
+    updateFields({ ...allFields, ProjectType: selectedValue });
     props.onNext();
   };
 
@@ -184,10 +238,18 @@ export const WindowProjectType = ({ props }) => {
       <div className="mt-7">
         <div className="space-y-5">
           {homeData.map((dat) => (
-            <FormSelectBox key={dat} active={value === dat} onClick={() => setValue(dat)} text={dat} />
+            <FormSelectBox
+              key={dat}
+              active={value === dat}
+              onClick={() => {
+                setValue(dat);
+                handleSelection(dat);
+              }}
+              text={dat}
+            />
           ))}
         </div>
-        <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} />
+        {/* <FormButton text="Continue" className="mt-7" onClick={handleClick} disabled={!value} /> */}
       </div>
     </div>
   );

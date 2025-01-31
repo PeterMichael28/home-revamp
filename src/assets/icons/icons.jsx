@@ -6,7 +6,6 @@ import { BiSortAlt2 } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 
-
 const icons = {
   close: <MdClose />,
   hamburger: <IoMdMenu />,
@@ -15,7 +14,7 @@ const icons = {
   ascending: <BsSortAlphaUp />,
   descending: <BsSortAlphaDownAlt />,
   threeDots: <BsThreeDotsVertical />,
-  search: <CiSearch />
+  search: <CiSearch />,
 };
 
 export default icons;
