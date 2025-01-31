@@ -21,7 +21,7 @@ const HeroSection = () => {
           <h1 className="text-[28px] text-secondary font-bold tracking-[-0.28px] leading-normal md:text-[34px] lg:text-[44px] lg:tracking-[-0.44px] lg:leading-[56px] max-w-[506px]">
             Get Instant Quotes for Your Home Services
           </h1>
-          <p className="text-gray-dark text-base font-medium leading-[24px] mt-3 max-sm:max-w-[600px] max-sm:mx-auto">
+          <p className="text-gray-dark text-base font-medium leading-[24px] mt-3 max-w-[600px] mx-auto md:mr-auto">
             Discover the best quotes from experienced contractors, guiding you through the journey of transforming your
             home into a haven of comfort and style.
           </p>
