@@ -42,7 +42,7 @@ const HeroSection = () => {
         </div>
 
         <img
-          src="/hero.webp"
+          src="/Hero.svg"
           alt="local home remodelers near me."
           className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain hidden md:block"
           width={570} // Specify dimensions explicitly
@@ -51,7 +51,7 @@ const HeroSection = () => {
         />
 
         <img
-          src="/hero-sm.webp"
+          src="/Hero.svg"
           alt="local home remodelers near me."
           className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain md:hidden "
           width={570} // Specify dimensions explicitly
