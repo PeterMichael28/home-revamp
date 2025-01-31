@@ -47,8 +47,6 @@ const HeroSection = () => {
           className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain"
           width={570} // Specify dimensions explicitly
           height={458}
-          // fetchPriority="high"
-
           loading="eager"
         />
       </div>
