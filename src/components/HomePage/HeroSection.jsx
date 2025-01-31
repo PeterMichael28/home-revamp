@@ -21,7 +21,7 @@ const HeroSection = () => {
           <h1 className="text-[28px] text-secondary font-bold tracking-[-0.28px] leading-normal md:text-[34px] lg:text-[44px] lg:tracking-[-0.44px] lg:leading-[56px] max-w-[506px]">
             Get Instant Quotes for Your Home Services
           </h1>
-          <p className="text-gray-dark text-base font-medium leading-[24px] mt-3 max-w-[600px] mx-auto md:mr-auto">
+          <p className="text-gray-dark text-sm md:text-base font-medium leading-[24px] mt-3 max-w-[600px] mx-auto md:mr-auto">
             Discover the best quotes from experienced contractors, guiding you through the journey of transforming your
             home into a haven of comfort and style.
           </p>
@@ -36,6 +36,7 @@ const HeroSection = () => {
               className="px-5 h-[53px] rounded-r text-sm flex justify-center items-center font-medium text-white bg-primary hover:bg-onPrimary transition-all duration-500"
               onClick={handleGoToNext}
               id="get-started"
+              name="get-started"
               aria-label="Get Started"
             >
               Get Started
