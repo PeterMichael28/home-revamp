@@ -44,7 +44,16 @@ const HeroSection = () => {
         <img
           src="/hero.webp"
           alt="local home remodelers near me."
-          className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain"
+          className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain hidden md:block"
+          width={570} // Specify dimensions explicitly
+          height={458}
+          loading="eager"
+        />
+
+        <img
+          src="/hero-sm.webp"
+          alt="local home remodelers near me."
+          className="w-full max-w-[450px] h-[235px] sm:h-[255px] lg:max-w-[570px] lg:h-[458px] object-contain md:hidden "
           width={570} // Specify dimensions explicitly
           height={458}
           loading="eager"
