@@ -18,10 +18,10 @@ const HeroSection = () => {
       <div className="w-full h-full px-4 sm:px-8 md:px-14 py-5 md:py-8 max-w-[1300px] mx-auto  flex flex-col lg:flex-row justify-between items-center max-md:pt-[37px] gap-y-[47px]">
         {/* text */}
         <div className="max-w-[506px] w-full text-left ">
-          <h1 className="text-[28px] text-secondary font-bold tracking-[-0.28px] leading-normal md:text-[34px] lg:text-[44px] lg:tracking-[-0.44px] lg:leading-[56px]">
+          <h1 className="text-[28px] text-secondary font-bold tracking-[-0.28px] leading-normal md:text-[34px] lg:text-[44px] lg:tracking-[-0.44px] lg:leading-[56px] max-w-[506px]">
             Get Instant Quotes for Your Home Services
           </h1>
-          <p className="text-gray-dark text-base font-medium leading-[24px] mt-3">
+          <p className="text-gray-dark text-base font-medium leading-[24px] mt-3 max-sm:max-w-[600px] max-sm:mx-auto">
             Discover the best quotes from experienced contractors, guiding you through the journey of transforming your
             home into a haven of comfort and style.
           </p>
@@ -35,6 +35,8 @@ const HeroSection = () => {
               type="button"
               className="px-5 h-[53px] rounded-r text-sm flex justify-center items-center font-medium text-white bg-primary hover:bg-onPrimary transition-all duration-500"
               onClick={handleGoToNext}
+              id="get-started"
+              aria-label="Get Started"
             >
               Get Started
             </button>

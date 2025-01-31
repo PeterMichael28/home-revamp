@@ -134,7 +134,23 @@ const AdminLayout = () => {
                 {isSidebarOpen ? <MdClose /> : <MdMenu />}
               </button>
 
-              <img src="/logo.webp" loading="lazy" className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px]" alt="logo" />
+              <img
+                src="/logo.svg"
+                loading="lazy"
+                className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px] md:hidden"
+                width={32}
+                height={32}
+                alt="logo"
+              />
+
+              <img
+                src="/logo.svg"
+                loading="lazy"
+                className="h-[32px] w-[32px] lg:w-[62px] lg:h-[48px] md:block hidden"
+                width={62}
+                height={48}
+                alt="logo"
+              />
 
               {/* Current page title with margin-left */}
               <h1 className="ml-4 text-[20px] md:text-[24px] font-medium leading-[30px] text-[#01100A]">

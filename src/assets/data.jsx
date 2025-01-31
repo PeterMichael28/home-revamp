@@ -1,67 +1,67 @@
-import roofingImg from "./images/roofing.webp";
-import windowsImg from "./images/windows.webp";
-import solarsImg from "./images/solar.webp";
-import HVACsImg from "./images/Hvacs.webp";
-import bathroomsImg from "./images/bathroom.webp";
-import guttersImg from "./images/gutters.webp";
-import paintingImg from "./images/painting.webp";
-import plumbingImg from "./images/plumbing.webp";
-import kitchenImg from "./images/kitchen.webp";
+// import roofingImg from "./images/roofing.webp";
+// import windowsImg from "./images/windows.webp";
+// import solarsImg from "./images/solar.webp";
+// import HVACsImg from "./images/Hvacs.webp";
+// import bathroomsImg from "./images/bathroom.webp";
+// import guttersImg from "./images/gutters.webp";
+// import paintingImg from "./images/painting.webp";
+// import plumbingImg from "./images/plumbing.webp";
+// import kitchenImg from "./images/kitchen.webp";
 
 export const ourServices = [
   {
     label: "Roofings",
     subText:
       "Get quotes for roof repairs, replacements, or new installations tailored to your home's requirements. Our contractors are ready to assist.",
-    img: roofingImg,
+    img: "/services/roofing.svg",
   },
   {
     label: "Windows",
     subText:
       "Receive competitive quotes for window replacements or installations based on your preferred materials and specifications.",
-    img: windowsImg,
+    img: "/services/windows.svg",
   },
   {
     label: "Solars",
     subText:
       "Whether you're seeking eco-friendly solutions or looking to cut down on energy costs, we offer tailored options to suit your home and budget.",
-    img: solarsImg,
+    img: "/services/solar.svg",
   },
   {
     label: "HVACs",
     subText:
       "Find out the cost of HVAC installations or repairs to keep your home comfortable. Get quotes for central air conditioning units and more.",
-    img: HVACsImg,
+    img: "/services/Hvacs.svg",
   },
   {
     label: "Bathrooms",
     subText:
       "Whether you're looking to update the aesthetics, improve functionality, or enhance accessibility, we have the expertise to bring your vision to life.",
-    img: bathroomsImg,
+    img: "/services/bathroom.svg",
   },
   {
     label: "Gutters",
     subText:
       "Receive quotes for gutter installations, repairs, or replacements to effectively manage rainwater and protect your home's foundation.",
-    img: guttersImg,
+    img: "/services/gutters.svg",
   },
   {
     label: "Painting",
     subText:
       "Obtain aedquate quote pricing for interior or exterior painting services to refresh and beautify your living space.",
-    img: paintingImg,
+    img: "/services/painting.svg",
   },
   {
     label: "Plumbing",
     subText:
       "Get estimates for plumbing services, whether it's fixing leaks, installing new, or full plumbing. Contact us today to discuss your requirements.",
-    img: plumbingImg,
+    img: "/services/plumbing.svg",
   },
   {
     label: "Kitchen",
     subText:
       "Get detailed quotes for kitchen remodeling projects, including cabinetry, countertops, backsplashes, and appliance installations.",
-    img: kitchenImg,
+    img: "/services/kitchen.svg",
   },
 ];
 

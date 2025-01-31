@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ setActive = () => {} }) => {
   return (
     <nav className="flex flex-col md:flex-row  gap-12 items-end md:items-center w-full">
-      <ul className="flex flex-col md:flex-row  gap-8 items-end md:items-center">
+      <div className="flex flex-col md:flex-row  gap-8 items-end md:items-center">
         <OurServicesDropdown />
         <ScrollLink
           className="text-secondary font-semibold md:text-sm text-lg cursor-pointer"
@@ -32,10 +32,10 @@ const Navbar = ({ setActive = () => {} }) => {
         >
           Our Partners{" "}
         </Link>
-      </ul>
+      </div>
       <p className="text-secondary font-semibold md:text-sm text-lg text-center md:text-left">
         Need Help? Call{" "}
-        <a href="tel:+9174103253" className="text-primary">
+        <a href="tel:+9174103253" className="text-blue-600 hover:text-blue-700">
           917-410-3253
         </a>
       </p>

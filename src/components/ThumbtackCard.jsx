@@ -94,10 +94,21 @@ export function ThumbtackCardText({ data }) {
         {/* Profile Image */}
         <div className=" flex justify-center h-fit">
           <img
-            src={"/logo.webp"}
+            src={"/logo.svg"}
             alt="Profile"
             loading="lazy"
-            className="w-32 sm:min-w-[150px] sm:h-[150px] rounded-full object-cover"
+            className="w-32 sm:min-w-[150px] sm:h-[150px] rounded-full object-cover md:hidden"
+            width={128}
+            height={89}
+          />
+
+          <img
+            src={"/logo.svg"}
+            alt="Profile"
+            loading="lazy"
+            className="w-32 sm:min-w-[150px] sm:h-[105px] rounded-full object-cover md:block hidden"
+            width={150}
+            height={105}
           />
         </div>
 
