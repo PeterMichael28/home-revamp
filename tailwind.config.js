@@ -43,5 +43,15 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addBase }) {
+      addBase({
+        "@font-face": {
+          fontFamily: "Inter",
+          fontDisplay: "swap",
+        },
+      });
+    },
+  ],
 };

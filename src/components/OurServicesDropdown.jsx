@@ -7,11 +7,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 const OurServicesDropdown = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <li className="text-secondary font-semibold md:text-sm text-lg flex items-center gap-x-1">
+      <DropdownMenuTrigger asChild>
+        <div className="text-secondary font-semibold md:text-sm text-lg flex items-center gap-x-1">
           <span>Our Services</span>{" "}
           <img src={chevron_down} alt="chevron_down" className={classNames("size-5, transition-all duration-500 ")} />
-        </li>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className=" h-max w-[330px]  rounded-[20px] bg-white border-gray-light p-5 shadow-xl relative z-[100]">
         <p className="text-lsm font-semibold mb-5">Select any service to continue:</p>

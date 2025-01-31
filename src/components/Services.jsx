@@ -30,11 +30,21 @@ const Services = ({ data }) => {
           <img
             src={ser.img}
             alt={ser.subText}
-            className="h-[60%] self-end w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
+            className="h-[60%] self-end w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500 md:hidden"
             onClick={() => navigate(`/${ser.label.toLowerCase()}`)}
             loading="lazy"
-            height="240"
-            width="380"
+            height={244}
+            width={356}
+          />
+
+          <img
+            src={ser.img}
+            alt={ser.subText}
+            className="h-[60%] self-end w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500 md:block hidden"
+            onClick={() => navigate(`/${ser.label.toLowerCase()}`)}
+            loading="lazy"
+            height={262}
+            width={380}
           />
         </div>
       ))}
