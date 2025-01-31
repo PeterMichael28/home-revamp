@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 const OurServicesDropdown = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <div className="text-secondary font-semibold md:text-sm text-lg flex items-center gap-x-1">
           <span>Our Services</span>{" "}
           <img src={chevron_down} alt="chevron_down" className={classNames("size-5, transition-all duration-500 ")} />
