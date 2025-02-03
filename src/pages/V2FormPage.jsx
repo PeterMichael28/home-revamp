@@ -85,14 +85,16 @@ const V2FormPage = () => {
   }, [slug]);
 
   // Get SEO metadata for the current slug
-  const currentSeoMetadata = seoMetadata[slug] || {
-    title: "Affordable Home Renovation Services | Home Revamp Expert Near You",
-    description:
-      "Home Revamp Expert connects you with affordable local home remodelers near you. Get tailored quotes for renovation services today!",
-    type: "website",
-    canonicalLink: "https://homerevampexpert.com",
-    keywords: "affordable home renovation services, Home Revamp Expert, local home remodelers near me",
-  };
+  const currentSeoMetadata = seoMetadata
+    ? seoMetadata[slug]
+    : {
+        title: "Affordable Home Renovation Services | Home Revamp Expert Near You",
+        description:
+          "Home Revamp Expert connects you with affordable local home remodelers near you. Get tailored quotes for renovation services today!",
+        type: "website",
+        canonicalLink: "https://homerevampexpert.com",
+        keywords: "affordable home renovation services, Home Revamp Expert, local home remodelers near me",
+      };
 
   return (
     <div className="w-full">
